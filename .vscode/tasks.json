@@ -4,6 +4,32 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "Clear Cashes",
+			"type": "shell",
+			"command": "Rscript -e 'rm(list=ls())' -e 'gc(reset = TRUE)' -e 'gc(reset = TRUE)'",
+			"presentation": {
+				"reveal": "silent",
+				"revealProblems": "onProblem",
+				"close": true
+			}
+		},
+		{
+			"label": "Clear Rendered Results",
+			"type": "shell",
+			"command": "echo Cleared!",
+			"presentation": {
+				"reveal": "silent",
+				"revealProblems": "onProblem",
+				"close": true
+			},
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Clear Cashes",
+				"Clear All Output Files in docs Directory",
+				"Clear Cashes"
+			]
+		},
+		{
 			"label": "Open index.html in Chrome",
 			"type": "shell",
 			"command": "fd index.html -t f ${workspaceFolder}/docs -x google-chrome {}",
@@ -36,7 +62,7 @@
 		{
 			"label": "Render Book and Open in Chrome",
 			"type": "shell",
-			"command": "echo rendering book...",
+			"command": "echo ending task...",
 			"presentation": {
 				"reveal": "silent",
 				"revealProblems": "onProblem",

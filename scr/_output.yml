@@ -1,4 +1,6 @@
 bookdown::gitbook:
+ split_by: none
+ highlight: "breezedark"
   config:
     toc:
       collapse: subsection
@@ -20,7 +22,7 @@ bookdown::gitbook:
       size: 2
     sharing:
       facebook: true
-      github: false
+      github: true
       twitter: true
       linkedin: false
       weibo: false
