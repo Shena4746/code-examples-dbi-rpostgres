@@ -20,5 +20,8 @@
 			"!code_workspace",
 			"md"
 		],
+		"ltex.checkFrequency": "save",
+		"ltex.completionEnabled": true,
+		"ltex.language": "en-GB",
 	}
 }

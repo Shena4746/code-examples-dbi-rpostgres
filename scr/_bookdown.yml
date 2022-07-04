@@ -1,7 +1,8 @@
 book_filename: index.Rmd
-delete_merged_file: true
+delete_merged_file: false
 rmd_files: 
   - top.Rmd # bind Rmd in this order.
   - 01-dbi.Rmd
   - 0201-connect.Rmd
   - 0202-table.Rmd
+  - 0203-queries.Rmd

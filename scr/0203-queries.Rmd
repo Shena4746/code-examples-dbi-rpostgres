@@ -1,36 +1,218 @@
-
 ## Queries and Statements
+
+```{r, include=FALSE}
+con <- refresh_con(con)
+```
+
+This section uses the following tables as an example.
+```{r }
+con %>% dbWriteTable("mtcars", mtcars, overwirte = TRUE)
+con %>% dbListTables()
+```
 
 ### `dbGetQuery()`
 
-Send query, retrieve results and then clear result set
+- Executes a `SELECT` query written as a string.
+- Returns the result, which is not stored as a result set contrary to `dbSendQuery()`.
+- Comes with a default implementation that calls `dbSendQuery()` -> `dbFetch()` -> `dbClearResult()`.
+- Returns a dataframe even if no rows are returned.
+- Additional arguments
+	- `n = -1`: specifies the number of rows to be fetched. `n = Inf` gives you the full result, `n = 0` the fully typed columns.
+	- `param`: allows passing query parameters, see `dbBind()` for details.
+	- `immediate`: see official reference.
+
+
+You don't have to add `;` at the end of the query.
+```{r getquery1}
+con %>% dbGetQuery("SELECT * FROM mtcars WHERE cyl >= 5", n = 5)
+```
+
+```{r getquery-param}
+con %>% dbGetQuery(
+    "SELECT * FROM mtcars WHERE cyl = $1",
+    params = list(1:5),
+    n = 5
+)
+```
 
 ### `dbExecute()`
 
-Execute an update statement, query number of rows affected, and then close result set
+- Executes a statement. The result is not stored as a result set.
+- Returns the number of rows affected. 
+- Comes with a default implementation that calls `dbSendStatement()` -> `dbGetRowsAffected()` -> `dbClearResult()`.
+- Additional arguments `params` and `immediate` are available as in `dbGetQuery()`.
 
-Results
-More control for sending queries and executing statements.
+```{r dbExecute, collapse=TRUE}
+# newly create cars table
+con %>% DBI::dbWriteTable("cars", cars %>% head(1), overwrite = TRUE)
+con %>% dbReadTable("cars") # only 1 row
+
+con %>% dbExecute(
+    "INSERT INTO cars (speed, dist) VALUES ($1, $2)",
+    params = list(1:4, 6:9)
+)
+con %>% dbReadTable("cars") # rows added
+```
 
 ### `dbSendQuery()`
 
-Execute a query on a given database connection
+- Submits and synchronously executes the SQL query. Should be followed by `dbFetch()` and `dbClearResult()` to get and clear the pooled result. See [The data retrieval flow section in official reference](https://dbi.r-dbi.org/reference/dbsendquery).
+- Returns an S4 object that inherits from DBIResult, called a result set.
+- The returned result object should be stored in a variable.
+- Additional arguments `params` and `immediate`.
+
+Exactly the same parameterization method works as in `dbGetQuery()`.
+
+```{r send-query-example1, collapse=TRUE}
+rs <- con %>% dbSendQuery(
+    "SELECT * FROM mtcars WHERE cyl = $1",
+    params = list(4L)
+)
+rs %>%
+    dbFetch() %>%
+    head()
+rs %>% dbClearResult()
+```
+
+`dbSendQuery()` gives us an alternative way of writing a parameterized query.
+
+```{r send-query-example2, collapse=TRUE}
+rs <- con %>% dbSendQuery(
+    "SELECT * FROM mtcars WHERE cyl = $1"
+)
+rs %>% dbBind(list(4L))
+rs %>%
+    dbFetch() %>%
+    head()
+rs %>% dbClearResult()
+```
 
 ### `dbSendStatement()`
 
-Execute a data manipulation statement on a given database connection
+- Submits and synchronously executes the SQL data manipulation statement (e.g., UPDATE, DELETE, INSERT INTO, DROP TABLE, ...).
+- Returns a result object as in `dbSendQuery()`.
+- The returned result set should be stored in a variable.
+- A part of `dbExecute()`.
+- Additional arguments `params` and `immediate`.
+
+A typical parameterization through `params = list(...)` works.
+
+```{r dbSendStatement-param, collapse=TRUE}
+# overwirte cars table
+con %>% DBI::dbWriteTable("cars", cars %>% head(1), overwrite = TRUE)
+con %>% dbReadTable("cars")
+
+# insert statement with typical parameterization
+rs <- con %>% dbSendStatement(
+    "INSERT INTO cars (speed, dist) VALUES ($1, $2)",
+    params = list(1:4, 5:8)
+)
+dbClearResult(rs)
+con %>% dbReadTable("cars")
+```
+
+You can also pass parameters by using `dbBind()`.
+
+```{r dbSendStatement-param2, collapse=TRUE}
+# overwirte cars table
+con %>% DBI::dbWriteTable("cars", cars %>% head(1), overwrite = TRUE)
+con %>% dbReadTable("cars")
+
+# pass multiple parameter using dbBind()
+rs <- dbSendStatement(
+    con,
+    "INSERT INTO cars (speed, dist) VALUES ($1, $2)"
+)
+dbBind(rs, list(2:3, 4:5))
+dbBind(rs, list(6L, 7L))
+dbClearResult(rs)
+dbReadTable(con, "cars")
+```
 
 ### `dbBind()`
 
-Bind values to a parameterized/prepared statement
+- Binds placeholders in a parameterized/prepared statement to actual values.
+- Returns a result set invisibly.
+- Is intented to be called before calling `dbFetch()` or `dbGetRowsAffected()`.
+- The placeholder syntax depends on DBMS.
+	- `?`: RMySQL and RSQLite
+	- `$1`: RPostgres and RSQLite
+	- `:name` and `$name`: RSQLite.
 
-### `dbFetch() fetch()`
+```{r bind-params, collapse=TRUE}
+con %>% dbWriteTable("iris", iris %>% head(), overwrite = TRUE)
+rs <- con %>% dbSendQuery("SELECT * FROM iris WHERE 'Petal.Width' > $1")
+rs %>% dbBind(list(3.0))
+dbFetch(rs)
+```
 
-Fetch records from a previously executed query
+See `dbSendQuery` and `dbSendStatement` for more examples.
+
+### `dbFetch(), fetch()`
+
+- Fetches the next `n` elements (rows) from the result set.
+- Returns a dataframe regardless of the result.
+- For all new code, use `dbFetch()` not `fetch()` which is provided just for compatibility with older DBI-client. 
+
+`dbFetch()` fetches unfetched results, as the next example shows.
+
+```{r dbFetch-example1, collapse=TRUE}
+rs <- con %>% dbSendQuery("SELECT mpg, cyl FROM mtcars LIMIT 10")
+while (rs %>% dbHasCompleted() %>% isFALSE()) {
+    chunk <- dbFetch(rs, 2)
+    print(chunk)
+}
+
+dbClearResult(rs)
+```
+
+Not all result objects can be fetched.
+One such example is the result of query with a unbounded placeholder.
+
+```{r dbFetch-counter-example1, error=TRUE ,collapse=TRUE}
+rs <- con %>% dbSendQuery("SELECT mpg, cyl, disp FROM mtcars WHERE cyl = $1")
+rs %>% dbFetch(n = 5) # placeholder should be bound before being fetched
+rs %>% dbBind(list(6L))
+rs %>% dbClearResult()
+```
+
+A more trivial result is a cleared result.
+
+```{r dbFetch-counter-example2, error=TRUE ,collapse=TRUE}
+rs %>% dbClearResult()
+rs %>% dbFetch()
+```
 
 ### `dbGetRowCount()`
 
-The number of rows fetched so far
+- Counts the total number of rows **actually returned** by `dbFetch()` for the input result object.
+- Returns a scalar number.
+
+```{r get-row-count-example, collapse=TRUE}
+rs <- dbSendQuery(con, "SELECT * FROM mtcars")
+
+rs %>% dbGetRowCount() # initial value of the method
+
+count_fetched_rows <- 0
+while (!dbHasCompleted(rs)) {
+    count_fetched_rows <- count_fetched_rows + nrow(rs %>% dbFetch(10))
+}
+
+count_fetched_rows # total number of rows fetched
+rs %>% dbGetRowCount()
+
+# fetching empty row has no effect on the value of dbGetRowCount()
+rs %>% dbFetch()
+rs %>% dbGetRowCount()
+
+rs %>% dbClearResult()
+```
+
+`dbGetRowCount()` cannot count a cleared result.
+
+```{r get-row-count-example2, error=TRUE,collapse=TRUE}
+rs %>% dbGetRowCount()
+```
 
 ### `dbGetRowsAffected()`
 

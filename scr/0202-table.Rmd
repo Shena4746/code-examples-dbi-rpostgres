@@ -56,7 +56,7 @@ con %>% dbListFields("mtcars")
 
 ### `dbExistsTable()`
 
-- Returns a lo'gical scalar, `TRUE` if the table or view specified by the name argument exists, `FALSE` otherwise.
+- Returns a logical scalar, `TRUE` if the table or view specified by the name argument exists, `FALSE` otherwise.
 - Works also for temprary tables created by `dplyr::copy_to()` in Postgres.
 
 ```{r exsits-table, collapse=TRUE}
@@ -99,7 +99,7 @@ In this case, the asked removal will not be executed.
 con %>% dbListTables() # the table is still alive
 ```
 
-The following examples illustate the behaviour of the option `fail_if_missing =`.
+The following examples illustrate the behaviour of the option `fail_if_missing =`.
 
 ```{r remove-absent-table1, collapse=TRUE}
 # fail_if_missing = FALSE makes an otherwise invalid call valid

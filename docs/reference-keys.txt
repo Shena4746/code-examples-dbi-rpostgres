@@ -23,3 +23,16 @@ dbexiststable
 dbremovetable
 dbreadtable
 dbappendtable
+queries-and-statements
+dbgetquery
+dbexecute
+dbsendquery
+dbsendstatement
+dbbind
+dbfetch-fetch
+dbgetrowcount
+dbgetrowsaffected
+dbgetstatement
+dbhascompleted
+dbcolumninfo
+dbclearresult

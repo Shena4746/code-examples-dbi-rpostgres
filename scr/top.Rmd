@@ -113,7 +113,7 @@ con <- DBI::dbConnect(
 )
 ```
 
-You should not write this way outside this demo. See \@ref(dbConnect.)
+You should not write this way outside this demo. See \@ref(dbConnect)
 
 ```{r example-issue-con, include=FALSE}
 dw <- config::get("demo")
@@ -139,8 +139,8 @@ The last two arguments are optional.
 
 ```{r our-first-table, collapse=TRUE}
 # create table by supplying local dataframe
-con %>% dbWriteTable("mtcars", mtcars, overwrite = TRUE, temoprary = TRUE)
-con %>% dbWriteTable("iris", iris, overwrite = TRUE, temoprary = TRUE)
+con %>% dbWriteTable("mtcars", mtcars, overwrite = TRUE)
+con %>% dbWriteTable("iris", iris, overwrite = TRUE)
 # check that tables are properly created
 DBI::dbListTables(con)
 ```
@@ -168,7 +168,7 @@ con %>%
 ```
 
 
-You can use `dbSendQuery()` to execute a query written in a string. Note that we don't need a `;` at the end of the query. Since this method does nothing but sending query, you should capture the returned value to perform an appropriate post-processing.
+You can use `dbSendQuery()` to execute a query written as a string. Note that we don't need a `;` at the end of the query. Since this method does nothing but sending query, you should capture the returned value to perform an appropriate post-processing.
 
 ```{r first-send-query}
 # send query and get response variable
@@ -221,7 +221,7 @@ The following code is one of the most simplest, deleting all tables.
 
 ```{r, collapse=TRUE}
 # create mtcars table again to demonstate sumultaneous-removal
-con %>% DBI::dbWriteTable("mtcars", mtcars, overwrite = TRUE, temoprary = TRUE)
+con %>% DBI::dbWriteTable("mtcars", mtcars, overwrite = TRUE)
 DBI::dbListTables(con)
 # remove multiple tables at once
 con %>%
