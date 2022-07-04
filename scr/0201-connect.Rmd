@@ -1,0 +1,99 @@
+## Connecting and Disconnecting
+
+### `dbCanConnect()`
+
+- Checks if a connection to a DBMS can be established
+- Retruns logical.
+- If `FALSE`, it comes with a reason for failure.
+
+```{r can-connect, collapse=TRUE}
+DBI::dbCanConnect(drv = RPostgres::Postgres())
+RPostgres::dbCanConnect(drv = RPostgres::Postgres())
+```
+
+### `dbConnect()` {#dbConnect}
+
+- Creates a connection to a DBMS.
+- Retruns S4 object (that inherits from DBIConnection virtual class), which holds the established connection information used to communicate with database.
+- Many connection variable can exist at the same time without affecting each other.
+
+The following example shows a typical argument list for connecting to Postgres.
+
+```{r, eval=FALSE}
+con <- DBI::dbConnect(
+    drv = RPostgres::Postgres(),
+    host = "localhost",
+    port = 5432,
+    dbname = "your-database-name",
+    user = "your-user",
+    password = "your-password"
+)
+```
+
+Be aware that this is a terrible way of connecting to a non-demo database because your credentials are completely revealed in a plain text. See [Securing Credentials](https://db.rstudio.com/best-practices/managing-credentials) for some better ways. In this document, we issue connection variables by calling `issue_con` defined in \@ref(Functions-dbi).
+
+```{r, collapse=TRUE}
+con <- issue_con("demo")
+# connection variable is printable
+con %>% print()
+```
+
+### `dbDisconnect()`
+
+- Closes the associated connection, discards all associated pending work, and frees resources.
+- Retruns `TRUE` invisibly.
+- Issues warning on an already disconnected connnectinon variable or invalid one.
+- NOT clears a supplied connection object.
+
+```{r disconnect-example, collapse=TRUE, warning=TRUE}
+# disconnect con varibale. returns nothing.
+con %>% dbDisconnect()
+# get warned since con is already disconnected
+con %>% dbDisconnect()
+```
+
+Disconnected object continues to exist as a non-null object.
+
+```{r disconnected-alive, collapse=TRUE}
+con %>% is.null()
+```
+
+But it is no longer printable.
+
+```{r disconnected-con-unpintable, collapse=TRUE, error=TRUE}
+con %>% print()
+```
+
+Disconnection has a local effect. That is, disconnecting one connection has no impact on other connections.
+
+```{r ,collapse=TRUE}
+con <- issue_con("demo")
+con1 <- issue_con("demo")
+con1 %>% dbDisconnect()
+# con is still valid
+con %>% print()
+```
+
+### `dbGetInfo()`
+
+- Retrieves information on database objects, i.e., DBIDriver (e.g., `RPostgres::Postgres`), DBIConnection (e.g., `con`) or DBIResult (e.g., `dbSendQuery()`).
+- Returns a named list whose components depend on the input class.
+
+```{r dbGetInfo, collapse=TRUE}
+dbGetInfo(RPostgres::Postgres())
+con %>% dbGetInfo()
+```
+
+### `dbIsReadOnly()`
+
+- Tests whether a database object is read only.
+- Returns logical.
+
+```{r dbIsReadOnly, collapse=TRUE}
+con %>% dbIsReadOnly()
+dbIsReadOnly(RPostgres::Postgres())
+```
+
+```{r, include=FALSE}
+con %>% dbDisconnect()
+```

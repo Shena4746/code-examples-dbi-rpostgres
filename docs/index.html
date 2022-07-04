@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>A Minimal Book Example</title>
-  <meta name="description" content="This is a minimal example of using the bookdown package to write a book." />
+  <title>Code Examples for DBI and RPostgres</title>
+  <meta name="description" content="Code Examples for DBI and RPostgres" />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A Minimal Book Example" />
+  <meta property="og:title" content="Code Examples for DBI and RPostgres" />
   <meta property="og:type" content="book" />
   
-  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book." />
-  <meta name="github-repo" content="Shena4746/latex-templete-vscode" />
+  
+  <meta name="github-repo" content="Shena4746/datascience-100knocks-preprocess-R" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Minimal Book Example" />
+  <meta name="twitter:title" content="Code Examples for DBI and RPostgres" />
   
-  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book." />
+  
   
 
-<meta name="author" content="shena" />
+<meta name="author" content="Shena" />
 
 
-<meta name="date" content="2022-06-24" />
+<meta name="date" content="2022-07-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 
-<link rel="next" href="introduction.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -55,6 +55,71 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #232629;
+    color: #7a7c7d;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+div.sourceCode
+  { color: #cfcfc2; background-color: #232629; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #cfcfc2; } /* Normal */
+code span.al { color: #95da4c; } /* Alert */
+code span.an { color: #3f8058; } /* Annotation */
+code span.at { color: #2980b9; } /* Attribute */
+code span.bn { color: #f67400; } /* BaseN */
+code span.bu { color: #7f8c8d; } /* BuiltIn */
+code span.cf { color: #fdbc4b; } /* ControlFlow */
+code span.ch { color: #3daee9; } /* Char */
+code span.cn { color: #27aeae; } /* Constant */
+code span.co { color: #7a7c7d; } /* Comment */
+code span.cv { color: #7f8c8d; } /* CommentVar */
+code span.do { color: #a43340; } /* Documentation */
+code span.dt { color: #2980b9; } /* DataType */
+code span.dv { color: #f67400; } /* DecVal */
+code span.er { color: #da4453; } /* Error */
+code span.ex { color: #0099ff; } /* Extension */
+code span.fl { color: #f67400; } /* Float */
+code span.fu { color: #8e44ad; } /* Function */
+code span.im { color: #27ae60; } /* Import */
+code span.in { color: #c45b00; } /* Information */
+code span.kw { color: #cfcfc2; } /* Keyword */
+code span.op { color: #cfcfc2; } /* Operator */
+code span.ot { color: #27ae60; } /* Other */
+code span.pp { color: #27ae60; } /* Preprocessor */
+code span.re { color: #2980b9; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #da4453; } /* SpecialString */
+code span.st { color: #f44f4f; } /* String */
+code span.va { color: #27aeae; } /* Variable */
+code span.vs { color: #da4453; } /* VerbatimString */
+code span.wa { color: #da4453; } /* Warning */
+</style>
 
 
 </head>
@@ -69,12 +134,35 @@
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> index</a></li>
-<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
-<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#why-bookdown"><i class="fa fa-check"></i><b>2.1</b> Why bookdown?</a></li>
+<li class="chapter" data-level="1" data-path=""><a href="#about-dbi-and-rpostgres"><i class="fa fa-check"></i><b>1</b> About DBI and RPostgres</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#overview"><i class="fa fa-check"></i><b>1.1</b> Overview</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#list-of-functions"><i class="fa fa-check"></i><b>1.2</b> List of Functions</a><ul>
+<li class="chapter" data-level="1.2.1" data-path=""><a href="#functions-in-dbi"><i class="fa fa-check"></i><b>1.2.1</b> Functions in DBI</a></li>
+<li class="chapter" data-level="1.2.2" data-path=""><a href="#functions-in-rpostgres"><i class="fa fa-check"></i><b>1.2.2</b> Functions in RPostgres</a></li>
+<li class="chapter" data-level="1.2.3" data-path=""><a href="#functions-with-duplicated-names"><i class="fa fa-check"></i><b>1.2.3</b> Functions with duplicated names</a></li>
+<li class="chapter" data-level="1.2.4" data-path=""><a href="#funcions-only-in-dbi"><i class="fa fa-check"></i><b>1.2.4</b> Funcions only in DBI</a></li>
+<li class="chapter" data-level="1.2.5" data-path=""><a href="#funcions-only-in-rpostgres"><i class="fa fa-check"></i><b>1.2.5</b> Funcions only in RPostgres</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>3</b> Getting Started</a><ul>
-<li class="chapter" data-level="3.1" data-path="getting-started.html"><a href="getting-started.html#is-everything-ok"><i class="fa fa-check"></i><b>3.1</b> Is Everything Ok?</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#basic-usage"><i class="fa fa-check"></i><b>1.3</b> Basic Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#Functions-dbi"><i class="fa fa-check"></i><b>2</b> Functions in DBI and RPostgres</a><ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#connecting-and-disconnecting"><i class="fa fa-check"></i><b>2.1</b> Connecting and Disconnecting</a><ul>
+<li class="chapter" data-level="2.1.1" data-path=""><a href="#dbcanconnect"><i class="fa fa-check"></i><b>2.1.1</b> <code>dbCanConnect()</code></a></li>
+<li class="chapter" data-level="2.1.2" data-path=""><a href="#dbConnect"><i class="fa fa-check"></i><b>2.1.2</b> <code>dbConnect()</code></a></li>
+<li class="chapter" data-level="2.1.3" data-path=""><a href="#dbdisconnect"><i class="fa fa-check"></i><b>2.1.3</b> <code>dbDisconnect()</code></a></li>
+<li class="chapter" data-level="2.1.4" data-path=""><a href="#dbgetinfo"><i class="fa fa-check"></i><b>2.1.4</b> <code>dbGetInfo()</code></a></li>
+<li class="chapter" data-level="2.1.5" data-path=""><a href="#dbisreadonly"><i class="fa fa-check"></i><b>2.1.5</b> <code>dbIsReadOnly()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path=""><a href="#manipulating-tables"><i class="fa fa-check"></i><b>2.2</b> Manipulating Tables</a><ul>
+<li class="chapter" data-level="2.2.1" data-path=""><a href="#dbwritetable"><i class="fa fa-check"></i><b>2.2.1</b> <code>dbWriteTable()</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path=""><a href="#dblisttables"><i class="fa fa-check"></i><b>2.2.2</b> <code>dbListTables()</code></a></li>
+<li class="chapter" data-level="2.2.3" data-path=""><a href="#dblistobjects"><i class="fa fa-check"></i><b>2.2.3</b> <code>dbListObjects()</code></a></li>
+<li class="chapter" data-level="2.2.4" data-path=""><a href="#dblistfields"><i class="fa fa-check"></i><b>2.2.4</b> <code>dbListFields()</code></a></li>
+<li class="chapter" data-level="2.2.5" data-path=""><a href="#dbexiststable"><i class="fa fa-check"></i><b>2.2.5</b> <code>dbExistsTable()</code></a></li>
+<li class="chapter" data-level="2.2.6" data-path=""><a href="#dbremovetable"><i class="fa fa-check"></i><b>2.2.6</b> <code>dbRemoveTable()</code></a></li>
+<li class="chapter" data-level="2.2.7" data-path=""><a href="#dbreadtable"><i class="fa fa-check"></i><b>2.2.7</b> <code>dbReadTable()</code></a></li>
+<li class="chapter" data-level="2.2.8" data-path=""><a href="#dbappendtable"><i class="fa fa-check"></i><b>2.2.8</b> <code>dbAppendTable()</code></a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -85,7 +173,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Code Examples for DBI and RPostgres</a>
           </h1>
         </div>
 
@@ -94,14 +182,552 @@
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<p class="author"><em>shena</em></p>
-<p class="date"><em>2022-06-24</em></p>
+<h1 class="title">Code Examples for DBI and RPostgres</h1>
+<p class="author"><em>Shena</em></p>
+<p class="date"><em>2022-07-04</em></p>
 </div>
-<div id="index" class="section level1 hasAnchor">
-<h1><span class="header-section-number">1</span> index<a href="index.html#index" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>I’m index. glad to see you.</p>
+<div id="about-dbi-and-rpostgres" class="section level1 hasAnchor">
+<h1><span class="header-section-number">1</span> About DBI and RPostgres<a href="#about-dbi-and-rpostgres" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(<span class="st">&quot;RPostgres&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(<span class="st">&quot;DBI&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(<span class="st">&quot;dbplyr&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(<span class="st">&quot;dplyr&quot;</span>)</a></code></pre></div>
+<p>This document is based on the following conditions.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">R.version.string</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">## [1] &quot;R version 4.2.0 (2022-04-22)&quot;</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">packageVersion</span>(<span class="st">&quot;RPostgres&quot;</span>)</a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">## [1] &#39;1.4.4.9000&#39;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw">packageVersion</span>(<span class="st">&quot;DBI&quot;</span>)</a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">## [1] &#39;1.1.3&#39;</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="kw">packageVersion</span>(<span class="st">&quot;dbplyr&quot;</span>)</a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">## [1] &#39;2.2.1&#39;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="kw">packageVersion</span>(<span class="st">&quot;dplyr&quot;</span>)</a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">## [1] &#39;1.0.9&#39;</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="kw">packageVersion</span>(<span class="st">&quot;purrr&quot;</span>)</a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">## [1] &#39;0.3.4&#39;</span></a></code></pre></div>
+<div id="overview" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.1</span> Overview<a href="#overview" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="list-of-functions" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.2</span> List of Functions<a href="#list-of-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="functions-in-dbi" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.1</span> Functions in DBI<a href="#functions-in-dbi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># functions in dbi package</span></a>
+<a class="sourceLine" id="cb3-2" title="2">dbi &lt;-<span class="st"> </span><span class="kw">ls</span>(<span class="st">&quot;package:DBI&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3">dbi <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>() <span class="co"># how many ?</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">## [1] 67</span></a>
+<a class="sourceLine" id="cb3-5" title="5">dbi <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">##  [1] &quot;ANSI&quot;                   &quot;dbAppendTable&quot;          &quot;dbBegin&quot;               </span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">##  [4] &quot;dbBind&quot;                 &quot;dbBreak&quot;                &quot;dbCallProc&quot;            </span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co">##  [7] &quot;dbCanConnect&quot;           &quot;dbClearResult&quot;          &quot;dbColumnInfo&quot;          </span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">## [10] &quot;dbCommit&quot;               &quot;dbConnect&quot;              &quot;dbCreateTable&quot;         </span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="co">## [13] &quot;dbDataType&quot;             &quot;dbDisconnect&quot;           &quot;dbDriver&quot;              </span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="co">## [16] &quot;dbExecute&quot;              &quot;dbExistsTable&quot;          &quot;dbFetch&quot;               </span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">## [19] &quot;dbGetConnectArgs&quot;       &quot;dbGetDBIVersion&quot;        &quot;dbGetException&quot;        </span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">## [22] &quot;dbGetInfo&quot;              &quot;dbGetQuery&quot;             &quot;dbGetRowCount&quot;         </span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="co">## [25] &quot;dbGetRowsAffected&quot;      &quot;dbGetStatement&quot;         &quot;dbHasCompleted&quot;        </span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="co">## [28] &quot;dbIsReadOnly&quot;           &quot;dbIsValid&quot;              &quot;dbListConnections&quot;     </span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="co">## [31] &quot;dbListFields&quot;           &quot;dbListObjects&quot;          &quot;dbListResults&quot;         </span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="co">## [34] &quot;dbListTables&quot;           &quot;dbQuoteIdentifier&quot;      &quot;dbQuoteLiteral&quot;        </span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="co">## [37] &quot;dbQuoteString&quot;          &quot;dbReadTable&quot;            &quot;dbRemoveTable&quot;         </span></a>
+<a class="sourceLine" id="cb3-19" title="19"><span class="co">## [40] &quot;dbRollback&quot;             &quot;dbSendQuery&quot;            &quot;dbSendStatement&quot;       </span></a>
+<a class="sourceLine" id="cb3-20" title="20"><span class="co">## [43] &quot;dbSetDataMappings&quot;      &quot;dbUnloadDriver&quot;         &quot;dbUnquoteIdentifier&quot;   </span></a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="co">## [46] &quot;dbWithTransaction&quot;      &quot;dbWriteTable&quot;           &quot;fetch&quot;                 </span></a>
+<a class="sourceLine" id="cb3-22" title="22"><span class="co">## [49] &quot;Id&quot;                     &quot;isSQLKeyword&quot;           &quot;isSQLKeyword.default&quot;  </span></a>
+<a class="sourceLine" id="cb3-23" title="23"><span class="co">## [52] &quot;make.db.names&quot;          &quot;make.db.names.default&quot;  &quot;show&quot;                  </span></a>
+<a class="sourceLine" id="cb3-24" title="24"><span class="co">## [55] &quot;SQL&quot;                    &quot;sqlAppendTable&quot;         &quot;sqlAppendTableTemplate&quot;</span></a>
+<a class="sourceLine" id="cb3-25" title="25"><span class="co">## [58] &quot;sqlColumnToRownames&quot;    &quot;sqlCommentSpec&quot;         &quot;sqlCreateTable&quot;        </span></a>
+<a class="sourceLine" id="cb3-26" title="26"><span class="co">## [61] &quot;sqlData&quot;                &quot;sqlInterpolate&quot;         &quot;SQLKeywords&quot;           </span></a>
+<a class="sourceLine" id="cb3-27" title="27"><span class="co">## [64] &quot;sqlParseVariables&quot;      &quot;sqlParseVariablesImpl&quot;  &quot;sqlQuoteSpec&quot;          </span></a>
+<a class="sourceLine" id="cb3-28" title="28"><span class="co">## [67] &quot;sqlRownamesToColumn&quot;</span></a></code></pre></div>
+</div>
+<div id="functions-in-rpostgres" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.2</span> Functions in RPostgres<a href="#functions-in-rpostgres" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># functions in RPostgres package</span></a>
+<a class="sourceLine" id="cb4-2" title="2">rpos &lt;-<span class="st"> </span><span class="kw">ls</span>(<span class="st">&quot;package:RPostgres&quot;</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3">rpos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>() <span class="co"># how many ?</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">## [1] 48</span></a>
+<a class="sourceLine" id="cb4-5" title="5">rpos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">##  [1] &quot;dbAppendTable&quot;         &quot;dbBegin&quot;               &quot;dbBind&quot;               </span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">##  [4] &quot;dbCanConnect&quot;          &quot;dbClearResult&quot;         &quot;dbColumnInfo&quot;         </span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">##  [7] &quot;dbCommit&quot;              &quot;dbConnect&quot;             &quot;dbCreateTable&quot;        </span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="co">## [10] &quot;dbDataType&quot;            &quot;dbDisconnect&quot;          &quot;dbDriver&quot;             </span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co">## [13] &quot;dbExecute&quot;             &quot;dbExistsTable&quot;         &quot;dbFetch&quot;              </span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="co">## [16] &quot;dbGetInfo&quot;             &quot;dbGetQuery&quot;            &quot;dbGetRowCount&quot;        </span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="co">## [19] &quot;dbGetRowsAffected&quot;     &quot;dbGetStatement&quot;        &quot;dbHasCompleted&quot;       </span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="co">## [22] &quot;dbIsReadOnly&quot;          &quot;dbIsValid&quot;             &quot;dbListFields&quot;         </span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="co">## [25] &quot;dbListObjects&quot;         &quot;dbListResults&quot;         &quot;dbListTables&quot;         </span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="co">## [28] &quot;dbQuoteIdentifier&quot;     &quot;dbQuoteLiteral&quot;        &quot;dbQuoteString&quot;        </span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="co">## [31] &quot;dbReadTable&quot;           &quot;dbRemoveTable&quot;         &quot;dbRollback&quot;           </span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="co">## [34] &quot;dbSendQuery&quot;           &quot;dbSendStatement&quot;       &quot;dbUnloadDriver&quot;       </span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="co">## [37] &quot;dbUnquoteIdentifier&quot;   &quot;dbWithTransaction&quot;     &quot;dbWriteTable&quot;         </span></a>
+<a class="sourceLine" id="cb4-19" title="19"><span class="co">## [40] &quot;Id&quot;                    &quot;Postgres&quot;              &quot;postgresDefault&quot;      </span></a>
+<a class="sourceLine" id="cb4-20" title="20"><span class="co">## [43] &quot;postgresHasDefault&quot;    &quot;postgresIsTransacting&quot; &quot;postgresWaitForNotify&quot;</span></a>
+<a class="sourceLine" id="cb4-21" title="21"><span class="co">## [46] &quot;Redshift&quot;              &quot;show&quot;                  &quot;sqlData&quot;</span></a></code></pre></div>
+</div>
+<div id="functions-with-duplicated-names" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.3</span> Functions with duplicated names<a href="#functions-with-duplicated-names" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You might have noticed that there are quite a few functions with the same name in these packages. They provides the same functionlaity, possibly with the different implementation and efficiecy.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># common functions in DBI and RPostgres</span></a>
+<a class="sourceLine" id="cb5-2" title="2">common &lt;-<span class="st"> </span>base<span class="op">::</span><span class="kw">intersect</span>(dbi, rpos)</a>
+<a class="sourceLine" id="cb5-3" title="3">common <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>() <span class="co"># how many ?</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">## [1] 42</span></a>
+<a class="sourceLine" id="cb5-5" title="5">common <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">##  [1] &quot;dbAppendTable&quot;       &quot;dbBegin&quot;             &quot;dbBind&quot;             </span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co">##  [4] &quot;dbCanConnect&quot;        &quot;dbClearResult&quot;       &quot;dbColumnInfo&quot;       </span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">##  [7] &quot;dbCommit&quot;            &quot;dbConnect&quot;           &quot;dbCreateTable&quot;      </span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">## [10] &quot;dbDataType&quot;          &quot;dbDisconnect&quot;        &quot;dbDriver&quot;           </span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">## [13] &quot;dbExecute&quot;           &quot;dbExistsTable&quot;       &quot;dbFetch&quot;            </span></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="co">## [16] &quot;dbGetInfo&quot;           &quot;dbGetQuery&quot;          &quot;dbGetRowCount&quot;      </span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">## [19] &quot;dbGetRowsAffected&quot;   &quot;dbGetStatement&quot;      &quot;dbHasCompleted&quot;     </span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="co">## [22] &quot;dbIsReadOnly&quot;        &quot;dbIsValid&quot;           &quot;dbListFields&quot;       </span></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="co">## [25] &quot;dbListObjects&quot;       &quot;dbListResults&quot;       &quot;dbListTables&quot;       </span></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co">## [28] &quot;dbQuoteIdentifier&quot;   &quot;dbQuoteLiteral&quot;      &quot;dbQuoteString&quot;      </span></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="co">## [31] &quot;dbReadTable&quot;         &quot;dbRemoveTable&quot;       &quot;dbRollback&quot;         </span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="co">## [34] &quot;dbSendQuery&quot;         &quot;dbSendStatement&quot;     &quot;dbUnloadDriver&quot;     </span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="co">## [37] &quot;dbUnquoteIdentifier&quot; &quot;dbWithTransaction&quot;   &quot;dbWriteTable&quot;       </span></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="co">## [40] &quot;Id&quot;                  &quot;show&quot;                &quot;sqlData&quot;</span></a></code></pre></div>
+<p>We don’t go into the (potentially deep) difference of these twin functions. This document prefers to using <code>DBI::</code> methods as introduced in <a href="https://github.com/r-dbi/RPostgres">GitHub repository of RPostgres package</a>, unless there is a significant difference between them.</p>
+</div>
+<div id="funcions-only-in-dbi" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.4</span> Funcions only in DBI<a href="#funcions-only-in-dbi" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># functions only in DBI</span></a>
+<a class="sourceLine" id="cb6-2" title="2">only_in_dbi &lt;-<span class="st"> </span>base<span class="op">::</span><span class="kw">setdiff</span>(dbi, rpos)</a>
+<a class="sourceLine" id="cb6-3" title="3">only_in_dbi <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>() <span class="co"># how many ?</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co">## [1] 25</span></a>
+<a class="sourceLine" id="cb6-5" title="5">only_in_dbi <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co">##  [1] &quot;ANSI&quot;                   &quot;dbBreak&quot;                &quot;dbCallProc&quot;            </span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="co">##  [4] &quot;dbGetConnectArgs&quot;       &quot;dbGetDBIVersion&quot;        &quot;dbGetException&quot;        </span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="co">##  [7] &quot;dbListConnections&quot;      &quot;dbSetDataMappings&quot;      &quot;fetch&quot;                 </span></a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co">## [10] &quot;isSQLKeyword&quot;           &quot;isSQLKeyword.default&quot;   &quot;make.db.names&quot;         </span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="co">## [13] &quot;make.db.names.default&quot;  &quot;SQL&quot;                    &quot;sqlAppendTable&quot;        </span></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co">## [16] &quot;sqlAppendTableTemplate&quot; &quot;sqlColumnToRownames&quot;    &quot;sqlCommentSpec&quot;        </span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co">## [19] &quot;sqlCreateTable&quot;         &quot;sqlInterpolate&quot;         &quot;SQLKeywords&quot;           </span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">## [22] &quot;sqlParseVariables&quot;      &quot;sqlParseVariablesImpl&quot;  &quot;sqlQuoteSpec&quot;          </span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="co">## [25] &quot;sqlRownamesToColumn&quot;</span></a></code></pre></div>
+</div>
+<div id="funcions-only-in-rpostgres" class="section level3 hasAnchor">
+<h3><span class="header-section-number">1.2.5</span> Funcions only in RPostgres<a href="#funcions-only-in-rpostgres" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># functions only in RPostgres</span></a>
+<a class="sourceLine" id="cb7-2" title="2">only_in_rpos &lt;-<span class="st"> </span>base<span class="op">::</span><span class="kw">setdiff</span>(rpos, dbi)</a>
+<a class="sourceLine" id="cb7-3" title="3">only_in_rpos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>() <span class="co"># how many ?</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">## [1] 6</span></a>
+<a class="sourceLine" id="cb7-5" title="5">only_in_rpos <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">## [1] &quot;Postgres&quot;              &quot;postgresDefault&quot;       &quot;postgresHasDefault&quot;   </span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">## [4] &quot;postgresIsTransacting&quot; &quot;postgresWaitForNotify&quot; &quot;Redshift&quot;</span></a></code></pre></div>
+</div>
+</div>
+<div id="basic-usage" class="section level2 hasAnchor">
+<h2><span class="header-section-number">1.3</span> Basic Usage<a href="#basic-usage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before we look at indivisual functions, let us describe a typical work flow with these packages.
+You may sefaly skip this section as it is independent of what follows.</p>
+<p>This section assumes that you have access to a postgres database. If necessary, run the following command to create a new database named ‘demo’.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">sudo</span> service postgresql start</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="ex">createdb</span> -p 5432 --owner=your-owner-name --host=localhost --username=your-username demo</a></code></pre></div>
+<p>The following code defines the <code>con</code> variable which keeps the establised connection to your database.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
+<a class="sourceLine" id="cb10-2" title="2">    <span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>(),</a>
+<a class="sourceLine" id="cb10-3" title="3">    <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>,</a>
+<a class="sourceLine" id="cb10-4" title="4">    <span class="dt">port =</span> <span class="dv">5432</span>,</a>
+<a class="sourceLine" id="cb10-5" title="5">    <span class="dt">dbname =</span> <span class="st">&quot;your-database-name&quot;</span>,</a>
+<a class="sourceLine" id="cb10-6" title="6">    <span class="dt">user =</span> <span class="st">&quot;your-user&quot;</span>,</a>
+<a class="sourceLine" id="cb10-7" title="7">    <span class="dt">password =</span> <span class="st">&quot;your-password&quot;</span></a>
+<a class="sourceLine" id="cb10-8" title="8">)</a></code></pre></div>
+<p>You should not write this way outside this demo. See @ref(dbConnect.)</p>
+<p>Let us observe the list of tables in the connected database.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># demo database is empty</span></a>
+<a class="sourceLine" id="cb11-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbListTables</span>()</a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="co">## character(0)</span></a></code></pre></div>
+<p><code>dbWriteTable()</code> Creates a remote table from local data.
+The last two arguments are optional.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># create table by supplying local dataframe</span></a>
+<a class="sourceLine" id="cb12-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">temoprary =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb12-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;iris&quot;</span>, iris, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">temoprary =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co"># check that tables are properly created</span></a>
+<a class="sourceLine" id="cb12-5" title="5">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</a>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">## [1] &quot;mtcars&quot; &quot;iris&quot;</span></a></code></pre></div>
+<p>You can also ask the existance of the specific table in the database associated with <code>con</code> variable.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># boolean question about the existance of indivisual table</span></a>
+<a class="sourceLine" id="cb13-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb13-3" title="3"><span class="co">## [1] TRUE</span></a></code></pre></div>
+<p><code>dbListFields()</code> gets you the list of fields of an indivisual table.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># now we have</span></a>
+<a class="sourceLine" id="cb14-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbListFields</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="co">##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;</span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="co">## [11] &quot;carb&quot;</span></a></code></pre></div>
+<p><code>dbReadTable()</code> allows you to take a quick peep at a table.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">con <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="st">    </span>DBI<span class="op">::</span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="st">    </span><span class="kw">head</span>()</a></code></pre></div>
+<pre><code>##    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## 3 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## 4 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## 5 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## 6 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<p>You can use <code>dbSendQuery()</code> to execute a query written in a string. Note that we don’t need a <code>;</code> at the end of the query. Since this method does nothing but sending query, you should capture the returned value to perform an appropriate post-processing.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># send query and get response variable</span></a>
+<a class="sourceLine" id="cb17-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbSendQuery</span>(<span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="st">    SELECT *</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="st">    FROM mtcars</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="st">    WHERE hp &lt;= 100</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="st">&quot;</span>)</a></code></pre></div>
+<p><code>dbFetch()</code> shows you the result of the query.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">rs <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbFetch</span>()</a></code></pre></div>
+<pre><code>##    mpg cyl  disp hp drat    wt  qsec vs am gear carb
+## 1 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1
+## 2 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2
+## 3 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2
+## 4 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1
+## 5 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2
+## 6 33.9   4  71.1 65 4.22 1.835 19.90  1  1    4    1
+## 7 21.5   4 120.1 97 3.70 2.465 20.01  1  0    3    1
+## 8 27.3   4  79.0 66 4.08 1.935 18.90  1  1    4    1
+## 9 26.0   4 120.3 91 4.43 2.140 16.70  0  1    5    2</code></pre>
+<p>Don’t forget to do <code>dbClearResult()</code>.
+DBI package keeps many kinds of resources associated with the result of the query unless manually cleared. <code>dbClearResult()</code> is responsible for that freeing role.
+DBI reference says that</p>
+<blockquote>
+<p>This step is mandatory for all objects obtained by calling dbSendQuery() or dbSendStatement().</p>
+</blockquote>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
+<p>We can write a parameterised query in the following way.
+<code>$1</code> and <code>$2</code> corresponds to the first and second argument in the <code>list(100, 120)</code>, respectively.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="st">    SELECT *</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="st">    FROM mtcars</span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="st">    WHERE hp BETWEEN $1 AND $2</span></a>
+<a class="sourceLine" id="cb21-5" title="5"><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb21-6" title="6">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(<span class="dv">100</span>, <span class="dv">120</span>))</a>
+<a class="sourceLine" id="cb21-7" title="7">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>()</a>
+<a class="sourceLine" id="cb21-8" title="8"><span class="co">##    mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb21-9" title="9"><span class="co">## 1 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span></a>
+<a class="sourceLine" id="cb21-10" title="10"><span class="co">## 2 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span></a>
+<a class="sourceLine" id="cb21-11" title="11"><span class="co">## 3 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1</span></a>
+<a class="sourceLine" id="cb21-12" title="12"><span class="co">## 4 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1</span></a>
+<a class="sourceLine" id="cb21-13" title="13"><span class="co">## 5 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span></a>
+<a class="sourceLine" id="cb21-14" title="14"><span class="co">## 6 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span></a>
+<a class="sourceLine" id="cb21-15" title="15">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
+<p>You can delete a table by <code>dbRemoveTable()</code>.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># remove indivisual table by supplying name string</span></a>
+<a class="sourceLine" id="cb22-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a></code></pre></div>
+<p>It is often useful to have a function that deletes multiple tables at once based on a pre-defined rule.
+The following code is one of the most simplest, deleting all tables.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># create mtcars table again to demonstate sumultaneous-removal</span></a>
+<a class="sourceLine" id="cb23-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">temoprary =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb23-3" title="3">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">## [1] &quot;iris&quot;   &quot;mtcars&quot;</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="co"># remove multiple tables at once</span></a>
+<a class="sourceLine" id="cb23-6" title="6">con <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="st">    </span>DBI<span class="op">::</span><span class="kw">dbListTables</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="st">    </span>purrr<span class="op">::</span><span class="kw">map_lgl</span>(<span class="op">~</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbRemoveTable</span>(con, .x)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb23-9" title="9"><span class="st">    </span><span class="kw">all</span>()</a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="co">## [1] TRUE</span></a>
+<a class="sourceLine" id="cb23-11" title="11">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</a>
+<a class="sourceLine" id="cb23-12" title="12"><span class="co">## character(0)</span></a></code></pre></div>
+<p><code>dbDisconnect()</code> terminates the supplied <code>con</code> variable, and closes the connection.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbDisconnect</span>()</a></code></pre></div>
 
+</div>
+</div>
+<div id="Functions-dbi" class="section level1 hasAnchor">
+<h1><span class="header-section-number">2</span> Functions in DBI and RPostgres<a href="#Functions-dbi" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>For convenience, we define a function that issues a connection variable.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># depends on config package to handling credentials</span></a>
+<a class="sourceLine" id="cb25-2" title="2">issue_con &lt;-<span class="st"> </span><span class="cf">function</span>(service_name) {</a>
+<a class="sourceLine" id="cb25-3" title="3">    dw &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>(service_name)</a>
+<a class="sourceLine" id="cb25-4" title="4">    DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
+<a class="sourceLine" id="cb25-5" title="5">        <span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>(),</a>
+<a class="sourceLine" id="cb25-6" title="6">        <span class="dt">host =</span> dw<span class="op">$</span>host,</a>
+<a class="sourceLine" id="cb25-7" title="7">        <span class="dt">port =</span> dw<span class="op">$</span>port,</a>
+<a class="sourceLine" id="cb25-8" title="8">        <span class="dt">dbname =</span> dw<span class="op">$</span>dbname,</a>
+<a class="sourceLine" id="cb25-9" title="9">        <span class="dt">user =</span> dw<span class="op">$</span>user,</a>
+<a class="sourceLine" id="cb25-10" title="10">        <span class="dt">password =</span> dw<span class="op">$</span>password</a>
+<a class="sourceLine" id="cb25-11" title="11">    )</a>
+<a class="sourceLine" id="cb25-12" title="12">}</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">remove_all_table &lt;-<span class="st"> </span><span class="cf">function</span>(con) {</a>
+<a class="sourceLine" id="cb26-2" title="2">    con <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="st">        </span>DBI<span class="op">::</span><span class="kw">dbListTables</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="st">        </span>purrr<span class="op">::</span><span class="kw">map_lgl</span>(<span class="op">~</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbRemoveTable</span>(con, .x)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="st">        </span><span class="kw">all</span>()</a>
+<a class="sourceLine" id="cb26-6" title="6">}</a></code></pre></div>
+
+<div id="connecting-and-disconnecting" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.1</span> Connecting and Disconnecting<a href="#connecting-and-disconnecting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="dbcanconnect" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.1</span> <code>dbCanConnect()</code><a href="#dbcanconnect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Checks if a connection to a DBMS can be established</li>
+<li>Retruns logical.</li>
+<li>If <code>FALSE</code>, it comes with a reason for failure.</li>
+</ul>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">DBI<span class="op">::</span><span class="kw">dbCanConnect</span>(<span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="co">## [1] TRUE</span></a>
+<a class="sourceLine" id="cb27-3" title="3">RPostgres<span class="op">::</span><span class="kw">dbCanConnect</span>(<span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="co">## [1] TRUE</span></a></code></pre></div>
+</div>
+<div id="dbConnect" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.2</span> <code>dbConnect()</code><a href="#dbConnect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Creates a connection to a DBMS.</li>
+<li>Retruns S4 object (that inherits from DBIConnection virtual class), which holds the established connection information used to communicate with database.</li>
+<li>Many connection variable can exist at the same time without affecting each other.</li>
+</ul>
+<p>The following example shows a typical argument list for connecting to Postgres.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
+<a class="sourceLine" id="cb28-2" title="2">    <span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>(),</a>
+<a class="sourceLine" id="cb28-3" title="3">    <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>,</a>
+<a class="sourceLine" id="cb28-4" title="4">    <span class="dt">port =</span> <span class="dv">5432</span>,</a>
+<a class="sourceLine" id="cb28-5" title="5">    <span class="dt">dbname =</span> <span class="st">&quot;your-database-name&quot;</span>,</a>
+<a class="sourceLine" id="cb28-6" title="6">    <span class="dt">user =</span> <span class="st">&quot;your-user&quot;</span>,</a>
+<a class="sourceLine" id="cb28-7" title="7">    <span class="dt">password =</span> <span class="st">&quot;your-password&quot;</span></a>
+<a class="sourceLine" id="cb28-8" title="8">)</a></code></pre></div>
+<p>Be aware that this is a terrible way of connecting to a non-demo database because your credentials are completely revealed in a plain text. See <a href="https://db.rstudio.com/best-practices/managing-credentials">Securing Credentials</a> for some better ways. In this document, we issue connection variables by calling <code>issue_con</code> defined in <a href="#Functions-dbi">2</a>.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="co"># connection variable is printable</span></a>
+<a class="sourceLine" id="cb29-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb29-4" title="4"><span class="co">## &lt;PqConnection&gt; demo@localhost:5432</span></a></code></pre></div>
+</div>
+<div id="dbdisconnect" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.3</span> <code>dbDisconnect()</code><a href="#dbdisconnect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Closes the associated connection, discards all associated pending work, and frees resources.</li>
+<li>Retruns <code>TRUE</code> invisibly.</li>
+<li>Issues warning on an already disconnected connnectinon variable or invalid one.</li>
+<li>NOT clears a supplied connection object.</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># disconnect con varibale. returns nothing.</span></a>
+<a class="sourceLine" id="cb30-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
+<a class="sourceLine" id="cb30-3" title="3"><span class="co"># get warned since con is already disconnected</span></a>
+<a class="sourceLine" id="cb30-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
+<a class="sourceLine" id="cb30-5" title="5"><span class="co">## Warning in connection_release(conn@ptr): Already disconnected</span></a></code></pre></div>
+<p>Disconnected object continues to exist as a non-null object.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">is.null</span>()</a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="co">## [1] FALSE</span></a></code></pre></div>
+<p>But it is no longer printable.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="co">## Error: Invalid connection</span></a></code></pre></div>
+<p>Disconnection has a local effect. That is, disconnecting one connection has no impact on other connections.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
+<a class="sourceLine" id="cb33-2" title="2">con1 &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
+<a class="sourceLine" id="cb33-3" title="3">con1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="co"># con is still valid</span></a>
+<a class="sourceLine" id="cb33-5" title="5">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb33-6" title="6"><span class="co">## &lt;PqConnection&gt; demo@localhost:5432</span></a></code></pre></div>
+</div>
+<div id="dbgetinfo" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.4</span> <code>dbGetInfo()</code><a href="#dbgetinfo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Retrieves information on database objects, i.e., DBIDriver (e.g., <code>RPostgres::Postgres</code>), DBIConnection (e.g., <code>con</code>) or DBIResult (e.g., <code>dbSendQuery()</code>).</li>
+<li>Returns a named list whose components depend on the input class.</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">dbGetInfo</span>(RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="co">## $driver.version</span></a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="co">## [1] &#39;1.4.4.9000&#39;</span></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="co">## </span></a>
+<a class="sourceLine" id="cb34-5" title="5"><span class="co">## $client.version</span></a>
+<a class="sourceLine" id="cb34-6" title="6"><span class="co">## [1] &#39;12.11&#39;</span></a>
+<a class="sourceLine" id="cb34-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetInfo</span>()</a>
+<a class="sourceLine" id="cb34-8" title="8"><span class="co">## $dbname</span></a>
+<a class="sourceLine" id="cb34-9" title="9"><span class="co">## [1] &quot;demo&quot;</span></a>
+<a class="sourceLine" id="cb34-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb34-11" title="11"><span class="co">## $host</span></a>
+<a class="sourceLine" id="cb34-12" title="12"><span class="co">## [1] &quot;localhost&quot;</span></a>
+<a class="sourceLine" id="cb34-13" title="13"><span class="co">## </span></a>
+<a class="sourceLine" id="cb34-14" title="14"><span class="co">## $port</span></a>
+<a class="sourceLine" id="cb34-15" title="15"><span class="co">## [1] &quot;5432&quot;</span></a>
+<a class="sourceLine" id="cb34-16" title="16"><span class="co">## </span></a>
+<a class="sourceLine" id="cb34-17" title="17"><span class="co">## $username</span></a>
+<a class="sourceLine" id="cb34-18" title="18"><span class="co">## [1] &quot;guest&quot;</span></a>
+<a class="sourceLine" id="cb34-19" title="19"><span class="co">## </span></a>
+<a class="sourceLine" id="cb34-20" title="20"><span class="co">## $protocol.version</span></a>
+<a class="sourceLine" id="cb34-21" title="21"><span class="co">## [1] 3</span></a>
+<a class="sourceLine" id="cb34-22" title="22"><span class="co">## </span></a>
+<a class="sourceLine" id="cb34-23" title="23"><span class="co">## $server.version</span></a>
+<a class="sourceLine" id="cb34-24" title="24"><span class="co">## [1] 120011</span></a>
+<a class="sourceLine" id="cb34-25" title="25"><span class="co">## </span></a>
+<a class="sourceLine" id="cb34-26" title="26"><span class="co">## $db.version</span></a>
+<a class="sourceLine" id="cb34-27" title="27"><span class="co">## [1] 120011</span></a>
+<a class="sourceLine" id="cb34-28" title="28"><span class="co">## </span></a>
+<a class="sourceLine" id="cb34-29" title="29"><span class="co">## $pid</span></a>
+<a class="sourceLine" id="cb34-30" title="30"><span class="co">## [1] 18286</span></a></code></pre></div>
+</div>
+<div id="dbisreadonly" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.1.5</span> <code>dbIsReadOnly()</code><a href="#dbisreadonly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Tests whether a database object is read only.</li>
+<li>Returns logical.</li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbIsReadOnly</span>()</a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="co">## [1] FALSE</span></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="kw">dbIsReadOnly</span>(RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="co">## [1] FALSE</span></a></code></pre></div>
+
+</div>
+</div>
+<div id="manipulating-tables" class="section level2 hasAnchor">
+<h2><span class="header-section-number">2.2</span> Manipulating Tables<a href="#manipulating-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="dbwritetable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.1</span> <code>dbWriteTable()</code><a href="#dbwritetable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Writes, overwrites or appends a data frame to a database table</li>
+<li>Various optional argumets (must be provided as named arguments) available such as
+<ul>
+<li><code>temoprary = FALSE</code>: a logical specifying whether a created table should be temoprary in the sense that it vanishes after disconection. <strong>NOT available with postgres</strong>.</li>
+<li><code>overwrite = FALSE</code>: a logical specifying whether to overwrite an existing table.</li>
+<li><code>append = FALSE</code>: a logical specifying whether to append to an existing table.</li>
+</ul></li>
+</ul>
+<p>The following example demonstrates that <code>DBI::dbWriteTable()</code> does not accept <code>temoprary =</code> option. Note that no error or warnig is raised. The same is true for <code>Postgres::dbWriteTable()</code>.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># temprary = TRUE is available?</span></a>
+<a class="sourceLine" id="cb36-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>RPostgres<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">temoprary =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb36-3" title="3"><span class="co"># show list of tables currently available</span></a>
+<a class="sourceLine" id="cb36-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
+<a class="sourceLine" id="cb36-5" title="5"><span class="co">## [1] &quot;mtcars&quot;</span></a>
+<a class="sourceLine" id="cb36-6" title="6"><span class="co"># refresh connnection</span></a>
+<a class="sourceLine" id="cb36-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
+<a class="sourceLine" id="cb36-8" title="8">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
+<a class="sourceLine" id="cb36-9" title="9"><span class="co"># is the table still alive? -&gt; yes</span></a>
+<a class="sourceLine" id="cb36-10" title="10">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
+<a class="sourceLine" id="cb36-11" title="11"><span class="co">## [1] &quot;mtcars&quot;</span></a></code></pre></div>
+</div>
+<div id="dblisttables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.2</span> <code>dbListTables()</code><a href="#dblisttables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Returns a character vector that enumerates all tables and views in the database.</li>
+<li>In Postgres, this includes views and temprary objects created by <code>dplyr::copy_to()</code>, but not those by <code>dbplyr::copy_inline()</code>.</li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="co">## [1] &quot;mtcars&quot;</span></a></code></pre></div>
+</div>
+<div id="dblistobjects" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.3</span> <code>dbListObjects()</code><a href="#dblistobjects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Returns a data frame with columns table and is_prefix in that order.</li>
+<li>Works also for temprary tables created by <code>dplyr::copy_to()</code> in Postgres.</li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListObjects</span>()</a>
+<a class="sourceLine" id="cb38-2" title="2"><span class="co">##                              table is_prefix</span></a>
+<a class="sourceLine" id="cb38-3" title="3"><span class="co">## 1              &lt;Id&gt; table = mtcars     FALSE</span></a>
+<a class="sourceLine" id="cb38-4" title="4"><span class="co">## 2             &lt;Id&gt; schema = public      TRUE</span></a>
+<a class="sourceLine" id="cb38-5" title="5"><span class="co">## 3 &lt;Id&gt; schema = information_schema      TRUE</span></a>
+<a class="sourceLine" id="cb38-6" title="6"><span class="co">## 4         &lt;Id&gt; schema = pg_catalog      TRUE</span></a></code></pre></div>
+</div>
+<div id="dblistfields" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.4</span> <code>dbListFields()</code><a href="#dblistfields" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Returns a character vector that enumerates all fields in the table in the correct order.</li>
+<li>Works also for temprary tables created by <code>dplyr::copy_to()</code> in Postgres.</li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListFields</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="co">##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;</span></a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="co">## [11] &quot;carb&quot;</span></a></code></pre></div>
+</div>
+<div id="dbexiststable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.5</span> <code>dbExistsTable()</code><a href="#dbexiststable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Returns a lo’gical scalar, <code>TRUE</code> if the table or view specified by the name argument exists, <code>FALSE</code> otherwise.</li>
+<li>Works also for temprary tables created by <code>dplyr::copy_to()</code> in Postgres.</li>
+</ul>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb40-2" title="2"><span class="co">## [1] TRUE</span></a>
+<a class="sourceLine" id="cb40-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;hoge&quot;</span>)</a>
+<a class="sourceLine" id="cb40-4" title="4"><span class="co">## [1] FALSE</span></a></code></pre></div>
+</div>
+<div id="dbremovetable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.6</span> <code>dbRemoveTable()</code><a href="#dbremovetable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Removes a remote table from the database.</li>
+<li>Returns <code>TRUE</code> invisibly.</li>
+<li>Raises an error if the intended table does not exist (see <code>fail_if_missing</code> option below).</li>
+<li>Cannot remove a view in postges. (Neither DBI nor RPostgres has a method for dropping a view. It must be crafted by the user.)</li>
+<li>Additional options, which must be called as named ones, include
+<ul>
+<li><code>temoprary = FALSE</code>: a logical specifying whether to consider only temprary tables. <strong>NOT available with postgres</strong>.</li>
+<li><code>fail_if_missing = TRUE</code>: a logical specifying whether to raise an error for the call to remove an absent table.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="cf">if</span> (con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
+<a class="sourceLine" id="cb41-2" title="2">    con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars)</a>
+<a class="sourceLine" id="cb41-3" title="3">}</a>
+<a class="sourceLine" id="cb41-4" title="4"></a>
+<a class="sourceLine" id="cb41-5" title="5">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
+<a class="sourceLine" id="cb41-6" title="6"><span class="co">## [1] &quot;mtcars&quot;</span></a>
+<a class="sourceLine" id="cb41-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="co"># remove here</span></a>
+<a class="sourceLine" id="cb41-8" title="8">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>() <span class="co"># removed table no longer exists</span></a>
+<a class="sourceLine" id="cb41-9" title="9"><span class="co">## character(0)</span></a></code></pre></div>
+<p>In Postgres, <code>temporary = TRUE</code> causes an error regardless of the existanece of the table.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="cf">if</span> (con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
+<a class="sourceLine" id="cb42-2" title="2">    con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars)</a>
+<a class="sourceLine" id="cb42-3" title="3">}</a>
+<a class="sourceLine" id="cb42-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;mtcars&quot;</span>, <span class="dt">temporary =</span> <span class="ot">TRUE</span>) <span class="co"># error</span></a>
+<a class="sourceLine" id="cb42-5" title="5"><span class="co">## Error: Failed to fetch row: ERROR:  schema &quot;pg_temp&quot; does not exist</span></a></code></pre></div>
+<p>In this case, the asked removal will not be executed.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>() <span class="co"># the table is still alive</span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="co">## [1] &quot;mtcars&quot;</span></a></code></pre></div>
+<p>The following examples illustate the behaviour of the option <code>fail_if_missing =</code>.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># fail_if_missing = FALSE makes an otherwise invalid call valid</span></a>
+<a class="sourceLine" id="cb44-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;absent_table&quot;</span>, <span class="dt">fail_if_missing =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb44-3" title="3"><span class="co">## </span><span class="al">NOTICE</span><span class="co">:  table &quot;absent_table&quot; does not exist, skipping</span></a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co"># fail_if_missing = TRUE, the default, raises an error for deleting an absent table</span></a>
+<a class="sourceLine" id="cb45-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;absent_table&quot;</span>)</a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="co">## Error: Failed to fetch row: ERROR:  table &quot;absent_table&quot; does not exist</span></a></code></pre></div>
+</div>
+<div id="dbreadtable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.7</span> <code>dbReadTable()</code><a href="#dbreadtable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Copy data frames from database tables.</li>
+<li>Returns a data frame that contains the complete data from the remote table.</li>
+</ul>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="cf">if</span> (con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
+<a class="sourceLine" id="cb46-2" title="2">    con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars)</a>
+<a class="sourceLine" id="cb46-3" title="3">}</a>
+<a class="sourceLine" id="cb46-4" title="4">con <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-5" title="5"><span class="st">    </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb46-6" title="6"><span class="st">    </span><span class="kw">head</span>()</a></code></pre></div>
+<pre><code>##    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## 3 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## 4 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## 5 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## 6 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+</div>
+<div id="dbappendtable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.8</span> <code>dbAppendTable()</code><a href="#dbappendtable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Inserts rows into a table, assuming that the table has been created beforehand.</li>
+<li>Returns a scalar numeric equal to the number of rows inserted.</li>
+<li>The <code>row.names</code> argument must be <code>NULL</code>, the default value. The row names of input data are ignored.</li>
+<li>In Postgres, <code>DBI::dbAppendTable()</code> is overrideen by <code>RPostgres::dbAppendTable()</code> because RPostgres uses placeholders of the form <code>$1</code>, <code>$2</code> etc. instead of <code>?</code>.</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co"># create demo table</span></a>
+<a class="sourceLine" id="cb48-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars2&quot;</span>, mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">2</span>), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="co"># insert 10 rows from tail</span></a>
+<a class="sourceLine" id="cb48-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbAppendTable</span>(<span class="dt">name =</span> <span class="st">&quot;mtcars2&quot;</span>, <span class="dt">value =</span> mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tail</span>(<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="co">## [1] 10</span></a>
+<a class="sourceLine" id="cb48-6" title="6"><span class="co"># show resulting table</span></a>
+<a class="sourceLine" id="cb48-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars2&quot;</span>)</a>
+<a class="sourceLine" id="cb48-8" title="8"><span class="co">##     mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb48-9" title="9"><span class="co">## 1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span></a>
+<a class="sourceLine" id="cb48-10" title="10"><span class="co">## 2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span></a>
+<a class="sourceLine" id="cb48-11" title="11"><span class="co">## 3  15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2</span></a>
+<a class="sourceLine" id="cb48-12" title="12"><span class="co">## 4  13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4</span></a>
+<a class="sourceLine" id="cb48-13" title="13"><span class="co">## 5  19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2</span></a>
+<a class="sourceLine" id="cb48-14" title="14"><span class="co">## 6  27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span></a>
+<a class="sourceLine" id="cb48-15" title="15"><span class="co">## 7  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span></a>
+<a class="sourceLine" id="cb48-16" title="16"><span class="co">## 8  30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span></a>
+<a class="sourceLine" id="cb48-17" title="17"><span class="co">## 9  15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4</span></a>
+<a class="sourceLine" id="cb48-18" title="18"><span class="co">## 10 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</span></a>
+<a class="sourceLine" id="cb48-19" title="19"><span class="co">## 11 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</span></a>
+<a class="sourceLine" id="cb48-20" title="20"><span class="co">## 12 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span></a></code></pre></div>
+<p>Appending rows into an absent table raises an error.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbAppendTable</span>(<span class="st">&quot;iris&quot;</span>, iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>())</a></code></pre></div>
+<pre><code>## Error: Failed to initialise COPY: ERROR:  relation &quot;iris&quot; does not exist</code></pre>
+
+</div>
+</div>
 </div>
             </section>
 
@@ -109,7 +735,7 @@
         </div>
       </div>
 
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -155,7 +781,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "subsection",
+"collapse": "none",
 "scroll_highlight": true
 },
 "toolbar": {

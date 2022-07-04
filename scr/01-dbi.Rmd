@@ -1,0 +1,34 @@
+# Functions in DBI and RPostgres {#Functions-dbi}
+
+For convenience, we define a function that issues a connection variable.
+
+```{r issue-con}
+# depends on config package to handling credentials
+issue_con <- function(service_name) {
+    dw <- config::get(service_name)
+    DBI::dbConnect(
+        drv = RPostgres::Postgres(),
+        host = dw$host,
+        port = dw$port,
+        dbname = dw$dbname,
+        user = dw$user,
+        password = dw$password
+    )
+}
+```
+
+```{r def-refresh-con, include=FALSE}
+refresh_con <- function(x) {
+    try(x %>% DBI::dbDisconnect())
+    issue_con("demo")
+}
+```
+
+```{r def-remove-all-table}
+remove_all_table <- function(con) {
+    con %>%
+        DBI::dbListTables() %>%
+        purrr::map_lgl(~ DBI::dbRemoveTable(con, .x)) %>%
+        all()
+}
+```

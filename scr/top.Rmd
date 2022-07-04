@@ -1,12 +1,238 @@
 ---
-title: "A Minimal Book Example"
-author: "shena"
+title: "Code Examples for DBI and RPostgres"
+author: "Shena"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
-description: "This is a minimal example of using
-  the bookdown package to write a book."
-github-repo: 'Shena4746/latex-templete-vscode'
+github-repo: 'Shena4746/datascience-100knocks-preprocess-R'
 ---
 
-# index 
-I'm index. glad to see you.
+```{r setup, eval = TRUE, include=FALSE}
+rm(list = ls())
+gc(reset = TRUE)
+gc(reset = TRUE)
+knitr::opts_chunk$set(eval = TRUE, echo = TRUE, warning = FALSE)
+```
+
+# About DBI and RPostgres
+
+```{r libraries, message=FALSE, warning=FALSE}
+library("RPostgres")
+library("DBI")
+library("dbplyr")
+library("dplyr")
+```
+
+This document is based on the following conditions.
+```{r versions-of-libraries, collapse=TRUE}
+R.version.string
+packageVersion("RPostgres")
+packageVersion("DBI")
+packageVersion("dbplyr")
+packageVersion("dplyr")
+packageVersion("purrr")
+```
+
+## Overview
+
+## List of Functions
+
+### Functions in DBI 
+
+```{r DBI-functions, collapse=TRUE}
+# functions in dbi package
+dbi <- ls("package:DBI")
+dbi %>% length() # how many ?
+dbi %>% print()
+```
+
+### Functions in RPostgres
+
+```{r RPostgres-functions, collapse=TRUE}
+# functions in RPostgres package
+rpos <- ls("package:RPostgres")
+rpos %>% length() # how many ?
+rpos %>% print()
+```
+
+### Functions with duplicated names
+
+You might have noticed that there are quite a few functions with the same name in these packages. They provides the same functionlaity, possibly with the different implementation and efficiecy.
+
+```{r DBI-RPostgres-common-functions, collapse=TRUE}
+# common functions in DBI and RPostgres
+common <- base::intersect(dbi, rpos)
+common %>% length() # how many ?
+common %>% print()
+```
+
+We don't go into the (potentially deep) difference of these twin functions. This document prefers to using `DBI::` methods as introduced in [GitHub repository of RPostgres package](https://github.com/r-dbi/RPostgres), unless there is a significant difference between them. 
+
+### Funcions only in DBI
+
+```{r DBI-unique-functions, collapse=TRUE}
+# functions only in DBI
+only_in_dbi <- base::setdiff(dbi, rpos)
+only_in_dbi %>% length() # how many ?
+only_in_dbi %>% print()
+```
+
+### Funcions only in RPostgres
+
+```{r RPostgres-unique-functions, collapse=TRUE}
+# functions only in RPostgres
+only_in_rpos <- base::setdiff(rpos, dbi)
+only_in_rpos %>% length() # how many ?
+only_in_rpos %>% print()
+```
+
+## Basic Usage
+
+Before we look at indivisual functions, let us describe a typical work flow with these packages.
+You may sefaly skip this section as it is independent of what follows.
+
+This section assumes that you have access to a postgres database. If necessary, run the following command to create a new database named 'demo'.
+
+```{bash start-postgres, eval=FALSE}
+sudo service postgresql start
+```
+
+```{bash, eval=FALSE}
+createdb -p 5432 --owner=your-owner-name --host=localhost --username=your-username demo
+```
+
+The following code defines the `con` variable which keeps the establised connection to your database. 
+
+```{r example-connect, eval = FALSE}
+con <- DBI::dbConnect(
+    drv = RPostgres::Postgres(),
+    host = "localhost",
+    port = 5432,
+    dbname = "your-database-name",
+    user = "your-user",
+    password = "your-password"
+)
+```
+
+You should not write this way outside this demo. See \@ref(dbConnect.)
+
+```{r example-issue-con, include=FALSE}
+dw <- config::get("demo")
+con <- DBI::dbConnect(
+    drv = RPostgres::Postgres(),
+    host = dw$host,
+    port = dw$port,
+    dbname = dw$dbname,
+    user = dw$user,
+    password = dw$password
+)
+```
+
+Let us observe the list of tables in the connected database.
+
+```{r empty-database, collapse=TRUE}
+# demo database is empty
+con %>% DBI::dbListTables()
+```
+
+`dbWriteTable()` Creates a remote table from local data.
+The last two arguments are optional.
+
+```{r our-first-table, collapse=TRUE}
+# create table by supplying local dataframe
+con %>% dbWriteTable("mtcars", mtcars, overwrite = TRUE, temoprary = TRUE)
+con %>% dbWriteTable("iris", iris, overwrite = TRUE, temoprary = TRUE)
+# check that tables are properly created
+DBI::dbListTables(con)
+```
+
+You can also ask the existance of the specific table in the database associated with `con` variable.
+
+```{r , collapse=TRUE}
+# boolean question about the existance of indivisual table
+con %>% DBI::dbExistsTable("mtcars")
+```
+
+`dbListFields()` gets you the list of fields of an indivisual table.
+
+```{r list-fields-mtcars, collapse=TRUE}
+# now we have
+con %>% DBI::dbListFields("mtcars")
+```
+
+`dbReadTable()` allows you to take a quick peep at a table. 
+
+```{r read-table-without-query}
+con %>%
+    DBI::dbReadTable("mtcars") %>%
+    head()
+```
+
+
+You can use `dbSendQuery()` to execute a query written in a string. Note that we don't need a `;` at the end of the query. Since this method does nothing but sending query, you should capture the returned value to perform an appropriate post-processing.
+
+```{r first-send-query}
+# send query and get response variable
+rs <- con %>% DBI::dbSendQuery("
+	SELECT *
+	FROM mtcars
+	WHERE hp <= 100
+")
+```
+
+`dbFetch()` shows you the result of the query.
+
+```{r first-fetch}
+rs %>% DBI::dbFetch()
+```
+
+Don't forget to do `dbClearResult()`. 
+DBI package keeps many kinds of resources associated with the result of the query unless manually cleared. `dbClearResult()` is responsible for that freeing role.
+DBI reference says that 
+
+> This step is mandatory for all objects obtained by calling dbSendQuery() or dbSendStatement().
+
+```{r first-clear-result}
+rs %>% dbClearResult()
+```
+
+We can write a parameterised query in the following way.
+`$1` and `$2` corresponds to the first and second argument in the `list(100, 120)`, respectively. 
+
+```{r first-param-query, collapse=TRUE}
+rs <- con %>% dbSendQuery("
+	SELECT *
+	FROM mtcars
+	WHERE hp BETWEEN $1 AND $2
+")
+rs %>% dbBind(list(100, 120))
+rs %>% dbFetch()
+rs %>% dbClearResult()
+```
+
+You can delete a table by `dbRemoveTable()`. 
+
+```{r remove-tables}
+# remove indivisual table by supplying name string
+con %>% DBI::dbRemoveTable("mtcars")
+```
+
+It is often useful to have a function that deletes multiple tables at once based on a pre-defined rule.
+The following code is one of the most simplest, deleting all tables.
+
+```{r, collapse=TRUE}
+# create mtcars table again to demonstate sumultaneous-removal
+con %>% DBI::dbWriteTable("mtcars", mtcars, overwrite = TRUE, temoprary = TRUE)
+DBI::dbListTables(con)
+# remove multiple tables at once
+con %>%
+    DBI::dbListTables() %>%
+    purrr::map_lgl(~ DBI::dbRemoveTable(con, .x)) %>%
+    all()
+DBI::dbListTables(con)
+```
+
+`dbDisconnect()` terminates the supplied `con` variable, and closes the connection.
+
+```{r first-dbDisconnect}
+con %>% DBI::dbDisconnect()
+```

@@ -1,0 +1,53 @@
+
+## Queries and Statements
+
+### `dbGetQuery()`
+
+Send query, retrieve results and then clear result set
+
+### `dbExecute()`
+
+Execute an update statement, query number of rows affected, and then close result set
+
+Results
+More control for sending queries and executing statements.
+
+### `dbSendQuery()`
+
+Execute a query on a given database connection
+
+### `dbSendStatement()`
+
+Execute a data manipulation statement on a given database connection
+
+### `dbBind()`
+
+Bind values to a parameterized/prepared statement
+
+### `dbFetch() fetch()`
+
+Fetch records from a previously executed query
+
+### `dbGetRowCount()`
+
+The number of rows fetched so far
+
+### `dbGetRowsAffected()`
+
+The number of rows affected
+
+### `dbGetStatement()`
+
+Get the statement associated with a result set
+
+### `dbHasCompleted()`
+
+Completion status
+
+### `dbColumnInfo()`
+
+Information about result types
+
+### `dbClearResult()`
+
+Clear a result set

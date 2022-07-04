@@ -6,5 +6,19 @@
 	],
 	"settings": {
 		"r.rmarkdown.knit.defaults.knitWorkingDirectory": "workspace root",
+		"textlint.languages": [
+			"markdown",
+			"plaintext",
+			"rmarkdown",
+			"Rmd"
+		],
+		"textlint.run": "onSave",
+		"cSpell.language": "en-GB",
+		"cSpell.showAutocompleteSuggestions": true,
+		"cSpell.enableFiletypes": [
+			"Rmd",
+			"!code_workspace",
+			"md"
+		],
 	}
 }

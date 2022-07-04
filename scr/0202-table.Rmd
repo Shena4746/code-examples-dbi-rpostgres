@@ -1,0 +1,152 @@
+## Manipulating Tables
+
+```{r ,include=FALSE}
+con <- refresh_con(con)
+remove_all_table(con)
+```
+
+### `dbWriteTable()`
+
+- Writes, overwrites or appends a data frame to a database table
+- Various optional argumets (must be provided as named arguments) available such as  
+	- `temoprary = FALSE`: a logical specifying whether a created table should be temoprary in the sense that it vanishes after disconection. **NOT available with postgres**.
+	- `overwrite = FALSE`: a logical specifying whether to overwrite an existing table.
+	- `append = FALSE`: a logical specifying whether to append to an existing table.
+
+The following example demonstrates that `DBI::dbWriteTable()` does not accept `temoprary = ` option. Note that no error or warnig is raised. The same is true for `Postgres::dbWriteTable()`.
+
+```{r write-mtcars-postgres, collapse=TRUE}
+# temprary = TRUE is available?
+con %>% RPostgres::dbWriteTable("mtcars", mtcars, overwrite = TRUE, temoprary = TRUE)
+# show list of tables currently available
+con %>% dbListTables()
+# refresh connnection
+con %>% dbDisconnect()
+con <- issue_con("demo")
+# is the table still alive? -> yes
+con %>% dbListTables()
+```
+
+### `dbListTables()`
+
+- Returns a character vector that enumerates all tables and views in the database.
+- In Postgres, this includes views and temprary objects created by `dplyr::copy_to()`, but not those by `dbplyr::copy_inline()`.
+
+```{r ListTable, collapse=TRUE}
+con %>% dbListTables()
+```
+
+### `dbListObjects()`
+
+- Returns a data frame with columns table and is_prefix in that order.
+- Works also for temprary tables created by `dplyr::copy_to()` in Postgres.
+
+```{r ListObj, collapse=TRUE}
+con %>% dbListObjects()
+```
+
+### `dbListFields()`
+
+- Returns a character vector that enumerates all fields in the table in the correct order.
+- Works also for temprary tables created by `dplyr::copy_to()` in Postgres.
+
+```{r Listfields, collapse=TRUE}
+con %>% dbListFields("mtcars")
+```
+
+### `dbExistsTable()`
+
+- Returns a lo'gical scalar, `TRUE` if the table or view specified by the name argument exists, `FALSE` otherwise.
+- Works also for temprary tables created by `dplyr::copy_to()` in Postgres.
+
+```{r exsits-table, collapse=TRUE}
+con %>% dbExistsTable("mtcars")
+con %>% dbExistsTable("hoge")
+```
+
+### `dbRemoveTable()`
+
+- Removes a remote table from the database.
+- Returns `TRUE` invisibly.
+- Raises an error if the intended table does not exist (see `fail_if_missing` option below).
+- Cannot remove a view in postges. (Neither DBI nor RPostgres has a method for dropping a view. It must be crafted by the user.)
+- Additional options, which must be called as named ones, include
+	- `temoprary = FALSE`: a logical specifying whether to consider only temprary tables. **NOT available with postgres**.
+	- `fail_if_missing = TRUE`: a logical specifying whether to raise an error for the call to remove an absent table.
+
+```{r remove-example1, collapse=TRUE}
+if (con %>% dbExistsTable("mtcars") %>% isFALSE()) {
+    con %>% dbWriteTable("mtcars", mtcars)
+}
+
+con %>% dbListTables()
+con %>% dbRemoveTable("mtcars") # remove here
+con %>% dbListTables() # removed table no longer exists
+```
+
+In Postgres, `temporary = TRUE` causes an error regardless of the existanece of the table.
+
+```{r remove-temoprary-fails, error=TRUE, collapse=TRUE}
+if (con %>% dbExistsTable("mtcars") %>% isFALSE()) {
+    con %>% dbWriteTable("mtcars", mtcars)
+}
+con %>% dbRemoveTable("mtcars", temporary = TRUE) # error
+```
+
+In this case, the asked removal will not be executed.
+
+```{r remove-temoprary-fails2, collapse=TRUE}
+con %>% dbListTables() # the table is still alive
+```
+
+The following examples illustate the behaviour of the option `fail_if_missing =`.
+
+```{r remove-absent-table1, collapse=TRUE}
+# fail_if_missing = FALSE makes an otherwise invalid call valid
+con %>% dbRemoveTable("absent_table", fail_if_missing = FALSE)
+```
+```{r remove-absent-table2, error=TRUE, collapse=TRUE}
+# fail_if_missing = TRUE, the default, raises an error for deleting an absent table
+con %>% dbRemoveTable("absent_table")
+```
+
+### `dbReadTable()`
+
+- Copy data frames from database tables.
+- Returns a data frame that contains the complete data from the remote table.
+
+```{r }
+if (con %>% dbExistsTable("mtcars") %>% isFALSE()) {
+    con %>% dbWriteTable("mtcars", mtcars)
+}
+con %>%
+    dbReadTable("mtcars") %>%
+    head()
+```
+
+### `dbAppendTable()`
+
+- Inserts rows into a table, assuming that the table has been created beforehand.
+- Returns a scalar numeric equal to the number of rows inserted.
+- The `row.names` argument must be `NULL`, the default value. The row names of input data are ignored.
+- In Postgres, `DBI::dbAppendTable()` is overrideen by `RPostgres::dbAppendTable()` because RPostgres uses placeholders of the form `$1`, `$2` etc. instead of `?`.
+
+```{r append-table-mtcars2, collapse=TRUE}
+# create demo table
+con %>% dbWriteTable("mtcars2", mtcars %>% head(2), overwrite = TRUE)
+# insert 10 rows from tail
+con %>% DBI::dbAppendTable(name = "mtcars2", value = mtcars %>% tail(10))
+# show resulting table
+con %>% dbReadTable("mtcars2")
+```
+
+Appending rows into an absent table raises an error.
+
+```{r append-absent-table, error=TRUE}
+con %>% dbAppendTable("iris", iris %>% head())
+```
+
+```{r, include=FALSE}
+remove_all_table(con)
+con %>% DBI::dbDisconnect()
+```
