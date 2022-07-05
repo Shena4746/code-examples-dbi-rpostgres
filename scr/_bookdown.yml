@@ -6,3 +6,5 @@ rmd_files:
   - 0201-connect.Rmd
   - 0202-table.Rmd
   - 0203-queries.Rmd
+  - 03-sql.Rmd
+  - 04-supplement.Rmd

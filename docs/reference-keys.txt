@@ -36,3 +36,10 @@ dbgetstatement
 dbhascompleted
 dbcolumninfo
 dbclearresult
+sql
+sql-1
+dbdatatype
+dbquoteidentifier
+dbquoteliteral
+sqlinterpolate
+views

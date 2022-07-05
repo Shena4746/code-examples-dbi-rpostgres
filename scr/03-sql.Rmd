@@ -1,0 +1,100 @@
+## SQL
+
+### `SQL()`
+
+- Hndles SQL quoting.
+- Returns a `SQL` class object. 
+- See `dbQuoteIdentifier()` or `dbQuoteLiteral()` for similar (but different) quoting methods.
+- See `sqlInterpolate()` for an application.
+- `glue_sql()` in glue packages is also useful to deal with SQL escaping needs.
+
+```{r sql-method-exampl1, collapse=TRUE}
+con <- refresh_con(con)
+str <- c("SELECT", "WHERE")
+s <- SQL(str)
+s %>% class()
+s %>% print()
+
+SQL(s) %>% print() # unchanged
+
+dbQuoteLiteral(con, s) %>% print() # SQL vectors pass through dbQuoteLiteral()
+
+lt <- dbQuoteLiteral(con, str)
+lt %>% print()
+
+dbQuoteLiteral(con, lt) %>% print() # double escaping doesn't happen
+```
+
+### `dbDataType()`
+
+- Describes the corresponding SQL data type for the DBMS.
+- Returns a character string.
+- Works without valid connection.
+
+```{r sql-data-type, error=TRUE, collapse=TRUE}
+con %>% dbDataType(Sys.Date()) # specify DB by connection
+# works with a disconnected connection variable
+con %>% dbDisconnect()
+con %>% dbDataType(Sys.time())
+con %>% dbDataType(Sys.time() - as.POSIXct(Sys.Date()))
+con %>% dbDataType(c("pi", "e"))
+con %>% dbDataType(list(raw(10), raw(20)))
+con %>% dbDataType(I(1))
+con %>% dbDataType(iris)
+con %>% dbDataType(NA)
+con %>% dbDataType(NULL) # error
+```
+
+You can also pass a `DBIDriver` object to specify the target DB.
+
+```{r sql-data-type2,collapse=TRUE}
+dbDataType(RPostgres::Postgres(), 1) # specify DB by driver
+dbDataType(RPostgres::Postgres(), iris) %>% class()
+```
+
+### `dbQuoteIdentifier()`
+
+### `dbQuoteLiteral()`
+
+### `sqlInterpolate()`
+
+- Create a SQL statement from a query string with a greater flexibility than `dbExecute()` or `dbGetQuery()`.
+- Returns SQL of `SQL` class.
+- Accepts placeholders with one of two syntaxes. They are bounded by `.dots = list()`. 
+	- `?,...,?`: bounded by an unnamed list.
+	-  `?name1,...,?name2`: bounded by a named list.
+- All values in `.dots = list()` will be first escaped with `dbQuoteLiteral()` to protect against SQL injection.
+
+[DBI references](https://dbi.r-dbi.org/reference/sqlinterpolate) has many examples including several anti-patterns that should be taken care of.
+
+```{r sql-interpolate-example1, collapse=TRUE}
+con <- issue_con("demo")
+sql <- "SELECT * FROM ?"
+con %>% sqlInterpolate(
+    sql = sql,
+    .dots = list("mtcars" %>% dbQuoteIdentifier(con, .))
+)
+```
+
+```{r sql-interpolate-example2, collapse=TRUE}
+sql <- "SELECT ?p AS ?name"
+stm <- con %>%
+    sqlInterpolate(
+        sql = sql,
+        p = 3.14,
+        name = "pi" %>% dbQuoteIdentifier(con, .)
+    )
+stm %>% print()
+
+con %>% dbGetQuery(stm)
+```
+
+```{r sql-interpolate-example3, collapse=TRUE}
+sql <- "DISCARD ?var"
+all <- FALSE
+
+con %>% sqlInterpolate(
+    sql,
+    var = if_else(all, "ALL", "TEMPORARY") %>% SQL()
+)
+```

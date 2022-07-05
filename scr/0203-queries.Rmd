@@ -28,7 +28,7 @@ You don't have to add `;` at the end of the query.
 con %>% dbGetQuery("SELECT * FROM mtcars WHERE cyl >= 5", n = 5)
 ```
 
-
+Sclar values in a query can be parameterized.
 
 ```{r getquery-param, collapse=TRUE}
 con %>% dbGetQuery(
@@ -36,6 +36,12 @@ con %>% dbGetQuery(
     params = list(1:5),
     n = 5
 )
+```
+
+`dbGetQuery()` rejects multiple queries.
+
+```{r cannot-get-multiple-queries, error=TRUE, collapse=TRUE}
+con %>% dbGetQuery("SELECT * FROM mtcars WHERE cyl >= 5; SELECT 3.14 AS pi")
 ```
 
 ### `dbExecute()`
@@ -55,6 +61,12 @@ con %>% dbExecute(
     params = list(1:4, 6:9)
 )
 con %>% dbReadTable("cars") # rows added
+```
+
+`dbExecute()` rejects multiple statements.
+
+```{r cannot-executes-multiple-statements, error=TRUE, collapse=TRUE}
+con %>% dbExecute("INSERT INTO cars (speed, dist) VALUES (7,21); DROP TABLE cars")
 ```
 
 ### `dbSendQuery()`
