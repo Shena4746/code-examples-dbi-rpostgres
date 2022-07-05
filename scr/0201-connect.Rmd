@@ -34,7 +34,9 @@ Be aware that this is a terrible way of connecting to a non-demo database becaus
 
 ```{r, collapse=TRUE}
 con <- issue_con("demo")
-# connection variable is printable
+con %>% class()
+con %>% mode()
+con %>% typeof()
 con %>% print()
 ```
 
@@ -56,6 +58,7 @@ A disconnected object continues to exist as a non-null object.
 
 ```{r disconnected-alive, collapse=TRUE}
 con %>% is.null()
+con %>% class()
 ```
 
 But it is no longer printable.

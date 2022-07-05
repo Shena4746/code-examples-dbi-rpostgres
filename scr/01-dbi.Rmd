@@ -24,7 +24,7 @@ refresh_con <- function(x) {
 }
 ```
 
-```{r def-remove-all-table}
+```{r def-remove-all-table, include=FALSE}
 remove_all_table <- function(con) {
     con %>%
         DBI::dbListTables() %>%

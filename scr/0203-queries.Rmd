@@ -5,9 +5,11 @@ con <- refresh_con(con)
 ```
 
 This section uses the following tables as an example.
-```{r }
+```{r queries-section-init, collapse=TRUE}
 con %>% dbWriteTable("mtcars", mtcars, overwirte = TRUE)
-con %>% dbListTables()
+con %>%
+    dbReadTable("mtcars") %>%
+    head()
 ```
 
 ### `dbGetQuery()`
@@ -21,13 +23,14 @@ con %>% dbListTables()
 	- `param`: allows passing query parameters, see `dbBind()` for details.
 	- `immediate`: see official reference.
 
-
 You don't have to add `;` at the end of the query.
-```{r getquery1}
+```{r getquery1, collapse=TRUE}
 con %>% dbGetQuery("SELECT * FROM mtcars WHERE cyl >= 5", n = 5)
 ```
 
-```{r getquery-param}
+
+
+```{r getquery-param, collapse=TRUE}
 con %>% dbGetQuery(
     "SELECT * FROM mtcars WHERE cyl = $1",
     params = list(1:5),
@@ -68,9 +71,7 @@ rs <- con %>% dbSendQuery(
     "SELECT * FROM mtcars WHERE cyl = $1",
     params = list(4L)
 )
-rs %>%
-    dbFetch() %>%
-    head()
+rs %>% dbFetch(n = 5)
 rs %>% dbClearResult()
 ```
 
@@ -81,9 +82,7 @@ rs <- con %>% dbSendQuery(
     "SELECT * FROM mtcars WHERE cyl = $1"
 )
 rs %>% dbBind(list(4L))
-rs %>%
-    dbFetch() %>%
-    head()
+rs %>% dbFetch(n = 5)
 rs %>% dbClearResult()
 ```
 
@@ -176,7 +175,7 @@ rs %>% dbBind(list(6L))
 rs %>% dbClearResult()
 ```
 
-A more trivial result is a cleared result.
+More trivial result is a cleared result.
 
 ```{r dbFetch-counter-example2, error=TRUE ,collapse=TRUE}
 rs %>% dbClearResult()
@@ -216,20 +215,123 @@ rs %>% dbGetRowCount()
 
 ### `dbGetRowsAffected()`
 
-The number of rows affected
+- Gets the number of rows affected by a data manipulation statement issued with dbSendStatement()
+- Returns a scalar number, integer or numeric.
+
+```{r dbGetRowsAffected-example1, collapse=TRUE}
+con %>% dbWriteTable("cars", cars, overwrite = TRUE)
+rs <- con %>% dbSendStatement("DELETE FROM cars WHERE dist >= 20")
+rs %>% dbGetRowsAffected()
+rs %>% dbClearResult()
+```
+
+The following example shows that `dbGetRowsAffected()` increases when placeholders get bounded, not when placeholders are placed.
+
+```{r dbGetRowsAffected-example2, collapse=TRUE}
+con %>% dbWriteTable("cars", cars, overwrite = TRUE)
+rs <- con %>% dbSendStatement("DELETE FROM cars WHERE speed = $1 AND dist = $2")
+rs %>% dbGetRowsAffected()
+rs <- rs %>% dbBind(list(7, 21))
+rs %>% dbGetRowsAffected() # there is no rows with that value
+rs %>% dbClearResult()
+```
 
 ### `dbGetStatement()`
 
-Get the statement associated with a result set
+- Gets the statement that was passed to `dbSendQuery()` or `dbSendStatement()`. It remains unchanged after placeholders are bounded afterwards.
+- Returns a string statement.
+
+```{r get-statement, collapse=TRUE}
+con %>% dbWriteTable("cars", cars, overwrite = TRUE)
+rs <- con %>% dbSendStatement("SELECT * FROM cars WHERE dist >= $1")
+stm <- rs %>% dbGetStatement()
+stm %>% class()
+stm %>% print()
+rs %>% dbBind(list(25))
+rs %>% dbGetStatement() # unchanged!
+rs %>% dbFetch(n = 5)
+rs %>% dbClearResult()
+
+# reuse the derived statement
+rs <- con %>% dbSendStatement(stm)
+rs %>% dbBind(list(35))
+rs %>% dbFetch(n = 5)
+rs %>% dbClearResult()
+```
 
 ### `dbHasCompleted()`
 
-Completion status
+- Tests if the associated operation has completed. 
+- Returns a logical. `TRUE` if there is nothing more to be fetched and `FALSE` if otherwise.
+
+`SELECT` statement completes when all results, if any, have been fetched.
+
+```{r dbHasCompleted-example1, collapse=TRUE}
+con %>% dbWriteTable("mtcars", mtcars, overwrite = TRUE)
+rs <- con %>% dbSendQuery("SELECT * FROM mtcars")
+rs %>% dbHasCompleted()
+rs %>%
+    dbFetch(n = 20) %>%
+    invisible() # discard
+rs %>% dbHasCompleted()
+rs %>%
+    dbFetch() %>%
+    invisible() # discard
+rs %>% dbHasCompleted()
+rs %>% dbClearResult()
+```
+
+`SELECT` statement with no result rows completes as soon as the query is executed. Consequently, there is no need to fetch it to get it completed.
+
+```{r dbHasCompleted-example2, collapse=TRUE}
+con %>% dbWriteTable("mtcars", mtcars, overwrite = TRUE)
+rs <- con %>% dbSendQuery("SELECT * FROM mtcars WHERE cyl = 5")
+rs %>% dbHasCompleted()
+rs %>% dbClearResult()
+```
+
+`DELETE`, `INSERT` and `UPDATE` statements get completed immediately after execution because there is originally nothing to fetch.
+
+```{r dbHasCompleted-example3, collapse=TRUE}
+con %>% dbWriteTable("cars", cars, overwrite = TRUE)
+rs <- con %>% dbSendStatement("DELETE FROM cars WHERE speed >= 8")
+rs %>% dbHasCompleted()
+rs %>% dbClearResult()
+```
 
 ### `dbColumnInfo()`
+
+- Returns `data.frame` that describes the output of a query.
+- A returned `data.frame` at least includes `"name"` and `"type"` followed by optional columns that starts with a dot such as `".oid"` and `".typname"` depending on DBMS.
+
+```{r column-info-example, collapse=TRUE}
+rs <- con %>% dbSendQuery(
+    "
+	SELECT 3.14 AS pi,
+	0 AS unit_addition,
+	'shena' AS author,
+	current_date AS today
+	"
+)
+info <- rs %>% dbColumnInfo()
+info %>% class()
+info %>% mode()
+info %>% print()
+rs %>% dbFetch(n = 0)
+rs %>% dbClearResult()
+```
 
 Information about result types
 
 ### `dbClearResult()`
 
-Clear a result set
+- Frees all resources (local and remote) associated with a result set.
+- Returns `TRUE` invisibly.
+- MUST follow `dbSendQuery()` and `dbSendStatement()`.
+
+```{r clear-result-example, collapse=TRUE}
+rs <- con %>% dbSendQuery("SELECT 3.14 AS pi")
+rs %>% dbFetch()
+rs %>% dbClearResult()
+rs %>% dbClearResult() # clearing a cleared result again raises warning
+```

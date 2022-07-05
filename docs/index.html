@@ -154,14 +154,14 @@ code span.wa { color: #da4453; } /* Warning */
 <li class="chapter" data-level="2.1.5" data-path=""><a href="#dbisreadonly"><i class="fa fa-check"></i><b>2.1.5</b> <code>dbIsReadOnly()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path=""><a href="#manipulating-tables"><i class="fa fa-check"></i><b>2.2</b> Manipulating Tables</a><ul>
-<li class="chapter" data-level="2.2.1" data-path=""><a href="#dbwritetable"><i class="fa fa-check"></i><b>2.2.1</b> <code>dbWriteTable()</code></a></li>
-<li class="chapter" data-level="2.2.2" data-path=""><a href="#dblisttables"><i class="fa fa-check"></i><b>2.2.2</b> <code>dbListTables()</code></a></li>
-<li class="chapter" data-level="2.2.3" data-path=""><a href="#dblistobjects"><i class="fa fa-check"></i><b>2.2.3</b> <code>dbListObjects()</code></a></li>
-<li class="chapter" data-level="2.2.4" data-path=""><a href="#dblistfields"><i class="fa fa-check"></i><b>2.2.4</b> <code>dbListFields()</code></a></li>
-<li class="chapter" data-level="2.2.5" data-path=""><a href="#dbexiststable"><i class="fa fa-check"></i><b>2.2.5</b> <code>dbExistsTable()</code></a></li>
-<li class="chapter" data-level="2.2.6" data-path=""><a href="#dbremovetable"><i class="fa fa-check"></i><b>2.2.6</b> <code>dbRemoveTable()</code></a></li>
-<li class="chapter" data-level="2.2.7" data-path=""><a href="#dbreadtable"><i class="fa fa-check"></i><b>2.2.7</b> <code>dbReadTable()</code></a></li>
-<li class="chapter" data-level="2.2.8" data-path=""><a href="#dbappendtable"><i class="fa fa-check"></i><b>2.2.8</b> <code>dbAppendTable()</code></a></li>
+<li class="chapter" data-level="2.2.1" data-path=""><a href="#dbreadtable"><i class="fa fa-check"></i><b>2.2.1</b> <code>dbReadTable()</code></a></li>
+<li class="chapter" data-level="2.2.2" data-path=""><a href="#dbwritetable"><i class="fa fa-check"></i><b>2.2.2</b> <code>dbWriteTable()</code></a></li>
+<li class="chapter" data-level="2.2.3" data-path=""><a href="#dbappendtable"><i class="fa fa-check"></i><b>2.2.3</b> <code>dbAppendTable()</code></a></li>
+<li class="chapter" data-level="2.2.4" data-path=""><a href="#dbremovetable"><i class="fa fa-check"></i><b>2.2.4</b> <code>dbRemoveTable()</code></a></li>
+<li class="chapter" data-level="2.2.5" data-path=""><a href="#dblisttables"><i class="fa fa-check"></i><b>2.2.5</b> <code>dbListTables()</code></a></li>
+<li class="chapter" data-level="2.2.6" data-path=""><a href="#dblistfields"><i class="fa fa-check"></i><b>2.2.6</b> <code>dbListFields()</code></a></li>
+<li class="chapter" data-level="2.2.7" data-path=""><a href="#dbexiststable"><i class="fa fa-check"></i><b>2.2.7</b> <code>dbExistsTable()</code></a></li>
+<li class="chapter" data-level="2.2.8" data-path=""><a href="#dblistobjects"><i class="fa fa-check"></i><b>2.2.8</b> <code>dbListObjects()</code></a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path=""><a href="#queries-and-statements"><i class="fa fa-check"></i><b>2.3</b> Queries and Statements</a><ul>
 <li class="chapter" data-level="2.3.1" data-path=""><a href="#dbgetquery"><i class="fa fa-check"></i><b>2.3.1</b> <code>dbGetQuery()</code></a></li>
@@ -351,7 +351,7 @@ You may sefaly skip this section as it is independent of what follows.</p>
 <p>Let us observe the list of tables in the connected database.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># demo database is empty</span></a>
 <a class="sourceLine" id="cb11-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbListTables</span>()</a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="co">## [1] &quot;cars&quot;   &quot;mtcars&quot; &quot;iris&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-3" title="3"><span class="co">## [1] &quot;iris&quot;   &quot;mtcars&quot; &quot;cars&quot;</span></a></code></pre></div>
 <p><code>dbWriteTable()</code> Creates a remote table from local data.
 The last two arguments are optional.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># create table by supplying local dataframe</span></a>
@@ -359,7 +359,7 @@ The last two arguments are optional.</p>
 <a class="sourceLine" id="cb12-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;iris&quot;</span>, iris, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb12-4" title="4"><span class="co"># check that tables are properly created</span></a>
 <a class="sourceLine" id="cb12-5" title="5">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="co">## [1] &quot;cars&quot;   &quot;mtcars&quot; &quot;iris&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">## [1] &quot;mtcars&quot; &quot;iris&quot;   &quot;cars&quot;</span></a></code></pre></div>
 <p>You can also ask the existance of the specific table in the database associated with <code>con</code> variable.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># boolean question about the existance of indivisual table</span></a>
 <a class="sourceLine" id="cb13-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
@@ -431,7 +431,7 @@ The following code is one of the most simplest, deleting all tables.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># create mtcars table again to demonstate sumultaneous-removal</span></a>
 <a class="sourceLine" id="cb23-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb23-3" title="3">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</a>
-<a class="sourceLine" id="cb23-4" title="4"><span class="co">## [1] &quot;cars&quot;   &quot;iris&quot;   &quot;mtcars&quot;</span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">## [1] &quot;iris&quot;   &quot;mtcars&quot; &quot;cars&quot;</span></a>
 <a class="sourceLine" id="cb23-5" title="5"><span class="co"># remove multiple tables at once</span></a>
 <a class="sourceLine" id="cb23-6" title="6">con <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb23-7" title="7"><span class="st">    </span>DBI<span class="op">::</span><span class="kw">dbListTables</span>() <span class="op">%&gt;%</span></a>
@@ -460,12 +460,6 @@ The following code is one of the most simplest, deleting all tables.</p>
 <a class="sourceLine" id="cb25-10" title="10">        <span class="dt">password =</span> dw<span class="op">$</span>password</a>
 <a class="sourceLine" id="cb25-11" title="11">    )</a>
 <a class="sourceLine" id="cb25-12" title="12">}</a></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">remove_all_table &lt;-<span class="st"> </span><span class="cf">function</span>(con) {</a>
-<a class="sourceLine" id="cb26-2" title="2">    con <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb26-3" title="3"><span class="st">        </span>DBI<span class="op">::</span><span class="kw">dbListTables</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb26-4" title="4"><span class="st">        </span>purrr<span class="op">::</span><span class="kw">map_lgl</span>(<span class="op">~</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbRemoveTable</span>(con, .x)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb26-5" title="5"><span class="st">        </span><span class="kw">all</span>()</a>
-<a class="sourceLine" id="cb26-6" title="6">}</a></code></pre></div>
 
 <div id="connecting-and-disconnecting" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.1</span> Connecting and Disconnecting<a href="#connecting-and-disconnecting" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -476,10 +470,10 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li>Retruns logical.</li>
 <li>If <code>FALSE</code>, it comes with a reason for failure.</li>
 </ul>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">DBI<span class="op">::</span><span class="kw">dbCanConnect</span>(<span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
-<a class="sourceLine" id="cb27-2" title="2"><span class="co">## [1] TRUE</span></a>
-<a class="sourceLine" id="cb27-3" title="3">RPostgres<span class="op">::</span><span class="kw">dbCanConnect</span>(<span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
-<a class="sourceLine" id="cb27-4" title="4"><span class="co">## [1] TRUE</span></a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">DBI<span class="op">::</span><span class="kw">dbCanConnect</span>(<span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
+<a class="sourceLine" id="cb26-2" title="2"><span class="co">## [1] TRUE</span></a>
+<a class="sourceLine" id="cb26-3" title="3">RPostgres<span class="op">::</span><span class="kw">dbCanConnect</span>(<span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="co">## [1] TRUE</span></a></code></pre></div>
 </div>
 <div id="dbConnect" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.2</span> <code>dbConnect()</code><a href="#dbConnect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -489,19 +483,26 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li>Many connection variables can exist at the same time without affecting each other.</li>
 </ul>
 <p>The following example shows a typical argument list for connecting to Postgres.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
-<a class="sourceLine" id="cb28-2" title="2">    <span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>(),</a>
-<a class="sourceLine" id="cb28-3" title="3">    <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>,</a>
-<a class="sourceLine" id="cb28-4" title="4">    <span class="dt">port =</span> <span class="dv">5432</span>,</a>
-<a class="sourceLine" id="cb28-5" title="5">    <span class="dt">dbname =</span> <span class="st">&quot;your-database-name&quot;</span>,</a>
-<a class="sourceLine" id="cb28-6" title="6">    <span class="dt">user =</span> <span class="st">&quot;your-user&quot;</span>,</a>
-<a class="sourceLine" id="cb28-7" title="7">    <span class="dt">password =</span> <span class="st">&quot;your-password&quot;</span></a>
-<a class="sourceLine" id="cb28-8" title="8">)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
+<a class="sourceLine" id="cb27-2" title="2">    <span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>(),</a>
+<a class="sourceLine" id="cb27-3" title="3">    <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>,</a>
+<a class="sourceLine" id="cb27-4" title="4">    <span class="dt">port =</span> <span class="dv">5432</span>,</a>
+<a class="sourceLine" id="cb27-5" title="5">    <span class="dt">dbname =</span> <span class="st">&quot;your-database-name&quot;</span>,</a>
+<a class="sourceLine" id="cb27-6" title="6">    <span class="dt">user =</span> <span class="st">&quot;your-user&quot;</span>,</a>
+<a class="sourceLine" id="cb27-7" title="7">    <span class="dt">password =</span> <span class="st">&quot;your-password&quot;</span></a>
+<a class="sourceLine" id="cb27-8" title="8">)</a></code></pre></div>
 <p>Be aware that this is a terrible way of connecting to a non-demo database because your credentials are completely revealed in a plain text. See <a href="https://db.rstudio.com/best-practices/managing-credentials">Securing Credentials</a> for some better ways. In this document, we issue connection variables by calling <code>issue_con</code> defined in <a href="#Functions-dbi">2</a>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="co"># connection variable is printable</span></a>
-<a class="sourceLine" id="cb29-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb29-4" title="4"><span class="co">## &lt;PqConnection&gt; demo@localhost:5432</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
+<a class="sourceLine" id="cb28-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">class</span>()</a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="co">## [1] &quot;PqConnection&quot;</span></a>
+<a class="sourceLine" id="cb28-4" title="4"><span class="co">## attr(,&quot;package&quot;)</span></a>
+<a class="sourceLine" id="cb28-5" title="5"><span class="co">## [1] &quot;RPostgres&quot;</span></a>
+<a class="sourceLine" id="cb28-6" title="6">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mode</span>()</a>
+<a class="sourceLine" id="cb28-7" title="7"><span class="co">## [1] &quot;S4&quot;</span></a>
+<a class="sourceLine" id="cb28-8" title="8">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">typeof</span>()</a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="co">## [1] &quot;S4&quot;</span></a>
+<a class="sourceLine" id="cb28-10" title="10">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb28-11" title="11"><span class="co">## &lt;PqConnection&gt; demo@localhost:5432</span></a></code></pre></div>
 </div>
 <div id="dbdisconnect" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.3</span> <code>dbDisconnect()</code><a href="#dbdisconnect" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -511,24 +512,28 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li>Issues warning on an already disconnected connnectinon variable or invalid one.</li>
 <li>NOT clears a supplied connection object.</li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># disconnect con varibale. returns nothing.</span></a>
-<a class="sourceLine" id="cb30-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
-<a class="sourceLine" id="cb30-3" title="3"><span class="co"># get warned since con is already disconnected</span></a>
-<a class="sourceLine" id="cb30-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
-<a class="sourceLine" id="cb30-5" title="5"><span class="co">## Warning in connection_release(conn@ptr): Already disconnected</span></a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co"># disconnect con varibale. returns nothing.</span></a>
+<a class="sourceLine" id="cb29-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
+<a class="sourceLine" id="cb29-3" title="3"><span class="co"># get warned since con is already disconnected</span></a>
+<a class="sourceLine" id="cb29-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
+<a class="sourceLine" id="cb29-5" title="5"><span class="co">## Warning in connection_release(conn@ptr): Already disconnected</span></a></code></pre></div>
 <p>A disconnected object continues to exist as a non-null object.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">is.null</span>()</a>
-<a class="sourceLine" id="cb31-2" title="2"><span class="co">## [1] FALSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">is.null</span>()</a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="co">## [1] FALSE</span></a>
+<a class="sourceLine" id="cb30-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">class</span>()</a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="co">## [1] &quot;PqConnection&quot;</span></a>
+<a class="sourceLine" id="cb30-5" title="5"><span class="co">## attr(,&quot;package&quot;)</span></a>
+<a class="sourceLine" id="cb30-6" title="6"><span class="co">## [1] &quot;RPostgres&quot;</span></a></code></pre></div>
 <p>But it is no longer printable.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb32-2" title="2"><span class="co">## Error: Invalid connection</span></a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="co">## Error: Invalid connection</span></a></code></pre></div>
 <p>Disconnection has a local effect. That is, disconnecting one connection has no impact on other connections.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
-<a class="sourceLine" id="cb33-2" title="2">con1 &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
-<a class="sourceLine" id="cb33-3" title="3">con1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
-<a class="sourceLine" id="cb33-4" title="4"><span class="co"># con is still valid</span></a>
-<a class="sourceLine" id="cb33-5" title="5">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb33-6" title="6"><span class="co">## &lt;PqConnection&gt; demo@localhost:5432</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
+<a class="sourceLine" id="cb32-2" title="2">con1 &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
+<a class="sourceLine" id="cb32-3" title="3">con1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="co"># con is still valid</span></a>
+<a class="sourceLine" id="cb32-5" title="5">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb32-6" title="6"><span class="co">## &lt;PqConnection&gt; demo@localhost:5432</span></a></code></pre></div>
 </div>
 <div id="dbgetinfo" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.4</span> <code>dbGetInfo()</code><a href="#dbgetinfo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -536,36 +541,36 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li>Retrieves information on database objects, i.e., DBIDriver (e.g., <code>RPostgres::Postgres</code>), DBIConnection (e.g., <code>con</code>) or DBIResult (e.g., <code>dbSendQuery()</code>).</li>
 <li>Returns a named list whose components depend on the input class.</li>
 </ul>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">dbGetInfo</span>(RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
-<a class="sourceLine" id="cb34-2" title="2"><span class="co">## $driver.version</span></a>
-<a class="sourceLine" id="cb34-3" title="3"><span class="co">## [1] &#39;1.4.4.9000&#39;</span></a>
-<a class="sourceLine" id="cb34-4" title="4"><span class="co">## </span></a>
-<a class="sourceLine" id="cb34-5" title="5"><span class="co">## $client.version</span></a>
-<a class="sourceLine" id="cb34-6" title="6"><span class="co">## [1] &#39;12.11&#39;</span></a>
-<a class="sourceLine" id="cb34-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetInfo</span>()</a>
-<a class="sourceLine" id="cb34-8" title="8"><span class="co">## $dbname</span></a>
-<a class="sourceLine" id="cb34-9" title="9"><span class="co">## [1] &quot;demo&quot;</span></a>
-<a class="sourceLine" id="cb34-10" title="10"><span class="co">## </span></a>
-<a class="sourceLine" id="cb34-11" title="11"><span class="co">## $host</span></a>
-<a class="sourceLine" id="cb34-12" title="12"><span class="co">## [1] &quot;localhost&quot;</span></a>
-<a class="sourceLine" id="cb34-13" title="13"><span class="co">## </span></a>
-<a class="sourceLine" id="cb34-14" title="14"><span class="co">## $port</span></a>
-<a class="sourceLine" id="cb34-15" title="15"><span class="co">## [1] &quot;5432&quot;</span></a>
-<a class="sourceLine" id="cb34-16" title="16"><span class="co">## </span></a>
-<a class="sourceLine" id="cb34-17" title="17"><span class="co">## $username</span></a>
-<a class="sourceLine" id="cb34-18" title="18"><span class="co">## [1] &quot;guest&quot;</span></a>
-<a class="sourceLine" id="cb34-19" title="19"><span class="co">## </span></a>
-<a class="sourceLine" id="cb34-20" title="20"><span class="co">## $protocol.version</span></a>
-<a class="sourceLine" id="cb34-21" title="21"><span class="co">## [1] 3</span></a>
-<a class="sourceLine" id="cb34-22" title="22"><span class="co">## </span></a>
-<a class="sourceLine" id="cb34-23" title="23"><span class="co">## $server.version</span></a>
-<a class="sourceLine" id="cb34-24" title="24"><span class="co">## [1] 120011</span></a>
-<a class="sourceLine" id="cb34-25" title="25"><span class="co">## </span></a>
-<a class="sourceLine" id="cb34-26" title="26"><span class="co">## $db.version</span></a>
-<a class="sourceLine" id="cb34-27" title="27"><span class="co">## [1] 120011</span></a>
-<a class="sourceLine" id="cb34-28" title="28"><span class="co">## </span></a>
-<a class="sourceLine" id="cb34-29" title="29"><span class="co">## $pid</span></a>
-<a class="sourceLine" id="cb34-30" title="30"><span class="co">## [1] 2432</span></a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">dbGetInfo</span>(RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="co">## $driver.version</span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="co">## [1] &#39;1.4.4.9000&#39;</span></a>
+<a class="sourceLine" id="cb33-4" title="4"><span class="co">## </span></a>
+<a class="sourceLine" id="cb33-5" title="5"><span class="co">## $client.version</span></a>
+<a class="sourceLine" id="cb33-6" title="6"><span class="co">## [1] &#39;12.11&#39;</span></a>
+<a class="sourceLine" id="cb33-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetInfo</span>()</a>
+<a class="sourceLine" id="cb33-8" title="8"><span class="co">## $dbname</span></a>
+<a class="sourceLine" id="cb33-9" title="9"><span class="co">## [1] &quot;demo&quot;</span></a>
+<a class="sourceLine" id="cb33-10" title="10"><span class="co">## </span></a>
+<a class="sourceLine" id="cb33-11" title="11"><span class="co">## $host</span></a>
+<a class="sourceLine" id="cb33-12" title="12"><span class="co">## [1] &quot;localhost&quot;</span></a>
+<a class="sourceLine" id="cb33-13" title="13"><span class="co">## </span></a>
+<a class="sourceLine" id="cb33-14" title="14"><span class="co">## $port</span></a>
+<a class="sourceLine" id="cb33-15" title="15"><span class="co">## [1] &quot;5432&quot;</span></a>
+<a class="sourceLine" id="cb33-16" title="16"><span class="co">## </span></a>
+<a class="sourceLine" id="cb33-17" title="17"><span class="co">## $username</span></a>
+<a class="sourceLine" id="cb33-18" title="18"><span class="co">## [1] &quot;guest&quot;</span></a>
+<a class="sourceLine" id="cb33-19" title="19"><span class="co">## </span></a>
+<a class="sourceLine" id="cb33-20" title="20"><span class="co">## $protocol.version</span></a>
+<a class="sourceLine" id="cb33-21" title="21"><span class="co">## [1] 3</span></a>
+<a class="sourceLine" id="cb33-22" title="22"><span class="co">## </span></a>
+<a class="sourceLine" id="cb33-23" title="23"><span class="co">## $server.version</span></a>
+<a class="sourceLine" id="cb33-24" title="24"><span class="co">## [1] 120011</span></a>
+<a class="sourceLine" id="cb33-25" title="25"><span class="co">## </span></a>
+<a class="sourceLine" id="cb33-26" title="26"><span class="co">## $db.version</span></a>
+<a class="sourceLine" id="cb33-27" title="27"><span class="co">## [1] 120011</span></a>
+<a class="sourceLine" id="cb33-28" title="28"><span class="co">## </span></a>
+<a class="sourceLine" id="cb33-29" title="29"><span class="co">## $pid</span></a>
+<a class="sourceLine" id="cb33-30" title="30"><span class="co">## [1] 13286</span></a></code></pre></div>
 </div>
 <div id="dbisreadonly" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.5</span> <code>dbIsReadOnly()</code><a href="#dbisreadonly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -573,19 +578,38 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li>Tests whether a database object is read only.</li>
 <li>Returns logical.</li>
 </ul>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbIsReadOnly</span>()</a>
-<a class="sourceLine" id="cb35-2" title="2"><span class="co">## [1] FALSE</span></a>
-<a class="sourceLine" id="cb35-3" title="3"><span class="kw">dbIsReadOnly</span>(RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
-<a class="sourceLine" id="cb35-4" title="4"><span class="co">## [1] FALSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbIsReadOnly</span>()</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="co">## [1] FALSE</span></a>
+<a class="sourceLine" id="cb34-3" title="3"><span class="kw">dbIsReadOnly</span>(RPostgres<span class="op">::</span><span class="kw">Postgres</span>())</a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="co">## [1] FALSE</span></a></code></pre></div>
 
 </div>
 </div>
 <div id="manipulating-tables" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.2</span> Manipulating Tables<a href="#manipulating-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="dbwritetable" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.2.1</span> <code>dbWriteTable()</code><a href="#dbwritetable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dbreadtable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.1</span> <code>dbReadTable()</code><a href="#dbreadtable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Writes, overwrites or appends a data frame to a database table</li>
+<li>Copy data frames from database tables.</li>
+<li>Returns a data frame that contains the complete data from the remote table.</li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># prepare a table to read</span></a>
+<a class="sourceLine" id="cb35-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb35-3" title="3"></a>
+<a class="sourceLine" id="cb35-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="co">##    mpg cyl disp  hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb35-6" title="6"><span class="co">## 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span></a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="co">## 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span></a>
+<a class="sourceLine" id="cb35-8" title="8"><span class="co">## 3 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span></a>
+<a class="sourceLine" id="cb35-9" title="9"><span class="co">## 4 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span></a>
+<a class="sourceLine" id="cb35-10" title="10"><span class="co">## 5 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span></a>
+<a class="sourceLine" id="cb35-11" title="11"><span class="co">## 6 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</span></a></code></pre></div>
+</div>
+<div id="dbwritetable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.2</span> <code>dbWriteTable()</code><a href="#dbwritetable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Writes, overwrites or appends a data frame to a database table.</li>
+<li>Returns <code>TRUE</code> invisibly.</li>
 <li>Various optional argumets (must be provided as named arguments) available such as
 <ul>
 <li><code>temoprary = FALSE</code>: a logical specifying whether a created table should be temoprary in the sense that it vanishes after disconection. <strong>NOT available with postgres</strong>.</li>
@@ -593,64 +617,86 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li><code>append = FALSE</code>: a logical specifying whether to append to an existing table.</li>
 </ul></li>
 </ul>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># clear an old table, if exists</span></a>
+<a class="sourceLine" id="cb36-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;mtcars&quot;</span>, <span class="dt">fail_if_missing =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb36-3" title="3"></a>
+<a class="sourceLine" id="cb36-4" title="4"><span class="co"># create a new table</span></a>
+<a class="sourceLine" id="cb36-5" title="5">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="dt">name =</span> <span class="st">&quot;mtcars&quot;</span>, <span class="dt">value =</span> mtcars[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, ])</a>
+<a class="sourceLine" id="cb36-6" title="6">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb36-7" title="7"><span class="co">##   mpg cyl disp  hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb36-8" title="8"><span class="co">## 1  21   6  160 110  3.9 2.620 16.46  0  1    4    4</span></a>
+<a class="sourceLine" id="cb36-9" title="9"><span class="co">## 2  21   6  160 110  3.9 2.875 17.02  0  1    4    4</span></a>
+<a class="sourceLine" id="cb36-10" title="10"></a>
+<a class="sourceLine" id="cb36-11" title="11"><span class="co"># append rows to an exsiting table</span></a>
+<a class="sourceLine" id="cb36-12" title="12">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="dt">name =</span> <span class="st">&quot;mtcars&quot;</span>, <span class="dt">value =</span> mtcars[<span class="dv">3</span><span class="op">:</span><span class="dv">5</span>, ], <span class="dt">append =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb36-13" title="13">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb36-14" title="14"><span class="co">##    mpg cyl disp  hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb36-15" title="15"><span class="co">## 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span></a>
+<a class="sourceLine" id="cb36-16" title="16"><span class="co">## 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span></a>
+<a class="sourceLine" id="cb36-17" title="17"><span class="co">## 3 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span></a>
+<a class="sourceLine" id="cb36-18" title="18"><span class="co">## 4 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span></a>
+<a class="sourceLine" id="cb36-19" title="19"><span class="co">## 5 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span></a>
+<a class="sourceLine" id="cb36-20" title="20"></a>
+<a class="sourceLine" id="cb36-21" title="21"><span class="co"># overwrite an existing table</span></a>
+<a class="sourceLine" id="cb36-22" title="22">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="dt">name =</span> <span class="st">&quot;mtcars&quot;</span>, <span class="dt">value =</span> mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tail</span>(), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb36-23" title="23">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb36-24" title="24"><span class="co">##    mpg cyl  disp  hp drat    wt qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb36-25" title="25"><span class="co">## 1 26.0   4 120.3  91 4.43 2.140 16.7  0  1    5    2</span></a>
+<a class="sourceLine" id="cb36-26" title="26"><span class="co">## 2 30.4   4  95.1 113 3.77 1.513 16.9  1  1    5    2</span></a>
+<a class="sourceLine" id="cb36-27" title="27"><span class="co">## 3 15.8   8 351.0 264 4.22 3.170 14.5  0  1    5    4</span></a>
+<a class="sourceLine" id="cb36-28" title="28"><span class="co">## 4 19.7   6 145.0 175 3.62 2.770 15.5  0  1    5    6</span></a>
+<a class="sourceLine" id="cb36-29" title="29"><span class="co">## 5 15.0   8 301.0 335 3.54 3.570 14.6  0  1    5    8</span></a>
+<a class="sourceLine" id="cb36-30" title="30"><span class="co">## 6 21.4   4 121.0 109 4.11 2.780 18.6  1  1    4    2</span></a></code></pre></div>
 <p>The following example demonstrates that <code>DBI::dbWriteTable()</code> does not accept <code>temoprary =</code> option. Note that no error or warnig is raised. The same is true for <code>Postgres::dbWriteTable()</code>.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># temprary = TRUE is available?</span></a>
-<a class="sourceLine" id="cb36-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>RPostgres<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">temoprary =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb36-3" title="3"><span class="co"># show list of tables currently available</span></a>
-<a class="sourceLine" id="cb36-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
-<a class="sourceLine" id="cb36-5" title="5"><span class="co">## [1] &quot;mtcars&quot;</span></a>
-<a class="sourceLine" id="cb36-6" title="6"><span class="co"># refresh connnection</span></a>
-<a class="sourceLine" id="cb36-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
-<a class="sourceLine" id="cb36-8" title="8">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
-<a class="sourceLine" id="cb36-9" title="9"><span class="co"># is the table still alive? -&gt; yes</span></a>
-<a class="sourceLine" id="cb36-10" title="10">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
-<a class="sourceLine" id="cb36-11" title="11"><span class="co">## [1] &quot;mtcars&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># temprary = TRUE is available?</span></a>
+<a class="sourceLine" id="cb37-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>RPostgres<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>, <span class="dt">temoprary =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb37-3" title="3"></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="co"># show list of tables currently available</span></a>
+<a class="sourceLine" id="cb37-5" title="5">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
+<a class="sourceLine" id="cb37-6" title="6"><span class="co">## [1] &quot;mtcars&quot;</span></a>
+<a class="sourceLine" id="cb37-7" title="7"></a>
+<a class="sourceLine" id="cb37-8" title="8"><span class="co"># refresh connnection</span></a>
+<a class="sourceLine" id="cb37-9" title="9">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
+<a class="sourceLine" id="cb37-10" title="10">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
+<a class="sourceLine" id="cb37-11" title="11"></a>
+<a class="sourceLine" id="cb37-12" title="12"><span class="co"># is the table still alive? -&gt; yes</span></a>
+<a class="sourceLine" id="cb37-13" title="13">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
+<a class="sourceLine" id="cb37-14" title="14"><span class="co">## [1] &quot;mtcars&quot;</span></a></code></pre></div>
 </div>
-<div id="dblisttables" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.2.2</span> <code>dbListTables()</code><a href="#dblisttables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dbappendtable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.3</span> <code>dbAppendTable()</code><a href="#dbappendtable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Returns a character vector that enumerates all tables and views in the database.</li>
-<li>In Postgres, this includes views and temprary objects created by <code>dplyr::copy_to()</code>, but not those by <code>dbplyr::copy_inline()</code>.</li>
+<li>Inserts rows into a table, assuming that the table has been created beforehand.</li>
+<li>Returns a scalar numeric equal to the number of rows inserted.</li>
+<li>The <code>row.names</code> argument must be <code>NULL</code>, the default value. The row names of input data are ignored.</li>
+<li>In Postgres, <code>DBI::dbAppendTable()</code> is overrideen by <code>RPostgres::dbAppendTable()</code> because RPostgres uses placeholders of the form <code>$1</code>, <code>$2</code> etc. instead of <code>?</code>.</li>
 </ul>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
-<a class="sourceLine" id="cb37-2" title="2"><span class="co">## [1] &quot;mtcars&quot;</span></a></code></pre></div>
-</div>
-<div id="dblistobjects" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.2.3</span> <code>dbListObjects()</code><a href="#dblistobjects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Returns a data frame with columns table and is_prefix in that order.</li>
-<li>Works also for temprary tables created by <code>dplyr::copy_to()</code> in Postgres.</li>
-</ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListObjects</span>()</a>
-<a class="sourceLine" id="cb38-2" title="2"><span class="co">##                              table is_prefix</span></a>
-<a class="sourceLine" id="cb38-3" title="3"><span class="co">## 1              &lt;Id&gt; table = mtcars     FALSE</span></a>
-<a class="sourceLine" id="cb38-4" title="4"><span class="co">## 2             &lt;Id&gt; schema = public      TRUE</span></a>
-<a class="sourceLine" id="cb38-5" title="5"><span class="co">## 3 &lt;Id&gt; schema = information_schema      TRUE</span></a>
-<a class="sourceLine" id="cb38-6" title="6"><span class="co">## 4         &lt;Id&gt; schema = pg_catalog      TRUE</span></a></code></pre></div>
-</div>
-<div id="dblistfields" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.2.4</span> <code>dbListFields()</code><a href="#dblistfields" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Returns a character vector that enumerates all fields in the table in the correct order.</li>
-<li>Works also for temprary tables created by <code>dplyr::copy_to()</code> in Postgres.</li>
-</ul>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListFields</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
-<a class="sourceLine" id="cb39-2" title="2"><span class="co">##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;</span></a>
-<a class="sourceLine" id="cb39-3" title="3"><span class="co">## [11] &quot;carb&quot;</span></a></code></pre></div>
-</div>
-<div id="dbexiststable" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.2.5</span> <code>dbExistsTable()</code><a href="#dbexiststable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<ul>
-<li>Returns a logical scalar, <code>TRUE</code> if the table or view specified by the name argument exists, <code>FALSE</code> otherwise.</li>
-<li>Works also for temprary tables created by <code>dplyr::copy_to()</code> in Postgres.</li>
-</ul>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
-<a class="sourceLine" id="cb40-2" title="2"><span class="co">## [1] TRUE</span></a>
-<a class="sourceLine" id="cb40-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;hoge&quot;</span>)</a>
-<a class="sourceLine" id="cb40-4" title="4"><span class="co">## [1] FALSE</span></a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="co"># create demo table</span></a>
+<a class="sourceLine" id="cb38-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">2</span>), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb38-3" title="3"><span class="co"># insert 10 rows from tail</span></a>
+<a class="sourceLine" id="cb38-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbAppendTable</span>(<span class="dt">name =</span> <span class="st">&quot;mtcars&quot;</span>, <span class="dt">value =</span> mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tail</span>(<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb38-5" title="5"><span class="co">## [1] 10</span></a>
+<a class="sourceLine" id="cb38-6" title="6"><span class="co"># show resulting table</span></a>
+<a class="sourceLine" id="cb38-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb38-8" title="8"><span class="co">##     mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb38-9" title="9"><span class="co">## 1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span></a>
+<a class="sourceLine" id="cb38-10" title="10"><span class="co">## 2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span></a>
+<a class="sourceLine" id="cb38-11" title="11"><span class="co">## 3  15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2</span></a>
+<a class="sourceLine" id="cb38-12" title="12"><span class="co">## 4  13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4</span></a>
+<a class="sourceLine" id="cb38-13" title="13"><span class="co">## 5  19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2</span></a>
+<a class="sourceLine" id="cb38-14" title="14"><span class="co">## 6  27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span></a>
+<a class="sourceLine" id="cb38-15" title="15"><span class="co">## 7  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span></a>
+<a class="sourceLine" id="cb38-16" title="16"><span class="co">## 8  30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span></a>
+<a class="sourceLine" id="cb38-17" title="17"><span class="co">## 9  15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4</span></a>
+<a class="sourceLine" id="cb38-18" title="18"><span class="co">## 10 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</span></a>
+<a class="sourceLine" id="cb38-19" title="19"><span class="co">## 11 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</span></a>
+<a class="sourceLine" id="cb38-20" title="20"><span class="co">## 12 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span></a></code></pre></div>
+<p>Appending rows into an absent table raises an error.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbAppendTable</span>(<span class="st">&quot;iris&quot;</span>, iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>())</a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="co">## Error: Failed to initialise COPY: ERROR:  relation &quot;iris&quot; does not exist</span></a></code></pre></div>
 </div>
 <div id="dbremovetable" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.2.6</span> <code>dbRemoveTable()</code><a href="#dbremovetable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<h3><span class="header-section-number">2.2.4</span> <code>dbRemoveTable()</code><a href="#dbremovetable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
 <li>Removes a remote table from the database.</li>
 <li>Returns <code>TRUE</code> invisibly.</li>
@@ -662,92 +708,114 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li><code>fail_if_missing = TRUE</code>: a logical specifying whether to raise an error for the call to remove an absent table.</li>
 </ul></li>
 </ul>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="cf">if</span> (con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
+<a class="sourceLine" id="cb40-2" title="2">    con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars)</a>
+<a class="sourceLine" id="cb40-3" title="3">}</a>
+<a class="sourceLine" id="cb40-4" title="4"></a>
+<a class="sourceLine" id="cb40-5" title="5">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
+<a class="sourceLine" id="cb40-6" title="6"><span class="co">## [1] &quot;mtcars&quot;</span></a>
+<a class="sourceLine" id="cb40-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="co"># remove here</span></a>
+<a class="sourceLine" id="cb40-8" title="8">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>() <span class="co"># removed table no longer exists</span></a>
+<a class="sourceLine" id="cb40-9" title="9"><span class="co">## character(0)</span></a></code></pre></div>
+<p>In Postgres, <code>temporary = TRUE</code> causes an error regardless of the existanece of the table.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="cf">if</span> (con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
 <a class="sourceLine" id="cb41-2" title="2">    con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars)</a>
 <a class="sourceLine" id="cb41-3" title="3">}</a>
-<a class="sourceLine" id="cb41-4" title="4"></a>
-<a class="sourceLine" id="cb41-5" title="5">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
-<a class="sourceLine" id="cb41-6" title="6"><span class="co">## [1] &quot;mtcars&quot;</span></a>
-<a class="sourceLine" id="cb41-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="co"># remove here</span></a>
-<a class="sourceLine" id="cb41-8" title="8">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>() <span class="co"># removed table no longer exists</span></a>
-<a class="sourceLine" id="cb41-9" title="9"><span class="co">## character(0)</span></a></code></pre></div>
-<p>In Postgres, <code>temporary = TRUE</code> causes an error regardless of the existanece of the table.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="cf">if</span> (con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
-<a class="sourceLine" id="cb42-2" title="2">    con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars)</a>
-<a class="sourceLine" id="cb42-3" title="3">}</a>
-<a class="sourceLine" id="cb42-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;mtcars&quot;</span>, <span class="dt">temporary =</span> <span class="ot">TRUE</span>) <span class="co"># error</span></a>
-<a class="sourceLine" id="cb42-5" title="5"><span class="co">## Error: Failed to fetch row: ERROR:  schema &quot;pg_temp&quot; does not exist</span></a></code></pre></div>
+<a class="sourceLine" id="cb41-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;mtcars&quot;</span>, <span class="dt">temporary =</span> <span class="ot">TRUE</span>) <span class="co"># error</span></a>
+<a class="sourceLine" id="cb41-5" title="5"><span class="co">## Error: Failed to fetch row: ERROR:  schema &quot;pg_temp&quot; does not exist</span></a></code></pre></div>
 <p>In this case, the asked removal will not be executed.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>() <span class="co"># the table is still alive</span></a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="co">## [1] &quot;mtcars&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>() <span class="co"># the table is still alive</span></a>
+<a class="sourceLine" id="cb42-2" title="2"><span class="co">## [1] &quot;mtcars&quot;</span></a></code></pre></div>
 <p>The following examples illustrate the behaviour of the option <code>fail_if_missing =</code>.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># fail_if_missing = FALSE makes an otherwise invalid call valid</span></a>
-<a class="sourceLine" id="cb44-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;absent_table&quot;</span>, <span class="dt">fail_if_missing =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb44-3" title="3"><span class="co">## </span><span class="al">NOTICE</span><span class="co">:  table &quot;absent_table&quot; does not exist, skipping</span></a></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co"># fail_if_missing = TRUE, the default, raises an error for deleting an absent table</span></a>
-<a class="sourceLine" id="cb45-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;absent_table&quot;</span>)</a>
-<a class="sourceLine" id="cb45-3" title="3"><span class="co">## Error: Failed to fetch row: ERROR:  table &quot;absent_table&quot; does not exist</span></a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co"># fail_if_missing = FALSE makes an otherwise invalid call valid</span></a>
+<a class="sourceLine" id="cb43-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;absent_table&quot;</span>, <span class="dt">fail_if_missing =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="co">## </span><span class="al">NOTICE</span><span class="co">:  table &quot;absent_table&quot; does not exist, skipping</span></a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># fail_if_missing = TRUE, the default, raises an error for deleting an absent table</span></a>
+<a class="sourceLine" id="cb44-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbRemoveTable</span>(<span class="st">&quot;absent_table&quot;</span>)</a>
+<a class="sourceLine" id="cb44-3" title="3"><span class="co">## Error: Failed to fetch row: ERROR:  table &quot;absent_table&quot; does not exist</span></a></code></pre></div>
 </div>
-<div id="dbreadtable" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.2.7</span> <code>dbReadTable()</code><a href="#dbreadtable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dblisttables" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.5</span> <code>dbListTables()</code><a href="#dblisttables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Copy data frames from database tables.</li>
-<li>Returns a data frame that contains the complete data from the remote table.</li>
+<li>Returns a character vector that enumerates all tables and views in the database.</li>
+<li>In Postgres, this includes views and temprary objects created by <code>dplyr::copy_to()</code>, but not those by <code>dbplyr::copy_inline()</code>.</li>
 </ul>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="cf">if</span> (con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
-<a class="sourceLine" id="cb46-2" title="2">    con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars)</a>
-<a class="sourceLine" id="cb46-3" title="3">}</a>
-<a class="sourceLine" id="cb46-4" title="4">con <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-5" title="5"><span class="st">    </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb46-6" title="6"><span class="st">    </span><span class="kw">head</span>()</a></code></pre></div>
-<pre><code>##    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## 3 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## 4 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## 5 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## 6 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co"># prepare a table to list</span></a>
+<a class="sourceLine" id="cb45-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb45-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;iris&quot;</span>, iris, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb45-4" title="4"></a>
+<a class="sourceLine" id="cb45-5" title="5">lt &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a>
+<a class="sourceLine" id="cb45-6" title="6">lt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">class</span>()</a>
+<a class="sourceLine" id="cb45-7" title="7"><span class="co">## [1] &quot;character&quot;</span></a>
+<a class="sourceLine" id="cb45-8" title="8">lt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mode</span>()</a>
+<a class="sourceLine" id="cb45-9" title="9"><span class="co">## [1] &quot;character&quot;</span></a>
+<a class="sourceLine" id="cb45-10" title="10">lt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">typeof</span>()</a>
+<a class="sourceLine" id="cb45-11" title="11"><span class="co">## [1] &quot;character&quot;</span></a>
+<a class="sourceLine" id="cb45-12" title="12">lt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb45-13" title="13"><span class="co">## [1] &quot;mtcars&quot; &quot;iris&quot;</span></a></code></pre></div>
 </div>
-<div id="dbappendtable" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.2.8</span> <code>dbAppendTable()</code><a href="#dbappendtable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="dblistfields" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.6</span> <code>dbListFields()</code><a href="#dblistfields" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Inserts rows into a table, assuming that the table has been created beforehand.</li>
-<li>Returns a scalar numeric equal to the number of rows inserted.</li>
-<li>The <code>row.names</code> argument must be <code>NULL</code>, the default value. The row names of input data are ignored.</li>
-<li>In Postgres, <code>DBI::dbAppendTable()</code> is overrideen by <code>RPostgres::dbAppendTable()</code> because RPostgres uses placeholders of the form <code>$1</code>, <code>$2</code> etc. instead of <code>?</code>.</li>
+<li>Returns a character vector that enumerates all fields in the table in the correct order.</li>
+<li>Works also for temprary tables created by <code>dplyr::copy_to()</code> in Postgres.</li>
 </ul>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co"># create demo table</span></a>
-<a class="sourceLine" id="cb48-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars2&quot;</span>, mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">2</span>), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb48-3" title="3"><span class="co"># insert 10 rows from tail</span></a>
-<a class="sourceLine" id="cb48-4" title="4">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbAppendTable</span>(<span class="dt">name =</span> <span class="st">&quot;mtcars2&quot;</span>, <span class="dt">value =</span> mtcars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">tail</span>(<span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb48-5" title="5"><span class="co">## [1] 10</span></a>
-<a class="sourceLine" id="cb48-6" title="6"><span class="co"># show resulting table</span></a>
-<a class="sourceLine" id="cb48-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars2&quot;</span>)</a>
-<a class="sourceLine" id="cb48-8" title="8"><span class="co">##     mpg cyl  disp  hp drat    wt  qsec vs am gear carb</span></a>
-<a class="sourceLine" id="cb48-9" title="9"><span class="co">## 1  21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4</span></a>
-<a class="sourceLine" id="cb48-10" title="10"><span class="co">## 2  21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4</span></a>
-<a class="sourceLine" id="cb48-11" title="11"><span class="co">## 3  15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2</span></a>
-<a class="sourceLine" id="cb48-12" title="12"><span class="co">## 4  13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4</span></a>
-<a class="sourceLine" id="cb48-13" title="13"><span class="co">## 5  19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2</span></a>
-<a class="sourceLine" id="cb48-14" title="14"><span class="co">## 6  27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1</span></a>
-<a class="sourceLine" id="cb48-15" title="15"><span class="co">## 7  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2</span></a>
-<a class="sourceLine" id="cb48-16" title="16"><span class="co">## 8  30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2</span></a>
-<a class="sourceLine" id="cb48-17" title="17"><span class="co">## 9  15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4</span></a>
-<a class="sourceLine" id="cb48-18" title="18"><span class="co">## 10 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6</span></a>
-<a class="sourceLine" id="cb48-19" title="19"><span class="co">## 11 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</span></a>
-<a class="sourceLine" id="cb48-20" title="20"><span class="co">## 12 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</span></a></code></pre></div>
-<p>Appending rows into an absent table raises an error.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbAppendTable</span>(<span class="st">&quot;iris&quot;</span>, iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>())</a></code></pre></div>
-<pre><code>## Error: Failed to initialise COPY: ERROR:  relation &quot;iris&quot; does not exist</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListFields</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb46-2" title="2"><span class="co">##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;</span></a>
+<a class="sourceLine" id="cb46-3" title="3"><span class="co">## [11] &quot;carb&quot;</span></a></code></pre></div>
+</div>
+<div id="dbexiststable" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.7</span> <code>dbExistsTable()</code><a href="#dbexiststable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Returns a logical scalar, <code>TRUE</code> if the table or view specified by the name argument exists, <code>FALSE</code> otherwise.</li>
+<li>Works also for temprary tables created by <code>dplyr::copy_to()</code> in Postgres.</li>
+</ul>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="co">## [1] TRUE</span></a>
+<a class="sourceLine" id="cb47-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExistsTable</span>(<span class="st">&quot;absent_table&quot;</span>)</a>
+<a class="sourceLine" id="cb47-4" title="4"><span class="co">## [1] FALSE</span></a></code></pre></div>
+</div>
+<div id="dblistobjects" class="section level3 hasAnchor">
+<h3><span class="header-section-number">2.2.8</span> <code>dbListObjects()</code><a href="#dblistobjects" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Returns a data frame with columns table and is_prefix in that order.</li>
+<li>Works also for temprary tables created by <code>dplyr::copy_to()</code> in Postgres.</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co"># prepare a table to list</span></a>
+<a class="sourceLine" id="cb48-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb48-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;iris&quot;</span>, iris, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb48-4" title="4"></a>
+<a class="sourceLine" id="cb48-5" title="5">objs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListObjects</span>()</a>
+<a class="sourceLine" id="cb48-6" title="6">objs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">class</span>()</a>
+<a class="sourceLine" id="cb48-7" title="7"><span class="co">## [1] &quot;data.frame&quot;</span></a>
+<a class="sourceLine" id="cb48-8" title="8">objs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mode</span>()</a>
+<a class="sourceLine" id="cb48-9" title="9"><span class="co">## [1] &quot;list&quot;</span></a>
+<a class="sourceLine" id="cb48-10" title="10">objs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">typeof</span>()</a>
+<a class="sourceLine" id="cb48-11" title="11"><span class="co">## [1] &quot;list&quot;</span></a>
+<a class="sourceLine" id="cb48-12" title="12">objs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb48-13" title="13"><span class="co">##                              table is_prefix</span></a>
+<a class="sourceLine" id="cb48-14" title="14"><span class="co">## 1              &lt;Id&gt; table = mtcars     FALSE</span></a>
+<a class="sourceLine" id="cb48-15" title="15"><span class="co">## 2                &lt;Id&gt; table = iris     FALSE</span></a>
+<a class="sourceLine" id="cb48-16" title="16"><span class="co">## 3             &lt;Id&gt; schema = public      TRUE</span></a>
+<a class="sourceLine" id="cb48-17" title="17"><span class="co">## 4 &lt;Id&gt; schema = information_schema      TRUE</span></a>
+<a class="sourceLine" id="cb48-18" title="18"><span class="co">## 5         &lt;Id&gt; schema = pg_catalog      TRUE</span></a></code></pre></div>
 
 </div>
 </div>
 <div id="queries-and-statements" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.3</span> Queries and Statements<a href="#queries-and-statements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This section uses the following tables as an example.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwirte =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb51-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListTables</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;mtcars&quot;</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwirte =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb49-2" title="2">con <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="st">    </span><span class="kw">dbReadTable</span>(<span class="st">&quot;mtcars&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb49-4" title="4"><span class="st">    </span><span class="kw">head</span>()</a>
+<a class="sourceLine" id="cb49-5" title="5"><span class="co">##    mpg cyl disp  hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb49-6" title="6"><span class="co">## 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span></a>
+<a class="sourceLine" id="cb49-7" title="7"><span class="co">## 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span></a>
+<a class="sourceLine" id="cb49-8" title="8"><span class="co">## 3 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1</span></a>
+<a class="sourceLine" id="cb49-9" title="9"><span class="co">## 4 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span></a>
+<a class="sourceLine" id="cb49-10" title="10"><span class="co">## 5 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span></a>
+<a class="sourceLine" id="cb49-11" title="11"><span class="co">## 6 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</span></a></code></pre></div>
 <div id="dbgetquery" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.1</span> <code>dbGetQuery()</code><a href="#dbgetquery" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
@@ -763,24 +831,24 @@ The following code is one of the most simplest, deleting all tables.</p>
 </ul></li>
 </ul>
 <p>You don’t have to add <code>;</code> at the end of the query.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetQuery</span>(<span class="st">&quot;SELECT * FROM mtcars WHERE cyl &gt;= 5&quot;</span>, <span class="dt">n =</span> <span class="dv">5</span>)</a></code></pre></div>
-<pre><code>##    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## 3 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## 4 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## 5 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetQuery</span>(</a>
-<a class="sourceLine" id="cb55-2" title="2">    <span class="st">&quot;SELECT * FROM mtcars WHERE cyl = $1&quot;</span>,</a>
-<a class="sourceLine" id="cb55-3" title="3">    <span class="dt">params =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb55-4" title="4">    <span class="dt">n =</span> <span class="dv">5</span></a>
-<a class="sourceLine" id="cb55-5" title="5">)</a></code></pre></div>
-<pre><code>##    mpg cyl  disp hp drat    wt  qsec vs am gear carb
-## 1 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1
-## 2 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2
-## 3 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2
-## 4 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1
-## 5 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetQuery</span>(<span class="st">&quot;SELECT * FROM mtcars WHERE cyl &gt;= 5&quot;</span>, <span class="dt">n =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="co">##    mpg cyl disp  hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="co">## 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4</span></a>
+<a class="sourceLine" id="cb50-4" title="4"><span class="co">## 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4</span></a>
+<a class="sourceLine" id="cb50-5" title="5"><span class="co">## 3 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1</span></a>
+<a class="sourceLine" id="cb50-6" title="6"><span class="co">## 4 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</span></a>
+<a class="sourceLine" id="cb50-7" title="7"><span class="co">## 5 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</span></a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetQuery</span>(</a>
+<a class="sourceLine" id="cb51-2" title="2">    <span class="st">&quot;SELECT * FROM mtcars WHERE cyl = $1&quot;</span>,</a>
+<a class="sourceLine" id="cb51-3" title="3">    <span class="dt">params =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb51-4" title="4">    <span class="dt">n =</span> <span class="dv">5</span></a>
+<a class="sourceLine" id="cb51-5" title="5">)</a>
+<a class="sourceLine" id="cb51-6" title="6"><span class="co">##    mpg cyl  disp hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb51-7" title="7"><span class="co">## 1 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1</span></a>
+<a class="sourceLine" id="cb51-8" title="8"><span class="co">## 2 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2</span></a>
+<a class="sourceLine" id="cb51-9" title="9"><span class="co">## 3 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2</span></a>
+<a class="sourceLine" id="cb51-10" title="10"><span class="co">## 4 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1</span></a>
+<a class="sourceLine" id="cb51-11" title="11"><span class="co">## 5 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2</span></a></code></pre></div>
 </div>
 <div id="dbexecute" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.2</span> <code>dbExecute()</code><a href="#dbexecute" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -790,24 +858,24 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li>Comes with a default implementation that calls <code>dbSendStatement()</code> -&gt; <code>dbGetRowsAffected()</code> -&gt; <code>dbClearResult()</code>.</li>
 <li>Additional arguments <code>params</code> and <code>immediate</code> are available as in <code>dbGetQuery()</code>.</li>
 </ul>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># newly create cars table</span></a>
-<a class="sourceLine" id="cb57-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">1</span>), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb57-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>) <span class="co"># only 1 row</span></a>
-<a class="sourceLine" id="cb57-4" title="4"><span class="co">##   speed dist</span></a>
-<a class="sourceLine" id="cb57-5" title="5"><span class="co">## 1     4    2</span></a>
-<a class="sourceLine" id="cb57-6" title="6"></a>
-<a class="sourceLine" id="cb57-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExecute</span>(</a>
-<a class="sourceLine" id="cb57-8" title="8">    <span class="st">&quot;INSERT INTO cars (speed, dist) VALUES ($1, $2)&quot;</span>,</a>
-<a class="sourceLine" id="cb57-9" title="9">    <span class="dt">params =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">6</span><span class="op">:</span><span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb57-10" title="10">)</a>
-<a class="sourceLine" id="cb57-11" title="11"><span class="co">## [1] 4</span></a>
-<a class="sourceLine" id="cb57-12" title="12">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>) <span class="co"># rows added</span></a>
-<a class="sourceLine" id="cb57-13" title="13"><span class="co">##   speed dist</span></a>
-<a class="sourceLine" id="cb57-14" title="14"><span class="co">## 1     4    2</span></a>
-<a class="sourceLine" id="cb57-15" title="15"><span class="co">## 2     1    6</span></a>
-<a class="sourceLine" id="cb57-16" title="16"><span class="co">## 3     2    7</span></a>
-<a class="sourceLine" id="cb57-17" title="17"><span class="co">## 4     3    8</span></a>
-<a class="sourceLine" id="cb57-18" title="18"><span class="co">## 5     4    9</span></a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># newly create cars table</span></a>
+<a class="sourceLine" id="cb52-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">1</span>), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb52-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>) <span class="co"># only 1 row</span></a>
+<a class="sourceLine" id="cb52-4" title="4"><span class="co">##   speed dist</span></a>
+<a class="sourceLine" id="cb52-5" title="5"><span class="co">## 1     4    2</span></a>
+<a class="sourceLine" id="cb52-6" title="6"></a>
+<a class="sourceLine" id="cb52-7" title="7">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbExecute</span>(</a>
+<a class="sourceLine" id="cb52-8" title="8">    <span class="st">&quot;INSERT INTO cars (speed, dist) VALUES ($1, $2)&quot;</span>,</a>
+<a class="sourceLine" id="cb52-9" title="9">    <span class="dt">params =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">6</span><span class="op">:</span><span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb52-10" title="10">)</a>
+<a class="sourceLine" id="cb52-11" title="11"><span class="co">## [1] 4</span></a>
+<a class="sourceLine" id="cb52-12" title="12">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>) <span class="co"># rows added</span></a>
+<a class="sourceLine" id="cb52-13" title="13"><span class="co">##   speed dist</span></a>
+<a class="sourceLine" id="cb52-14" title="14"><span class="co">## 1     4    2</span></a>
+<a class="sourceLine" id="cb52-15" title="15"><span class="co">## 2     1    6</span></a>
+<a class="sourceLine" id="cb52-16" title="16"><span class="co">## 3     2    7</span></a>
+<a class="sourceLine" id="cb52-17" title="17"><span class="co">## 4     3    8</span></a>
+<a class="sourceLine" id="cb52-18" title="18"><span class="co">## 5     4    9</span></a></code></pre></div>
 </div>
 <div id="dbsendquery" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.3</span> <code>dbSendQuery()</code><a href="#dbsendquery" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -818,37 +886,31 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li>Additional arguments <code>params</code> and <code>immediate</code>.</li>
 </ul>
 <p>Exactly the same parameterization method works as in <code>dbGetQuery()</code>.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(</a>
-<a class="sourceLine" id="cb58-2" title="2">    <span class="st">&quot;SELECT * FROM mtcars WHERE cyl = $1&quot;</span>,</a>
-<a class="sourceLine" id="cb58-3" title="3">    <span class="dt">params =</span> <span class="kw">list</span>(4L)</a>
-<a class="sourceLine" id="cb58-4" title="4">)</a>
-<a class="sourceLine" id="cb58-5" title="5">rs <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb58-6" title="6"><span class="st">    </span><span class="kw">dbFetch</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb58-7" title="7"><span class="st">    </span><span class="kw">head</span>()</a>
-<a class="sourceLine" id="cb58-8" title="8"><span class="co">##    mpg cyl  disp hp drat    wt  qsec vs am gear carb</span></a>
-<a class="sourceLine" id="cb58-9" title="9"><span class="co">## 1 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1</span></a>
-<a class="sourceLine" id="cb58-10" title="10"><span class="co">## 2 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2</span></a>
-<a class="sourceLine" id="cb58-11" title="11"><span class="co">## 3 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2</span></a>
-<a class="sourceLine" id="cb58-12" title="12"><span class="co">## 4 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1</span></a>
-<a class="sourceLine" id="cb58-13" title="13"><span class="co">## 5 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2</span></a>
-<a class="sourceLine" id="cb58-14" title="14"><span class="co">## 6 33.9   4  71.1 65 4.22 1.835 19.90  1  1    4    1</span></a>
-<a class="sourceLine" id="cb58-15" title="15">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(</a>
+<a class="sourceLine" id="cb53-2" title="2">    <span class="st">&quot;SELECT * FROM mtcars WHERE cyl = $1&quot;</span>,</a>
+<a class="sourceLine" id="cb53-3" title="3">    <span class="dt">params =</span> <span class="kw">list</span>(4L)</a>
+<a class="sourceLine" id="cb53-4" title="4">)</a>
+<a class="sourceLine" id="cb53-5" title="5">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>(<span class="dt">n =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb53-6" title="6"><span class="co">##    mpg cyl  disp hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb53-7" title="7"><span class="co">## 1 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1</span></a>
+<a class="sourceLine" id="cb53-8" title="8"><span class="co">## 2 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2</span></a>
+<a class="sourceLine" id="cb53-9" title="9"><span class="co">## 3 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2</span></a>
+<a class="sourceLine" id="cb53-10" title="10"><span class="co">## 4 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1</span></a>
+<a class="sourceLine" id="cb53-11" title="11"><span class="co">## 5 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2</span></a>
+<a class="sourceLine" id="cb53-12" title="12">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
 <p><code>dbSendQuery()</code> gives us an alternative way of writing a parameterized query.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(</a>
-<a class="sourceLine" id="cb59-2" title="2">    <span class="st">&quot;SELECT * FROM mtcars WHERE cyl = $1&quot;</span></a>
-<a class="sourceLine" id="cb59-3" title="3">)</a>
-<a class="sourceLine" id="cb59-4" title="4">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(4L))</a>
-<a class="sourceLine" id="cb59-5" title="5">rs <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-6" title="6"><span class="st">    </span><span class="kw">dbFetch</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb59-7" title="7"><span class="st">    </span><span class="kw">head</span>()</a>
-<a class="sourceLine" id="cb59-8" title="8"><span class="co">##    mpg cyl  disp hp drat    wt  qsec vs am gear carb</span></a>
-<a class="sourceLine" id="cb59-9" title="9"><span class="co">## 1 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1</span></a>
-<a class="sourceLine" id="cb59-10" title="10"><span class="co">## 2 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2</span></a>
-<a class="sourceLine" id="cb59-11" title="11"><span class="co">## 3 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2</span></a>
-<a class="sourceLine" id="cb59-12" title="12"><span class="co">## 4 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1</span></a>
-<a class="sourceLine" id="cb59-13" title="13"><span class="co">## 5 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2</span></a>
-<a class="sourceLine" id="cb59-14" title="14"><span class="co">## 6 33.9   4  71.1 65 4.22 1.835 19.90  1  1    4    1</span></a>
-<a class="sourceLine" id="cb59-15" title="15">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(</a>
+<a class="sourceLine" id="cb54-2" title="2">    <span class="st">&quot;SELECT * FROM mtcars WHERE cyl = $1&quot;</span></a>
+<a class="sourceLine" id="cb54-3" title="3">)</a>
+<a class="sourceLine" id="cb54-4" title="4">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(4L))</a>
+<a class="sourceLine" id="cb54-5" title="5">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>(<span class="dt">n =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb54-6" title="6"><span class="co">##    mpg cyl  disp hp drat    wt  qsec vs am gear carb</span></a>
+<a class="sourceLine" id="cb54-7" title="7"><span class="co">## 1 22.8   4 108.0 93 3.85 2.320 18.61  1  1    4    1</span></a>
+<a class="sourceLine" id="cb54-8" title="8"><span class="co">## 2 24.4   4 146.7 62 3.69 3.190 20.00  1  0    4    2</span></a>
+<a class="sourceLine" id="cb54-9" title="9"><span class="co">## 3 22.8   4 140.8 95 3.92 3.150 22.90  1  0    4    2</span></a>
+<a class="sourceLine" id="cb54-10" title="10"><span class="co">## 4 32.4   4  78.7 66 4.08 2.200 19.47  1  1    4    1</span></a>
+<a class="sourceLine" id="cb54-11" title="11"><span class="co">## 5 30.4   4  75.7 52 4.93 1.615 18.52  1  1    4    2</span></a>
+<a class="sourceLine" id="cb54-12" title="12">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
 </div>
 <div id="dbsendstatement" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.4</span> <code>dbSendStatement()</code><a href="#dbsendstatement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -860,46 +922,46 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li>Additional arguments <code>params</code> and <code>immediate</code>.</li>
 </ul>
 <p>A typical parameterization through <code>params = list(...)</code> works.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="co"># overwirte cars table</span></a>
-<a class="sourceLine" id="cb60-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">1</span>), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb60-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>)</a>
-<a class="sourceLine" id="cb60-4" title="4"><span class="co">##   speed dist</span></a>
-<a class="sourceLine" id="cb60-5" title="5"><span class="co">## 1     4    2</span></a>
-<a class="sourceLine" id="cb60-6" title="6"></a>
-<a class="sourceLine" id="cb60-7" title="7"><span class="co"># insert statement with typical parameterization</span></a>
-<a class="sourceLine" id="cb60-8" title="8">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendStatement</span>(</a>
-<a class="sourceLine" id="cb60-9" title="9">    <span class="st">&quot;INSERT INTO cars (speed, dist) VALUES ($1, $2)&quot;</span>,</a>
-<a class="sourceLine" id="cb60-10" title="10">    <span class="dt">params =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)</a>
-<a class="sourceLine" id="cb60-11" title="11">)</a>
-<a class="sourceLine" id="cb60-12" title="12"><span class="kw">dbClearResult</span>(rs)</a>
-<a class="sourceLine" id="cb60-13" title="13">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>)</a>
-<a class="sourceLine" id="cb60-14" title="14"><span class="co">##   speed dist</span></a>
-<a class="sourceLine" id="cb60-15" title="15"><span class="co">## 1     4    2</span></a>
-<a class="sourceLine" id="cb60-16" title="16"><span class="co">## 2     1    5</span></a>
-<a class="sourceLine" id="cb60-17" title="17"><span class="co">## 3     2    6</span></a>
-<a class="sourceLine" id="cb60-18" title="18"><span class="co">## 4     3    7</span></a>
-<a class="sourceLine" id="cb60-19" title="19"><span class="co">## 5     4    8</span></a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="co"># overwirte cars table</span></a>
+<a class="sourceLine" id="cb55-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">1</span>), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb55-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>)</a>
+<a class="sourceLine" id="cb55-4" title="4"><span class="co">##   speed dist</span></a>
+<a class="sourceLine" id="cb55-5" title="5"><span class="co">## 1     4    2</span></a>
+<a class="sourceLine" id="cb55-6" title="6"></a>
+<a class="sourceLine" id="cb55-7" title="7"><span class="co"># insert statement with typical parameterization</span></a>
+<a class="sourceLine" id="cb55-8" title="8">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendStatement</span>(</a>
+<a class="sourceLine" id="cb55-9" title="9">    <span class="st">&quot;INSERT INTO cars (speed, dist) VALUES ($1, $2)&quot;</span>,</a>
+<a class="sourceLine" id="cb55-10" title="10">    <span class="dt">params =</span> <span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>)</a>
+<a class="sourceLine" id="cb55-11" title="11">)</a>
+<a class="sourceLine" id="cb55-12" title="12"><span class="kw">dbClearResult</span>(rs)</a>
+<a class="sourceLine" id="cb55-13" title="13">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>)</a>
+<a class="sourceLine" id="cb55-14" title="14"><span class="co">##   speed dist</span></a>
+<a class="sourceLine" id="cb55-15" title="15"><span class="co">## 1     4    2</span></a>
+<a class="sourceLine" id="cb55-16" title="16"><span class="co">## 2     1    5</span></a>
+<a class="sourceLine" id="cb55-17" title="17"><span class="co">## 3     2    6</span></a>
+<a class="sourceLine" id="cb55-18" title="18"><span class="co">## 4     3    7</span></a>
+<a class="sourceLine" id="cb55-19" title="19"><span class="co">## 5     4    8</span></a></code></pre></div>
 <p>You can also pass parameters by using <code>dbBind()</code>.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="co"># overwirte cars table</span></a>
-<a class="sourceLine" id="cb61-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">1</span>), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb61-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>)</a>
-<a class="sourceLine" id="cb61-4" title="4"><span class="co">##   speed dist</span></a>
-<a class="sourceLine" id="cb61-5" title="5"><span class="co">## 1     4    2</span></a>
-<a class="sourceLine" id="cb61-6" title="6"></a>
-<a class="sourceLine" id="cb61-7" title="7"><span class="co"># pass multiple parameter using dbBind()</span></a>
-<a class="sourceLine" id="cb61-8" title="8">rs &lt;-<span class="st"> </span><span class="kw">dbSendStatement</span>(</a>
-<a class="sourceLine" id="cb61-9" title="9">    con,</a>
-<a class="sourceLine" id="cb61-10" title="10">    <span class="st">&quot;INSERT INTO cars (speed, dist) VALUES ($1, $2)&quot;</span></a>
-<a class="sourceLine" id="cb61-11" title="11">)</a>
-<a class="sourceLine" id="cb61-12" title="12"><span class="kw">dbBind</span>(rs, <span class="kw">list</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>))</a>
-<a class="sourceLine" id="cb61-13" title="13"><span class="kw">dbBind</span>(rs, <span class="kw">list</span>(6L, 7L))</a>
-<a class="sourceLine" id="cb61-14" title="14"><span class="kw">dbClearResult</span>(rs)</a>
-<a class="sourceLine" id="cb61-15" title="15"><span class="kw">dbReadTable</span>(con, <span class="st">&quot;cars&quot;</span>)</a>
-<a class="sourceLine" id="cb61-16" title="16"><span class="co">##   speed dist</span></a>
-<a class="sourceLine" id="cb61-17" title="17"><span class="co">## 1     4    2</span></a>
-<a class="sourceLine" id="cb61-18" title="18"><span class="co">## 2     2    4</span></a>
-<a class="sourceLine" id="cb61-19" title="19"><span class="co">## 3     3    5</span></a>
-<a class="sourceLine" id="cb61-20" title="20"><span class="co">## 4     6    7</span></a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># overwirte cars table</span></a>
+<a class="sourceLine" id="cb56-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">1</span>), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb56-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbReadTable</span>(<span class="st">&quot;cars&quot;</span>)</a>
+<a class="sourceLine" id="cb56-4" title="4"><span class="co">##   speed dist</span></a>
+<a class="sourceLine" id="cb56-5" title="5"><span class="co">## 1     4    2</span></a>
+<a class="sourceLine" id="cb56-6" title="6"></a>
+<a class="sourceLine" id="cb56-7" title="7"><span class="co"># pass multiple parameter using dbBind()</span></a>
+<a class="sourceLine" id="cb56-8" title="8">rs &lt;-<span class="st"> </span><span class="kw">dbSendStatement</span>(</a>
+<a class="sourceLine" id="cb56-9" title="9">    con,</a>
+<a class="sourceLine" id="cb56-10" title="10">    <span class="st">&quot;INSERT INTO cars (speed, dist) VALUES ($1, $2)&quot;</span></a>
+<a class="sourceLine" id="cb56-11" title="11">)</a>
+<a class="sourceLine" id="cb56-12" title="12"><span class="kw">dbBind</span>(rs, <span class="kw">list</span>(<span class="dv">2</span><span class="op">:</span><span class="dv">3</span>, <span class="dv">4</span><span class="op">:</span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb56-13" title="13"><span class="kw">dbBind</span>(rs, <span class="kw">list</span>(6L, 7L))</a>
+<a class="sourceLine" id="cb56-14" title="14"><span class="kw">dbClearResult</span>(rs)</a>
+<a class="sourceLine" id="cb56-15" title="15"><span class="kw">dbReadTable</span>(con, <span class="st">&quot;cars&quot;</span>)</a>
+<a class="sourceLine" id="cb56-16" title="16"><span class="co">##   speed dist</span></a>
+<a class="sourceLine" id="cb56-17" title="17"><span class="co">## 1     4    2</span></a>
+<a class="sourceLine" id="cb56-18" title="18"><span class="co">## 2     2    4</span></a>
+<a class="sourceLine" id="cb56-19" title="19"><span class="co">## 3     3    5</span></a>
+<a class="sourceLine" id="cb56-20" title="20"><span class="co">## 4     6    7</span></a></code></pre></div>
 </div>
 <div id="dbbind" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.5</span> <code>dbBind()</code><a href="#dbbind" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -914,17 +976,17 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li><code>:name</code> and <code>$name</code>: RSQLite.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;iris&quot;</span>, iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb62-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;SELECT * FROM iris WHERE &#39;Petal.Width&#39; &gt; $1&quot;</span>)</a>
-<a class="sourceLine" id="cb62-3" title="3">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(<span class="fl">3.0</span>))</a>
-<a class="sourceLine" id="cb62-4" title="4"><span class="kw">dbFetch</span>(rs)</a>
-<a class="sourceLine" id="cb62-5" title="5"><span class="co">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
-<a class="sourceLine" id="cb62-6" title="6"><span class="co">## 1          5.1         3.5          1.4         0.2  setosa</span></a>
-<a class="sourceLine" id="cb62-7" title="7"><span class="co">## 2          4.9         3.0          1.4         0.2  setosa</span></a>
-<a class="sourceLine" id="cb62-8" title="8"><span class="co">## 3          4.7         3.2          1.3         0.2  setosa</span></a>
-<a class="sourceLine" id="cb62-9" title="9"><span class="co">## 4          4.6         3.1          1.5         0.2  setosa</span></a>
-<a class="sourceLine" id="cb62-10" title="10"><span class="co">## 5          5.0         3.6          1.4         0.2  setosa</span></a>
-<a class="sourceLine" id="cb62-11" title="11"><span class="co">## 6          5.4         3.9          1.7         0.4  setosa</span></a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;iris&quot;</span>, iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(), <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb57-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;SELECT * FROM iris WHERE &#39;Petal.Width&#39; &gt; $1&quot;</span>)</a>
+<a class="sourceLine" id="cb57-3" title="3">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(<span class="fl">3.0</span>))</a>
+<a class="sourceLine" id="cb57-4" title="4"><span class="kw">dbFetch</span>(rs)</a>
+<a class="sourceLine" id="cb57-5" title="5"><span class="co">##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
+<a class="sourceLine" id="cb57-6" title="6"><span class="co">## 1          5.1         3.5          1.4         0.2  setosa</span></a>
+<a class="sourceLine" id="cb57-7" title="7"><span class="co">## 2          4.9         3.0          1.4         0.2  setosa</span></a>
+<a class="sourceLine" id="cb57-8" title="8"><span class="co">## 3          4.7         3.2          1.3         0.2  setosa</span></a>
+<a class="sourceLine" id="cb57-9" title="9"><span class="co">## 4          4.6         3.1          1.5         0.2  setosa</span></a>
+<a class="sourceLine" id="cb57-10" title="10"><span class="co">## 5          5.0         3.6          1.4         0.2  setosa</span></a>
+<a class="sourceLine" id="cb57-11" title="11"><span class="co">## 6          5.4         3.9          1.7         0.4  setosa</span></a></code></pre></div>
 <p>See <code>dbSendQuery</code> and <code>dbSendStatement</code> for more examples.</p>
 </div>
 <div id="dbfetch-fetch" class="section level3 hasAnchor">
@@ -935,39 +997,39 @@ The following code is one of the most simplest, deleting all tables.</p>
 <li>For all new code, use <code>dbFetch()</code> not <code>fetch()</code> which is provided just for compatibility with older DBI-client.</li>
 </ul>
 <p><code>dbFetch()</code> fetches unfetched results, as the next example shows.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;SELECT mpg, cyl FROM mtcars LIMIT 10&quot;</span>)</a>
-<a class="sourceLine" id="cb63-2" title="2"><span class="cf">while</span> (rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbHasCompleted</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
-<a class="sourceLine" id="cb63-3" title="3">    chunk &lt;-<span class="st"> </span><span class="kw">dbFetch</span>(rs, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb63-4" title="4">    <span class="kw">print</span>(chunk)</a>
-<a class="sourceLine" id="cb63-5" title="5">}</a>
-<a class="sourceLine" id="cb63-6" title="6"><span class="co">##   mpg cyl</span></a>
-<a class="sourceLine" id="cb63-7" title="7"><span class="co">## 1  21   6</span></a>
-<a class="sourceLine" id="cb63-8" title="8"><span class="co">## 2  21   6</span></a>
-<a class="sourceLine" id="cb63-9" title="9"><span class="co">##    mpg cyl</span></a>
-<a class="sourceLine" id="cb63-10" title="10"><span class="co">## 1 22.8   4</span></a>
-<a class="sourceLine" id="cb63-11" title="11"><span class="co">## 2 21.4   6</span></a>
-<a class="sourceLine" id="cb63-12" title="12"><span class="co">##    mpg cyl</span></a>
-<a class="sourceLine" id="cb63-13" title="13"><span class="co">## 1 18.7   8</span></a>
-<a class="sourceLine" id="cb63-14" title="14"><span class="co">## 2 18.1   6</span></a>
-<a class="sourceLine" id="cb63-15" title="15"><span class="co">##    mpg cyl</span></a>
-<a class="sourceLine" id="cb63-16" title="16"><span class="co">## 1 14.3   8</span></a>
-<a class="sourceLine" id="cb63-17" title="17"><span class="co">## 2 24.4   4</span></a>
-<a class="sourceLine" id="cb63-18" title="18"><span class="co">##    mpg cyl</span></a>
-<a class="sourceLine" id="cb63-19" title="19"><span class="co">## 1 22.8   4</span></a>
-<a class="sourceLine" id="cb63-20" title="20"><span class="co">## 2 19.2   6</span></a>
-<a class="sourceLine" id="cb63-21" title="21"></a>
-<a class="sourceLine" id="cb63-22" title="22"><span class="kw">dbClearResult</span>(rs)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;SELECT mpg, cyl FROM mtcars LIMIT 10&quot;</span>)</a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="cf">while</span> (rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbHasCompleted</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
+<a class="sourceLine" id="cb58-3" title="3">    chunk &lt;-<span class="st"> </span><span class="kw">dbFetch</span>(rs, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb58-4" title="4">    <span class="kw">print</span>(chunk)</a>
+<a class="sourceLine" id="cb58-5" title="5">}</a>
+<a class="sourceLine" id="cb58-6" title="6"><span class="co">##   mpg cyl</span></a>
+<a class="sourceLine" id="cb58-7" title="7"><span class="co">## 1  21   6</span></a>
+<a class="sourceLine" id="cb58-8" title="8"><span class="co">## 2  21   6</span></a>
+<a class="sourceLine" id="cb58-9" title="9"><span class="co">##    mpg cyl</span></a>
+<a class="sourceLine" id="cb58-10" title="10"><span class="co">## 1 22.8   4</span></a>
+<a class="sourceLine" id="cb58-11" title="11"><span class="co">## 2 21.4   6</span></a>
+<a class="sourceLine" id="cb58-12" title="12"><span class="co">##    mpg cyl</span></a>
+<a class="sourceLine" id="cb58-13" title="13"><span class="co">## 1 18.7   8</span></a>
+<a class="sourceLine" id="cb58-14" title="14"><span class="co">## 2 18.1   6</span></a>
+<a class="sourceLine" id="cb58-15" title="15"><span class="co">##    mpg cyl</span></a>
+<a class="sourceLine" id="cb58-16" title="16"><span class="co">## 1 14.3   8</span></a>
+<a class="sourceLine" id="cb58-17" title="17"><span class="co">## 2 24.4   4</span></a>
+<a class="sourceLine" id="cb58-18" title="18"><span class="co">##    mpg cyl</span></a>
+<a class="sourceLine" id="cb58-19" title="19"><span class="co">## 1 22.8   4</span></a>
+<a class="sourceLine" id="cb58-20" title="20"><span class="co">## 2 19.2   6</span></a>
+<a class="sourceLine" id="cb58-21" title="21"></a>
+<a class="sourceLine" id="cb58-22" title="22"><span class="kw">dbClearResult</span>(rs)</a></code></pre></div>
 <p>Not all result objects can be fetched.
 One such example is the result of query with a unbounded placeholder.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;SELECT mpg, cyl, disp FROM mtcars WHERE cyl = $1&quot;</span>)</a>
-<a class="sourceLine" id="cb64-2" title="2">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>(<span class="dt">n =</span> <span class="dv">5</span>) <span class="co"># placeholder should be bound before being fetched</span></a>
-<a class="sourceLine" id="cb64-3" title="3"><span class="co">## Error: Query needs to be bound before fetching</span></a>
-<a class="sourceLine" id="cb64-4" title="4">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(6L))</a>
-<a class="sourceLine" id="cb64-5" title="5">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
-<p>A more trivial result is a cleared result.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a>
-<a class="sourceLine" id="cb65-2" title="2">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>()</a>
-<a class="sourceLine" id="cb65-3" title="3"><span class="co">## Error: Invalid result set</span></a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;SELECT mpg, cyl, disp FROM mtcars WHERE cyl = $1&quot;</span>)</a>
+<a class="sourceLine" id="cb59-2" title="2">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>(<span class="dt">n =</span> <span class="dv">5</span>) <span class="co"># placeholder should be bound before being fetched</span></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="co">## Error: Query needs to be bound before fetching</span></a>
+<a class="sourceLine" id="cb59-4" title="4">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(6L))</a>
+<a class="sourceLine" id="cb59-5" title="5">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
+<p>More trivial result is a cleared result.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a>
+<a class="sourceLine" id="cb60-2" title="2">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>()</a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="co">## Error: Invalid result set</span></a></code></pre></div>
 </div>
 <div id="dbgetrowcount" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.7</span> <code>dbGetRowCount()</code><a href="#dbgetrowcount" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -975,52 +1037,170 @@ One such example is the result of query with a unbounded placeholder.</p>
 <li>Counts the total number of rows <strong>actually returned</strong> by <code>dbFetch()</code> for the input result object.</li>
 <li>Returns a scalar number.</li>
 </ul>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">rs &lt;-<span class="st"> </span><span class="kw">dbSendQuery</span>(con, <span class="st">&quot;SELECT * FROM mtcars&quot;</span>)</a>
-<a class="sourceLine" id="cb66-2" title="2"></a>
-<a class="sourceLine" id="cb66-3" title="3">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowCount</span>() <span class="co"># initial value for the method</span></a>
-<a class="sourceLine" id="cb66-4" title="4"><span class="co">## [1] 0</span></a>
-<a class="sourceLine" id="cb66-5" title="5"></a>
-<a class="sourceLine" id="cb66-6" title="6">count_fetched_rows &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb66-7" title="7"><span class="cf">while</span> (<span class="op">!</span><span class="kw">dbHasCompleted</span>(rs)) {</a>
-<a class="sourceLine" id="cb66-8" title="8">    count_fetched_rows &lt;-<span class="st"> </span>count_fetched_rows <span class="op">+</span><span class="st"> </span><span class="kw">nrow</span>(rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>(<span class="dv">10</span>))</a>
-<a class="sourceLine" id="cb66-9" title="9">}</a>
-<a class="sourceLine" id="cb66-10" title="10"></a>
-<a class="sourceLine" id="cb66-11" title="11">count_fetched_rows <span class="co"># total number of rows fetched</span></a>
-<a class="sourceLine" id="cb66-12" title="12"><span class="co">## [1] 32</span></a>
-<a class="sourceLine" id="cb66-13" title="13">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowCount</span>()</a>
-<a class="sourceLine" id="cb66-14" title="14"><span class="co">## [1] 32</span></a>
-<a class="sourceLine" id="cb66-15" title="15"></a>
-<a class="sourceLine" id="cb66-16" title="16"><span class="co"># fetching empty row has no effect on the value of dbGetRowCount()</span></a>
-<a class="sourceLine" id="cb66-17" title="17">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>()</a>
-<a class="sourceLine" id="cb66-18" title="18"><span class="co">##  [1] mpg  cyl  disp hp   drat wt   qsec vs   am   gear carb</span></a>
-<a class="sourceLine" id="cb66-19" title="19"><span class="co">## &lt;0 rows&gt; (or 0-length row.names)</span></a>
-<a class="sourceLine" id="cb66-20" title="20">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowCount</span>()</a>
-<a class="sourceLine" id="cb66-21" title="21"><span class="co">## [1] 32</span></a>
-<a class="sourceLine" id="cb66-22" title="22"></a>
-<a class="sourceLine" id="cb66-23" title="23">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1">rs &lt;-<span class="st"> </span><span class="kw">dbSendQuery</span>(con, <span class="st">&quot;SELECT * FROM mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb61-2" title="2"></a>
+<a class="sourceLine" id="cb61-3" title="3">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowCount</span>() <span class="co"># initial value of the method</span></a>
+<a class="sourceLine" id="cb61-4" title="4"><span class="co">## [1] 0</span></a>
+<a class="sourceLine" id="cb61-5" title="5"></a>
+<a class="sourceLine" id="cb61-6" title="6">count_fetched_rows &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb61-7" title="7"><span class="cf">while</span> (<span class="op">!</span><span class="kw">dbHasCompleted</span>(rs)) {</a>
+<a class="sourceLine" id="cb61-8" title="8">    count_fetched_rows &lt;-<span class="st"> </span>count_fetched_rows <span class="op">+</span><span class="st"> </span><span class="kw">nrow</span>(rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>(<span class="dv">10</span>))</a>
+<a class="sourceLine" id="cb61-9" title="9">}</a>
+<a class="sourceLine" id="cb61-10" title="10"></a>
+<a class="sourceLine" id="cb61-11" title="11">count_fetched_rows <span class="co"># total number of rows fetched</span></a>
+<a class="sourceLine" id="cb61-12" title="12"><span class="co">## [1] 32</span></a>
+<a class="sourceLine" id="cb61-13" title="13">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowCount</span>()</a>
+<a class="sourceLine" id="cb61-14" title="14"><span class="co">## [1] 32</span></a>
+<a class="sourceLine" id="cb61-15" title="15"></a>
+<a class="sourceLine" id="cb61-16" title="16"><span class="co"># fetching empty row has no effect on the value of dbGetRowCount()</span></a>
+<a class="sourceLine" id="cb61-17" title="17">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>()</a>
+<a class="sourceLine" id="cb61-18" title="18"><span class="co">##  [1] mpg  cyl  disp hp   drat wt   qsec vs   am   gear carb</span></a>
+<a class="sourceLine" id="cb61-19" title="19"><span class="co">## &lt;0 rows&gt; (or 0-length row.names)</span></a>
+<a class="sourceLine" id="cb61-20" title="20">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowCount</span>()</a>
+<a class="sourceLine" id="cb61-21" title="21"><span class="co">## [1] 32</span></a>
+<a class="sourceLine" id="cb61-22" title="22"></a>
+<a class="sourceLine" id="cb61-23" title="23">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
 <p><code>dbGetRowCount()</code> cannot count a cleared result.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowCount</span>()</a>
-<a class="sourceLine" id="cb67-2" title="2"><span class="co">## Error: Invalid result set</span></a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowCount</span>()</a>
+<a class="sourceLine" id="cb62-2" title="2"><span class="co">## Error: Invalid result set</span></a></code></pre></div>
 </div>
 <div id="dbgetrowsaffected" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.8</span> <code>dbGetRowsAffected()</code><a href="#dbgetrowsaffected" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The number of rows affected</p>
+<ul>
+<li>Gets the number of rows affected by a data manipulation statement issued with dbSendStatement()</li>
+<li>Returns a scalar number, integer or numeric.</li>
+</ul>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb63-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendStatement</span>(<span class="st">&quot;DELETE FROM cars WHERE dist &gt;= 20&quot;</span>)</a>
+<a class="sourceLine" id="cb63-3" title="3">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowsAffected</span>()</a>
+<a class="sourceLine" id="cb63-4" title="4"><span class="co">## [1] 42</span></a>
+<a class="sourceLine" id="cb63-5" title="5">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
+<p>The following example shows that <code>dbGetRowsAffected()</code> increases when placeholders get bounded, not when placeholders are placed.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb64-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendStatement</span>(<span class="st">&quot;DELETE FROM cars WHERE speed = $1 AND dist = $2&quot;</span>)</a>
+<a class="sourceLine" id="cb64-3" title="3">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowsAffected</span>()</a>
+<a class="sourceLine" id="cb64-4" title="4"><span class="co">## [1] NA</span></a>
+<a class="sourceLine" id="cb64-5" title="5">rs &lt;-<span class="st"> </span>rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(<span class="dv">7</span>, <span class="dv">21</span>))</a>
+<a class="sourceLine" id="cb64-6" title="6">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetRowsAffected</span>() <span class="co"># there is no rows with that value</span></a>
+<a class="sourceLine" id="cb64-7" title="7"><span class="co">## [1] 0</span></a>
+<a class="sourceLine" id="cb64-8" title="8">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
 </div>
 <div id="dbgetstatement" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.9</span> <code>dbGetStatement()</code><a href="#dbgetstatement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Get the statement associated with a result set</p>
+<ul>
+<li>Gets the statement that was passed to <code>dbSendQuery()</code> or <code>dbSendStatement()</code>. It remains unchanged after placeholders are bounded afterwards.</li>
+<li>Returns a string statement.</li>
+</ul>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb65-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendStatement</span>(<span class="st">&quot;SELECT * FROM cars WHERE dist &gt;= $1&quot;</span>)</a>
+<a class="sourceLine" id="cb65-3" title="3">stm &lt;-<span class="st"> </span>rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetStatement</span>()</a>
+<a class="sourceLine" id="cb65-4" title="4">stm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">class</span>()</a>
+<a class="sourceLine" id="cb65-5" title="5"><span class="co">## [1] &quot;character&quot;</span></a>
+<a class="sourceLine" id="cb65-6" title="6">stm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb65-7" title="7"><span class="co">## [1] &quot;SELECT * FROM cars WHERE dist &gt;= $1&quot;</span></a>
+<a class="sourceLine" id="cb65-8" title="8">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(<span class="dv">25</span>))</a>
+<a class="sourceLine" id="cb65-9" title="9">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbGetStatement</span>() <span class="co"># unchanged!</span></a>
+<a class="sourceLine" id="cb65-10" title="10"><span class="co">## [1] &quot;SELECT * FROM cars WHERE dist &gt;= $1&quot;</span></a>
+<a class="sourceLine" id="cb65-11" title="11">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>(<span class="dt">n =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb65-12" title="12"><span class="co">##   speed dist</span></a>
+<a class="sourceLine" id="cb65-13" title="13"><span class="co">## 1    10   26</span></a>
+<a class="sourceLine" id="cb65-14" title="14"><span class="co">## 2    10   34</span></a>
+<a class="sourceLine" id="cb65-15" title="15"><span class="co">## 3    11   28</span></a>
+<a class="sourceLine" id="cb65-16" title="16"><span class="co">## 4    12   28</span></a>
+<a class="sourceLine" id="cb65-17" title="17"><span class="co">## 5    13   26</span></a>
+<a class="sourceLine" id="cb65-18" title="18">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a>
+<a class="sourceLine" id="cb65-19" title="19"></a>
+<a class="sourceLine" id="cb65-20" title="20"><span class="co"># reuse the derived statement</span></a>
+<a class="sourceLine" id="cb65-21" title="21">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendStatement</span>(stm)</a>
+<a class="sourceLine" id="cb65-22" title="22">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbBind</span>(<span class="kw">list</span>(<span class="dv">35</span>))</a>
+<a class="sourceLine" id="cb65-23" title="23">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>(<span class="dt">n =</span> <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb65-24" title="24"><span class="co">##   speed dist</span></a>
+<a class="sourceLine" id="cb65-25" title="25"><span class="co">## 1    13   46</span></a>
+<a class="sourceLine" id="cb65-26" title="26"><span class="co">## 2    14   36</span></a>
+<a class="sourceLine" id="cb65-27" title="27"><span class="co">## 3    14   60</span></a>
+<a class="sourceLine" id="cb65-28" title="28"><span class="co">## 4    14   80</span></a>
+<a class="sourceLine" id="cb65-29" title="29"><span class="co">## 5    15   54</span></a>
+<a class="sourceLine" id="cb65-30" title="30">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
 </div>
 <div id="dbhascompleted" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.10</span> <code>dbHasCompleted()</code><a href="#dbhascompleted" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Completion status</p>
+<ul>
+<li>Tests if the associated operation has completed.</li>
+<li>Returns a logical. <code>TRUE</code> if there is nothing more to be fetched and <code>FALSE</code> if otherwise.</li>
+</ul>
+<p><code>SELECT</code> statement completes when all results, if any, have been fetched.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb66-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;SELECT * FROM mtcars&quot;</span>)</a>
+<a class="sourceLine" id="cb66-3" title="3">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbHasCompleted</span>()</a>
+<a class="sourceLine" id="cb66-4" title="4"><span class="co">## [1] FALSE</span></a>
+<a class="sourceLine" id="cb66-5" title="5">rs <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-6" title="6"><span class="st">    </span><span class="kw">dbFetch</span>(<span class="dt">n =</span> <span class="dv">20</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-7" title="7"><span class="st">    </span><span class="kw">invisible</span>() <span class="co"># discard</span></a>
+<a class="sourceLine" id="cb66-8" title="8">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbHasCompleted</span>()</a>
+<a class="sourceLine" id="cb66-9" title="9"><span class="co">## [1] FALSE</span></a>
+<a class="sourceLine" id="cb66-10" title="10">rs <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-11" title="11"><span class="st">    </span><span class="kw">dbFetch</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb66-12" title="12"><span class="st">    </span><span class="kw">invisible</span>() <span class="co"># discard</span></a>
+<a class="sourceLine" id="cb66-13" title="13">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbHasCompleted</span>()</a>
+<a class="sourceLine" id="cb66-14" title="14"><span class="co">## [1] TRUE</span></a>
+<a class="sourceLine" id="cb66-15" title="15">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
+<p><code>SELECT</code> statement with no result rows completes as soon as the query is executed. Consequently, there is no need to fetch it to get it completed.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb67-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;SELECT * FROM mtcars WHERE cyl = 5&quot;</span>)</a>
+<a class="sourceLine" id="cb67-3" title="3">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbHasCompleted</span>()</a>
+<a class="sourceLine" id="cb67-4" title="4"><span class="co">## [1] TRUE</span></a>
+<a class="sourceLine" id="cb67-5" title="5">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
+<p><code>DELETE</code>, <code>INSERT</code> and <code>UPDATE</code> statements get completed immediately after execution because there is originally nothing to fetch.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;cars&quot;</span>, cars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb68-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendStatement</span>(<span class="st">&quot;DELETE FROM cars WHERE speed &gt;= 8&quot;</span>)</a>
+<a class="sourceLine" id="cb68-3" title="3">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbHasCompleted</span>()</a>
+<a class="sourceLine" id="cb68-4" title="4"><span class="co">## [1] TRUE</span></a>
+<a class="sourceLine" id="cb68-5" title="5">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
 </div>
 <div id="dbcolumninfo" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.11</span> <code>dbColumnInfo()</code><a href="#dbcolumninfo" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>Returns <code>data.frame</code> that describes the output of a query.</li>
+<li>A returned <code>data.frame</code> at least includes <code>"name"</code> and <code>"type"</code> followed by optional columns that starts with a dot such as <code>".oid"</code> and <code>".typname"</code> depending on DBMS.</li>
+</ul>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(</a>
+<a class="sourceLine" id="cb69-2" title="2">    <span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb69-3" title="3"><span class="st">    SELECT 3.14 AS pi,</span></a>
+<a class="sourceLine" id="cb69-4" title="4"><span class="st">    0 AS unit_addition,</span></a>
+<a class="sourceLine" id="cb69-5" title="5"><span class="st">    &#39;shena&#39; AS author,</span></a>
+<a class="sourceLine" id="cb69-6" title="6"><span class="st">    current_date AS today</span></a>
+<a class="sourceLine" id="cb69-7" title="7"><span class="st">    &quot;</span></a>
+<a class="sourceLine" id="cb69-8" title="8">)</a>
+<a class="sourceLine" id="cb69-9" title="9">info &lt;-<span class="st"> </span>rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbColumnInfo</span>()</a>
+<a class="sourceLine" id="cb69-10" title="10">info <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">class</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1">info <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mode</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">info <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a></code></pre></div>
+<pre><code>##            name      type .oid .known .typname
+## 1            pi    double 1700   TRUE  numeric
+## 2 unit_addition   integer   23   TRUE     int4
+## 3        author character   25   TRUE     text
+## 4         today    double 1082   TRUE     date</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>(<span class="dt">n =</span> <span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## [1] pi            unit_addition author        today        
+## &lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a></code></pre></div>
 <p>Information about result types</p>
 </div>
 <div id="dbclearresult" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.3.12</span> <code>dbClearResult()</code><a href="#dbclearresult" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Clear a result set</p>
+<ul>
+<li>Frees all resources (local and remote) associated with a result set.</li>
+<li>Returns <code>TRUE</code> invisibly.</li>
+<li>MUST follow <code>dbSendQuery()</code> and <code>dbSendStatement()</code>.</li>
+</ul>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbSendQuery</span>(<span class="st">&quot;SELECT 3.14 AS pi&quot;</span>)</a>
+<a class="sourceLine" id="cb78-2" title="2">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbFetch</span>()</a>
+<a class="sourceLine" id="cb78-3" title="3"><span class="co">##     pi</span></a>
+<a class="sourceLine" id="cb78-4" title="4"><span class="co">## 1 3.14</span></a>
+<a class="sourceLine" id="cb78-5" title="5">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>()</a>
+<a class="sourceLine" id="cb78-6" title="6">rs <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbClearResult</span>() <span class="co"># clearing a cleared result again raises warning</span></a></code></pre></div>
 
 </div>
 </div>
