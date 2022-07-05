@@ -1,1 +1,105 @@
 ## Views
+
+### Function for listing views
+```{r def-list-views}
+# list normal or/and tempoary views selectively
+dbListViews <- function(con, parmanent = TRUE, temporary = TRUE) {
+    if (c(parmanent, temporary) %>% any() %>% isFALSE()) {
+        NULL %>%
+            invisible() %>%
+            return()
+    }
+    sql <- "?p ?u ?t"
+    parm <- "SELECT pg_views.viewname AS viewname FROM pg_views WHERE schemaname = current_schema()"
+    tmp <- "SELECT viewname FROM pg_views WHERE schemaname LIKE 'pg_temp_%'"
+    sqlInterpolate(
+        con,
+        sql,
+        p = dplyr::if_else(parmanent, parm, "") %>% SQL(),
+        u = dplyr::if_else(c(parmanent, temporary) %>% all(), "UNION", "") %>% SQL(),
+        t = dplyr::if_else(temporary, tmp, "") %>% SQL()
+    ) %>%
+        dbGetQuery(con, .) %>%
+        pull(viewname)
+}
+```
+
+### Function for testing the existance of a view
+
+```{r def-exists-view}
+dbExistsView <- function(con, name, parmanent = TRUE, temporary = TRUE) {
+    name %in% dbListViews(con, parmanent, temporary)
+}
+```
+
+### Function for dropping a view
+
+```{r def-drop-view}
+# drop view and return the number of views deleted by this call.
+dbDropView <- function(con, name, if_exists = FALSE, cascade = FALSE) {
+    if (!requireNamespace("dplyr", quietly = TRUE)) stop("dplyr library is required.")
+    before <- con %>%
+        dbListViews() %>%
+        length()
+    "DROP VIEW ?if_ex ?name ?cas_res" %>%
+        DBI::sqlInterpolate(
+            con,
+            .,
+            if_ex = dplyr::if_else(if_exists, "IF EXISTS", "") %>% DBI::SQL(),
+            name = name %>% DBI::dbQuoteIdentifier(con, .),
+            cas_res = dplyr::if_else(cascade, "CASCADE", "RESTRICT") %>% SQL()
+        ) %>%
+        DBI::dbExecute(con, .)
+    before - (con %>% dbListViews() %>% length())
+}
+```
+
+```{r drop-all-temporary-views-example, collapse=TRUE}
+con %>%
+    dbListViews() %>%
+    purrr::map_int(~ dbDropView(con, .x)) %>%
+    sum()
+```
+
+### Function for creating a view
+
+```{r def-create-view}
+dbCreateView <- function(con, sql_view, name, or_replace = FALSE, temporary = FALSE) {
+    if (!requireNamespace("dplyr", quietly = TRUE)) stop("dplyr library is required.")
+    if (sql_view %>% inherits(c("character", "SQL")) %>% isFALSE()) stop("provided sql string is not of class character or SQL.")
+    sql <- "CREATE ?or ?tmp VIEW ?name AS ?q"
+    stm <- DBI::sqlInterpolate(
+        con,
+        sql,
+        or = dplyr::if_else(or_replace, "OR REPLACE", "") %>% DBI::SQL(),
+        tmp = dplyr::if_else(temporary, "TEMPORARY", "") %>% DBI::SQL(),
+        name = name %>% DBI::dbQuoteIdentifier(con, .),
+        q = sql_view %>% DBI::SQL()
+    )
+    DBI::dbExecute(con, stm)
+}
+```
+
+### Function for freeing resources
+
+```{r def-discard-function}
+dbDiscard <- function(con, all = FALSE, plans = FALSE, temporary = TRUE) {
+    if (c(all, plans, temporary) %>% any()) {
+        resource <- case_when(
+            all ~ "ALL",
+            plans ~ "PLANS",
+            temporary ~ "TEMPORARY"
+        )
+        "DISCARD ?rsc" %>%
+            DBI::sqlInterpolate(
+                con,
+                .,
+                rsc = resource %>% DBI::SQL()
+            ) %>%
+            DBI::dbExecute(con, .)
+    }
+    TRUE %>%
+        invisible() %>%
+        return()
+}
+```

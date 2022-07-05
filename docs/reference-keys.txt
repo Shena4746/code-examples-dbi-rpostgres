@@ -43,3 +43,8 @@ dbquoteidentifier
 dbquoteliteral
 sqlinterpolate
 views
+function-for-listing-views
+function-for-testing-the-existance-of-a-view
+function-for-dropping-a-view
+function-for-creating-a-view
+function-for-freeing-resources
