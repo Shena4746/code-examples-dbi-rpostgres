@@ -87,7 +87,7 @@ only_in_rpos %>% print()
 
 ## Basic Usage
 
-Before we look at indivisual functions, let us describe a typical work flow with these packages.
+Before we look at each function, let us describe a typical work flow with these packages.
 You may sefaly skip this section as it is independent of what follows.
 
 This section assumes that you have access to a postgres database. If necessary, run the following command to create a new database named 'demo'.
@@ -100,7 +100,7 @@ sudo service postgresql start
 createdb -p 5432 --owner=your-owner-name --host=localhost --username=your-username demo
 ```
 
-The following code defines the `con` variable which keeps the establised connection to your database. 
+The following code defines the `con` variable which holds a establised connection to your database. 
 
 ```{r example-connect, eval = FALSE}
 con <- DBI::dbConnect(
@@ -113,7 +113,7 @@ con <- DBI::dbConnect(
 )
 ```
 
-You should not write this way outside this demo. See \@ref(dbConnect)
+You should not write this way outside this demo. See \@ref(dbConnect).
 
 ```{r example-issue-con, include=FALSE}
 dw <- config::get("demo")
@@ -135,7 +135,7 @@ con %>% DBI::dbListTables()
 ```
 
 `dbWriteTable()` Creates a remote table from local data.
-The last two arguments are optional.
+The last argument is optional.
 
 ```{r our-first-table, collapse=TRUE}
 # create table by supplying local dataframe
@@ -168,7 +168,7 @@ con %>%
 ```
 
 
-You can use `dbSendQuery()` to execute a query written as a string. Note that we don't need a `;` at the end of the query. Since this method does nothing but sending query, you should capture the returned value to perform an appropriate post-processing.
+You can use `dbSendQuery()` to execute a query written as a string. Note that we don't need a `;` at the end of the query. Since this method does nothing but sending query, you should keep the returned value to perform appropriate post-processing.
 
 ```{r first-send-query}
 # send query and get response variable
@@ -231,7 +231,7 @@ con %>%
 DBI::dbListTables(con)
 ```
 
-`dbDisconnect()` terminates the supplied `con` variable, and closes the connection.
+`dbDisconnect()` terminates the supplied `con` variable, and closes the connection. 
 
 ```{r first-dbDisconnect}
 con %>% DBI::dbDisconnect()

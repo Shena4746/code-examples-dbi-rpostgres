@@ -23,7 +23,7 @@
 <meta name="author" content="Shena" />
 
 
-<meta name="date" content="2022-07-06" />
+<meta name="date" content="2022-07-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,13 +184,6 @@ code span.wa { color: #da4453; } /* Warning */
 <li class="chapter" data-level="2.4.4" data-path=""><a href="#dbquoteliteral"><i class="fa fa-check"></i><b>2.4.4</b> <code>dbQuoteLiteral()</code></a></li>
 <li class="chapter" data-level="2.4.5" data-path=""><a href="#sqlinterpolate"><i class="fa fa-check"></i><b>2.4.5</b> <code>sqlInterpolate()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path=""><a href="#views"><i class="fa fa-check"></i><b>2.5</b> Views</a><ul>
-<li class="chapter" data-level="2.5.1" data-path=""><a href="#function-for-listing-views"><i class="fa fa-check"></i><b>2.5.1</b> Function for listing views</a></li>
-<li class="chapter" data-level="2.5.2" data-path=""><a href="#function-for-testing-the-existance-of-a-view"><i class="fa fa-check"></i><b>2.5.2</b> Function for testing the existance of a view</a></li>
-<li class="chapter" data-level="2.5.3" data-path=""><a href="#function-for-dropping-a-view"><i class="fa fa-check"></i><b>2.5.3</b> Function for dropping a view</a></li>
-<li class="chapter" data-level="2.5.4" data-path=""><a href="#function-for-creating-a-view"><i class="fa fa-check"></i><b>2.5.4</b> Function for creating a view</a></li>
-<li class="chapter" data-level="2.5.5" data-path=""><a href="#function-for-freeing-resources"><i class="fa fa-check"></i><b>2.5.5</b> Function for freeing resources</a></li>
-</ul></li>
 </ul></li>
 </ul>
 
@@ -212,7 +205,7 @@ code span.wa { color: #da4453; } /* Warning */
 <div id="header">
 <h1 class="title">Code Examples for DBI and RPostgres</h1>
 <p class="author"><em>Shena</em></p>
-<p class="date"><em>2022-07-06</em></p>
+<p class="date"><em>2022-07-10</em></p>
 </div>
 <div id="about-dbi-and-rpostgres" class="section level1 hasAnchor">
 <h1><span class="header-section-number">1</span> About DBI and RPostgres<a href="#about-dbi-and-rpostgres" class="anchor-section" aria-label="Anchor link to header"></a></h1>
@@ -347,12 +340,12 @@ code span.wa { color: #da4453; } /* Warning */
 </div>
 <div id="basic-usage" class="section level2 hasAnchor">
 <h2><span class="header-section-number">1.3</span> Basic Usage<a href="#basic-usage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Before we look at indivisual functions, let us describe a typical work flow with these packages.
+<p>Before we look at each function, let us describe a typical work flow with these packages.
 You may sefaly skip this section as it is independent of what follows.</p>
 <p>This section assumes that you have access to a postgres database. If necessary, run the following command to create a new database named ‘demo’.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" title="1"><span class="fu">sudo</span> service postgresql start</a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" title="1"><span class="ex">createdb</span> -p 5432 --owner=your-owner-name --host=localhost --username=your-username demo</a></code></pre></div>
-<p>The following code defines the <code>con</code> variable which keeps the establised connection to your database.</p>
+<p>The following code defines the <code>con</code> variable which holds a establised connection to your database.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
 <a class="sourceLine" id="cb10-2" title="2">    <span class="dt">drv =</span> RPostgres<span class="op">::</span><span class="kw">Postgres</span>(),</a>
 <a class="sourceLine" id="cb10-3" title="3">    <span class="dt">host =</span> <span class="st">&quot;localhost&quot;</span>,</a>
@@ -361,19 +354,19 @@ You may sefaly skip this section as it is independent of what follows.</p>
 <a class="sourceLine" id="cb10-6" title="6">    <span class="dt">user =</span> <span class="st">&quot;your-user&quot;</span>,</a>
 <a class="sourceLine" id="cb10-7" title="7">    <span class="dt">password =</span> <span class="st">&quot;your-password&quot;</span></a>
 <a class="sourceLine" id="cb10-8" title="8">)</a></code></pre></div>
-<p>You should not write this way outside this demo. See <a href="#dbConnect">2.1.2</a></p>
+<p>You should not write this way outside this demo. See <a href="#dbConnect">2.1.2</a>.</p>
 <p>Let us observe the list of tables in the connected database.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># demo database is empty</span></a>
 <a class="sourceLine" id="cb11-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbListTables</span>()</a>
 <a class="sourceLine" id="cb11-3" title="3"><span class="co">## [1] &quot;iris&quot;   &quot;mtcars&quot; &quot;cars&quot;</span></a></code></pre></div>
 <p><code>dbWriteTable()</code> Creates a remote table from local data.
-The last two arguments are optional.</p>
+The last argument is optional.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># create table by supplying local dataframe</span></a>
 <a class="sourceLine" id="cb12-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb12-3" title="3">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbWriteTable</span>(<span class="st">&quot;iris&quot;</span>, iris, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb12-4" title="4"><span class="co"># check that tables are properly created</span></a>
 <a class="sourceLine" id="cb12-5" title="5">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</a>
-<a class="sourceLine" id="cb12-6" title="6"><span class="co">## [1] &quot;cars&quot;   &quot;mtcars&quot; &quot;iris&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-6" title="6"><span class="co">## [1] &quot;mtcars&quot; &quot;iris&quot;   &quot;cars&quot;</span></a></code></pre></div>
 <p>You can also ask the existance of the specific table in the database associated with <code>con</code> variable.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># boolean question about the existance of indivisual table</span></a>
 <a class="sourceLine" id="cb13-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbExistsTable</span>(<span class="st">&quot;mtcars&quot;</span>)</a>
@@ -394,7 +387,7 @@ The last two arguments are optional.</p>
 ## 4 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
 ## 5 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 ## 6 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<p>You can use <code>dbSendQuery()</code> to execute a query written as a string. Note that we don’t need a <code>;</code> at the end of the query. Since this method does nothing but sending query, you should capture the returned value to perform an appropriate post-processing.</p>
+<p>You can use <code>dbSendQuery()</code> to execute a query written as a string. Note that we don’t need a <code>;</code> at the end of the query. Since this method does nothing but sending query, you should keep the returned value to perform appropriate post-processing.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># send query and get response variable</span></a>
 <a class="sourceLine" id="cb17-2" title="2">rs &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbSendQuery</span>(<span class="st">&quot;</span></a>
 <a class="sourceLine" id="cb17-3" title="3"><span class="st">    SELECT *</span></a>
@@ -445,7 +438,7 @@ The following code is one of the most simplest, deleting all tables.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># create mtcars table again to demonstate sumultaneous-removal</span></a>
 <a class="sourceLine" id="cb23-2" title="2">con <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbWriteTable</span>(<span class="st">&quot;mtcars&quot;</span>, mtcars, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb23-3" title="3">DBI<span class="op">::</span><span class="kw">dbListTables</span>(con)</a>
-<a class="sourceLine" id="cb23-4" title="4"><span class="co">## [1] &quot;cars&quot;   &quot;iris&quot;   &quot;mtcars&quot;</span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co">## [1] &quot;iris&quot;   &quot;mtcars&quot; &quot;cars&quot;</span></a>
 <a class="sourceLine" id="cb23-5" title="5"><span class="co"># remove multiple tables at once</span></a>
 <a class="sourceLine" id="cb23-6" title="6">con <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb23-7" title="7"><span class="st">    </span>DBI<span class="op">::</span><span class="kw">dbListTables</span>() <span class="op">%&gt;%</span></a>
@@ -461,8 +454,8 @@ The following code is one of the most simplest, deleting all tables.</p>
 </div>
 <div id="Functions-dbi" class="section level1 hasAnchor">
 <h1><span class="header-section-number">2</span> Functions in DBI and RPostgres<a href="#Functions-dbi" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>For convenience, we define a function that issues a connection variable.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># depends on config package to handling credentials</span></a>
+<p>For convenience, we define a function that issues a connection variable. Here we use config package to avoid to write credentials in a code.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># depends on config package</span></a>
 <a class="sourceLine" id="cb25-2" title="2">issue_con &lt;-<span class="st"> </span><span class="cf">function</span>(service_name) {</a>
 <a class="sourceLine" id="cb25-3" title="3">    dw &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>(service_name)</a>
 <a class="sourceLine" id="cb25-4" title="4">    DBI<span class="op">::</span><span class="kw">dbConnect</span>(</a>
@@ -584,7 +577,7 @@ The following code is one of the most simplest, deleting all tables.</p>
 <a class="sourceLine" id="cb33-27" title="27"><span class="co">## [1] 120011</span></a>
 <a class="sourceLine" id="cb33-28" title="28"><span class="co">## </span></a>
 <a class="sourceLine" id="cb33-29" title="29"><span class="co">## $pid</span></a>
-<a class="sourceLine" id="cb33-30" title="30"><span class="co">## [1] 1757</span></a></code></pre></div>
+<a class="sourceLine" id="cb33-30" title="30"><span class="co">## [1] 20334</span></a></code></pre></div>
 </div>
 <div id="dbisreadonly" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.1.5</span> <code>dbIsReadOnly()</code><a href="#dbisreadonly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1236,33 +1229,34 @@ One such example is the result of query with a unbounded placeholder.</p>
 <li>See <code>sqlInterpolate()</code> for an application.</li>
 <li><code>glue_sql()</code> in glue packages is also useful to deal with SQL escaping needs.</li>
 </ul>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">con &lt;-<span class="st"> </span><span class="kw">refresh_con</span>(con)</a>
-<a class="sourceLine" id="cb73-2" title="2">str &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SELECT&quot;</span>, <span class="st">&quot;WHERE&quot;</span>)</a>
-<a class="sourceLine" id="cb73-3" title="3">s &lt;-<span class="st"> </span><span class="kw">SQL</span>(str)</a>
-<a class="sourceLine" id="cb73-4" title="4">s <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">class</span>()</a>
-<a class="sourceLine" id="cb73-5" title="5"><span class="co">## [1] &quot;SQL&quot;</span></a>
-<a class="sourceLine" id="cb73-6" title="6"><span class="co">## attr(,&quot;package&quot;)</span></a>
-<a class="sourceLine" id="cb73-7" title="7"><span class="co">## [1] &quot;DBI&quot;</span></a>
-<a class="sourceLine" id="cb73-8" title="8">s <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb73-9" title="9"><span class="co">## &lt;SQL&gt; SELECT</span></a>
-<a class="sourceLine" id="cb73-10" title="10"><span class="co">## &lt;SQL&gt; WHERE</span></a>
-<a class="sourceLine" id="cb73-11" title="11"></a>
-<a class="sourceLine" id="cb73-12" title="12"><span class="kw">SQL</span>(s) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>() <span class="co"># unchanged</span></a>
-<a class="sourceLine" id="cb73-13" title="13"><span class="co">## &lt;SQL&gt; SELECT</span></a>
-<a class="sourceLine" id="cb73-14" title="14"><span class="co">## &lt;SQL&gt; WHERE</span></a>
-<a class="sourceLine" id="cb73-15" title="15"></a>
-<a class="sourceLine" id="cb73-16" title="16"><span class="kw">dbQuoteLiteral</span>(con, s) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>() <span class="co"># SQL vectors pass through dbQuoteLiteral()</span></a>
-<a class="sourceLine" id="cb73-17" title="17"><span class="co">## &lt;SQL&gt; SELECT</span></a>
-<a class="sourceLine" id="cb73-18" title="18"><span class="co">## &lt;SQL&gt; WHERE</span></a>
-<a class="sourceLine" id="cb73-19" title="19"></a>
-<a class="sourceLine" id="cb73-20" title="20">lt &lt;-<span class="st"> </span><span class="kw">dbQuoteLiteral</span>(con, str)</a>
-<a class="sourceLine" id="cb73-21" title="21">lt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb73-22" title="22"><span class="co">## &lt;SQL&gt; &#39;SELECT&#39;</span></a>
-<a class="sourceLine" id="cb73-23" title="23"><span class="co">## &lt;SQL&gt; &#39;WHERE&#39;</span></a>
-<a class="sourceLine" id="cb73-24" title="24"></a>
-<a class="sourceLine" id="cb73-25" title="25"><span class="kw">dbQuoteLiteral</span>(con, lt) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>() <span class="co"># double escaping doesn&#39;t happen</span></a>
-<a class="sourceLine" id="cb73-26" title="26"><span class="co">## &lt;SQL&gt; &#39;SELECT&#39;</span></a>
-<a class="sourceLine" id="cb73-27" title="27"><span class="co">## &lt;SQL&gt; &#39;WHERE&#39;</span></a></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1">con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbDisconnect</span>()</a>
+<a class="sourceLine" id="cb73-2" title="2">con &lt;-<span class="st"> </span><span class="kw">issue_con</span>(<span class="st">&quot;demo&quot;</span>)</a>
+<a class="sourceLine" id="cb73-3" title="3">str &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SELECT&quot;</span>, <span class="st">&quot;WHERE&quot;</span>)</a>
+<a class="sourceLine" id="cb73-4" title="4">s &lt;-<span class="st"> </span><span class="kw">SQL</span>(str)</a>
+<a class="sourceLine" id="cb73-5" title="5">s <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">class</span>()</a>
+<a class="sourceLine" id="cb73-6" title="6"><span class="co">## [1] &quot;SQL&quot;</span></a>
+<a class="sourceLine" id="cb73-7" title="7"><span class="co">## attr(,&quot;package&quot;)</span></a>
+<a class="sourceLine" id="cb73-8" title="8"><span class="co">## [1] &quot;DBI&quot;</span></a>
+<a class="sourceLine" id="cb73-9" title="9">s <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb73-10" title="10"><span class="co">## &lt;SQL&gt; SELECT</span></a>
+<a class="sourceLine" id="cb73-11" title="11"><span class="co">## &lt;SQL&gt; WHERE</span></a>
+<a class="sourceLine" id="cb73-12" title="12"></a>
+<a class="sourceLine" id="cb73-13" title="13"><span class="kw">SQL</span>(s) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>() <span class="co"># unchanged</span></a>
+<a class="sourceLine" id="cb73-14" title="14"><span class="co">## &lt;SQL&gt; SELECT</span></a>
+<a class="sourceLine" id="cb73-15" title="15"><span class="co">## &lt;SQL&gt; WHERE</span></a>
+<a class="sourceLine" id="cb73-16" title="16"></a>
+<a class="sourceLine" id="cb73-17" title="17"><span class="kw">dbQuoteLiteral</span>(con, s) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>() <span class="co"># SQL vectors pass through dbQuoteLiteral()</span></a>
+<a class="sourceLine" id="cb73-18" title="18"><span class="co">## &lt;SQL&gt; SELECT</span></a>
+<a class="sourceLine" id="cb73-19" title="19"><span class="co">## &lt;SQL&gt; WHERE</span></a>
+<a class="sourceLine" id="cb73-20" title="20"></a>
+<a class="sourceLine" id="cb73-21" title="21">lt &lt;-<span class="st"> </span><span class="kw">dbQuoteLiteral</span>(con, str)</a>
+<a class="sourceLine" id="cb73-22" title="22">lt <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb73-23" title="23"><span class="co">## &lt;SQL&gt; &#39;SELECT&#39;</span></a>
+<a class="sourceLine" id="cb73-24" title="24"><span class="co">## &lt;SQL&gt; &#39;WHERE&#39;</span></a>
+<a class="sourceLine" id="cb73-25" title="25"></a>
+<a class="sourceLine" id="cb73-26" title="26"><span class="kw">dbQuoteLiteral</span>(con, lt) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">print</span>() <span class="co"># double escaping doesn&#39;t happen</span></a>
+<a class="sourceLine" id="cb73-27" title="27"><span class="co">## &lt;SQL&gt; &#39;SELECT&#39;</span></a>
+<a class="sourceLine" id="cb73-28" title="28"><span class="co">## &lt;SQL&gt; &#39;WHERE&#39;</span></a></code></pre></div>
 </div>
 <div id="dbdatatype" class="section level3 hasAnchor">
 <h3><span class="header-section-number">2.4.2</span> <code>dbDataType()</code><a href="#dbdatatype" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1311,7 +1305,7 @@ One such example is the result of query with a unbounded placeholder.</p>
 <ul>
 <li>Create a SQL statement from a query string with a greater flexibility than <code>dbExecute()</code> or <code>dbGetQuery()</code>.</li>
 <li>Returns SQL of <code>SQL</code> class.</li>
-<li>Accepts placeholders with one of two syntaxes. They are bounded by <code>.dots = list()</code>.
+<li>Accepts placeholders with one of the following two syntaxes. They should be bounded by <code>.dots = list()</code>.
 <ul>
 <li><code>?,...,?</code>: bounded by an unnamed list.</li>
 <li><code>?name1,...,?name2</code>: bounded by a named list.</li>
@@ -1347,103 +1341,6 @@ One such example is the result of query with a unbounded placeholder.</p>
 <a class="sourceLine" id="cb78-6" title="6">    <span class="dt">var =</span> <span class="kw">if_else</span>(all, <span class="st">&quot;ALL&quot;</span>, <span class="st">&quot;TEMPORARY&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">SQL</span>()</a>
 <a class="sourceLine" id="cb78-7" title="7">)</a>
 <a class="sourceLine" id="cb78-8" title="8"><span class="co">## &lt;SQL&gt; DISCARD TEMPORARY</span></a></code></pre></div>
-
-</div>
-</div>
-<div id="views" class="section level2 hasAnchor">
-<h2><span class="header-section-number">2.5</span> Views<a href="#views" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="function-for-listing-views" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.5.1</span> Function for listing views<a href="#function-for-listing-views" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="co"># list normal or/and tempoary views selectively</span></a>
-<a class="sourceLine" id="cb79-2" title="2">dbListViews &lt;-<span class="st"> </span><span class="cf">function</span>(con, <span class="dt">parmanent =</span> <span class="ot">TRUE</span>, <span class="dt">temporary =</span> <span class="ot">TRUE</span>) {</a>
-<a class="sourceLine" id="cb79-3" title="3">    <span class="cf">if</span> (<span class="kw">c</span>(parmanent, temporary) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">any</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) {</a>
-<a class="sourceLine" id="cb79-4" title="4">        <span class="ot">NULL</span> <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb79-5" title="5"><span class="st">            </span><span class="kw">invisible</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb79-6" title="6"><span class="st">            </span><span class="kw">return</span>()</a>
-<a class="sourceLine" id="cb79-7" title="7">    }</a>
-<a class="sourceLine" id="cb79-8" title="8">    sql &lt;-<span class="st"> &quot;?p ?u ?t&quot;</span></a>
-<a class="sourceLine" id="cb79-9" title="9">    parm &lt;-<span class="st"> &quot;SELECT pg_views.viewname AS viewname FROM pg_views WHERE schemaname = current_schema()&quot;</span></a>
-<a class="sourceLine" id="cb79-10" title="10">    tmp &lt;-<span class="st"> &quot;SELECT viewname FROM pg_views WHERE schemaname LIKE &#39;pg_temp_%&#39;&quot;</span></a>
-<a class="sourceLine" id="cb79-11" title="11">    <span class="kw">sqlInterpolate</span>(</a>
-<a class="sourceLine" id="cb79-12" title="12">        con,</a>
-<a class="sourceLine" id="cb79-13" title="13">        sql,</a>
-<a class="sourceLine" id="cb79-14" title="14">        <span class="dt">p =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(parmanent, parm, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">SQL</span>(),</a>
-<a class="sourceLine" id="cb79-15" title="15">        <span class="dt">u =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(<span class="kw">c</span>(parmanent, temporary) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">all</span>(), <span class="st">&quot;UNION&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">SQL</span>(),</a>
-<a class="sourceLine" id="cb79-16" title="16">        <span class="dt">t =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(temporary, tmp, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">SQL</span>()</a>
-<a class="sourceLine" id="cb79-17" title="17">    ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb79-18" title="18"><span class="st">        </span><span class="kw">dbGetQuery</span>(con, .) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb79-19" title="19"><span class="st">        </span><span class="kw">pull</span>(viewname)</a>
-<a class="sourceLine" id="cb79-20" title="20">}</a></code></pre></div>
-</div>
-<div id="function-for-testing-the-existance-of-a-view" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.5.2</span> Function for testing the existance of a view<a href="#function-for-testing-the-existance-of-a-view" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" title="1">dbExistsView &lt;-<span class="st"> </span><span class="cf">function</span>(con, name, <span class="dt">parmanent =</span> <span class="ot">TRUE</span>, <span class="dt">temporary =</span> <span class="ot">TRUE</span>) {</a>
-<a class="sourceLine" id="cb80-2" title="2">    name <span class="op">%in%</span><span class="st"> </span><span class="kw">dbListViews</span>(con, parmanent, temporary)</a>
-<a class="sourceLine" id="cb80-3" title="3">}</a></code></pre></div>
-</div>
-<div id="function-for-dropping-a-view" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.5.3</span> Function for dropping a view<a href="#function-for-dropping-a-view" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1"><span class="co"># drop view and return the number of views deleted by this call.</span></a>
-<a class="sourceLine" id="cb81-2" title="2">dbDropView &lt;-<span class="st"> </span><span class="cf">function</span>(con, name, <span class="dt">if_exists =</span> <span class="ot">FALSE</span>, <span class="dt">cascade =</span> <span class="ot">FALSE</span>) {</a>
-<a class="sourceLine" id="cb81-3" title="3">    <span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) <span class="kw">stop</span>(<span class="st">&quot;dplyr library is required.&quot;</span>)</a>
-<a class="sourceLine" id="cb81-4" title="4">    before &lt;-<span class="st"> </span>con <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb81-5" title="5"><span class="st">        </span><span class="kw">dbListViews</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb81-6" title="6"><span class="st">        </span><span class="kw">length</span>()</a>
-<a class="sourceLine" id="cb81-7" title="7">    <span class="st">&quot;DROP VIEW ?if_ex ?name ?cas_res&quot;</span> <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb81-8" title="8"><span class="st">        </span>DBI<span class="op">::</span><span class="kw">sqlInterpolate</span>(</a>
-<a class="sourceLine" id="cb81-9" title="9">            con,</a>
-<a class="sourceLine" id="cb81-10" title="10">            .,</a>
-<a class="sourceLine" id="cb81-11" title="11">            <span class="dt">if_ex =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(if_exists, <span class="st">&quot;IF EXISTS&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">SQL</span>(),</a>
-<a class="sourceLine" id="cb81-12" title="12">            <span class="dt">name =</span> name <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbQuoteIdentifier</span>(con, .),</a>
-<a class="sourceLine" id="cb81-13" title="13">            <span class="dt">cas_res =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(cascade, <span class="st">&quot;CASCADE&quot;</span>, <span class="st">&quot;RESTRICT&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">SQL</span>()</a>
-<a class="sourceLine" id="cb81-14" title="14">        ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb81-15" title="15"><span class="st">        </span>DBI<span class="op">::</span><span class="kw">dbExecute</span>(con, .)</a>
-<a class="sourceLine" id="cb81-16" title="16">    before <span class="op">-</span><span class="st"> </span>(con <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dbListViews</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>())</a>
-<a class="sourceLine" id="cb81-17" title="17">}</a></code></pre></div>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1">con <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb82-2" title="2"><span class="st">    </span><span class="kw">dbListViews</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb82-3" title="3"><span class="st">    </span>purrr<span class="op">::</span><span class="kw">map_int</span>(<span class="op">~</span><span class="st"> </span><span class="kw">dbDropView</span>(con, .x)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb82-4" title="4"><span class="st">    </span><span class="kw">sum</span>()</a>
-<a class="sourceLine" id="cb82-5" title="5"><span class="co">## [1] 0</span></a></code></pre></div>
-</div>
-<div id="function-for-creating-a-view" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.5.4</span> Function for creating a view<a href="#function-for-creating-a-view" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" title="1">dbCreateView &lt;-<span class="st"> </span><span class="cf">function</span>(con, sql_view, name, <span class="dt">or_replace =</span> <span class="ot">FALSE</span>, <span class="dt">temporary =</span> <span class="ot">FALSE</span>) {</a>
-<a class="sourceLine" id="cb83-2" title="2">    <span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) <span class="kw">stop</span>(<span class="st">&quot;dplyr library is required.&quot;</span>)</a>
-<a class="sourceLine" id="cb83-3" title="3">    <span class="cf">if</span> (sql_view <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">inherits</span>(<span class="kw">c</span>(<span class="st">&quot;character&quot;</span>, <span class="st">&quot;SQL&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">isFALSE</span>()) <span class="kw">stop</span>(<span class="st">&quot;provided sql string is not of class character or SQL.&quot;</span>)</a>
-<a class="sourceLine" id="cb83-4" title="4">    sql &lt;-<span class="st"> &quot;CREATE ?or ?tmp VIEW ?name AS ?q&quot;</span></a>
-<a class="sourceLine" id="cb83-5" title="5">    stm &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">sqlInterpolate</span>(</a>
-<a class="sourceLine" id="cb83-6" title="6">        con,</a>
-<a class="sourceLine" id="cb83-7" title="7">        sql,</a>
-<a class="sourceLine" id="cb83-8" title="8">        <span class="dt">or =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(or_replace, <span class="st">&quot;OR REPLACE&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">SQL</span>(),</a>
-<a class="sourceLine" id="cb83-9" title="9">        <span class="dt">tmp =</span> dplyr<span class="op">::</span><span class="kw">if_else</span>(temporary, <span class="st">&quot;TEMPORARY&quot;</span>, <span class="st">&quot;&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">SQL</span>(),</a>
-<a class="sourceLine" id="cb83-10" title="10">        <span class="dt">name =</span> name <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbQuoteIdentifier</span>(con, .),</a>
-<a class="sourceLine" id="cb83-11" title="11">        <span class="dt">q =</span> sql_view <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">SQL</span>()</a>
-<a class="sourceLine" id="cb83-12" title="12">    )</a>
-<a class="sourceLine" id="cb83-13" title="13">    DBI<span class="op">::</span><span class="kw">dbExecute</span>(con, stm)</a>
-<a class="sourceLine" id="cb83-14" title="14">}</a></code></pre></div>
-</div>
-<div id="function-for-freeing-resources" class="section level3 hasAnchor">
-<h3><span class="header-section-number">2.5.5</span> Function for freeing resources<a href="#function-for-freeing-resources" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1">dbDiscard &lt;-<span class="st"> </span><span class="cf">function</span>(con, <span class="dt">all =</span> <span class="ot">FALSE</span>, <span class="dt">plans =</span> <span class="ot">FALSE</span>, <span class="dt">temporary =</span> <span class="ot">TRUE</span>) {</a>
-<a class="sourceLine" id="cb84-2" title="2">    <span class="cf">if</span> (<span class="kw">c</span>(all, plans, temporary) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">any</span>()) {</a>
-<a class="sourceLine" id="cb84-3" title="3">        resource &lt;-<span class="st"> </span><span class="kw">case_when</span>(</a>
-<a class="sourceLine" id="cb84-4" title="4">            all <span class="op">~</span><span class="st"> &quot;ALL&quot;</span>,</a>
-<a class="sourceLine" id="cb84-5" title="5">            plans <span class="op">~</span><span class="st"> &quot;PLANS&quot;</span>,</a>
-<a class="sourceLine" id="cb84-6" title="6">            temporary <span class="op">~</span><span class="st"> &quot;TEMPORARY&quot;</span></a>
-<a class="sourceLine" id="cb84-7" title="7">        )</a>
-<a class="sourceLine" id="cb84-8" title="8">        <span class="st">&quot;DISCARD ?rsc&quot;</span> <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb84-9" title="9"><span class="st">            </span>DBI<span class="op">::</span><span class="kw">sqlInterpolate</span>(</a>
-<a class="sourceLine" id="cb84-10" title="10">                con,</a>
-<a class="sourceLine" id="cb84-11" title="11">                .,</a>
-<a class="sourceLine" id="cb84-12" title="12">                <span class="dt">rsc =</span> resource <span class="op">%&gt;%</span><span class="st"> </span>DBI<span class="op">::</span><span class="kw">SQL</span>()</a>
-<a class="sourceLine" id="cb84-13" title="13">            ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb84-14" title="14"><span class="st">            </span>DBI<span class="op">::</span><span class="kw">dbExecute</span>(con, .)</a>
-<a class="sourceLine" id="cb84-15" title="15">    }</a>
-<a class="sourceLine" id="cb84-16" title="16">    <span class="ot">TRUE</span> <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb84-17" title="17"><span class="st">        </span><span class="kw">invisible</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb84-18" title="18"><span class="st">        </span><span class="kw">return</span>()</a>
-<a class="sourceLine" id="cb84-19" title="19">}</a></code></pre></div>
 
 </div>
 </div>

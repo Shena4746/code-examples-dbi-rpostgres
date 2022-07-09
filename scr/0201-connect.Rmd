@@ -50,6 +50,7 @@ con %>% print()
 ```{r disconnect-example, collapse=TRUE, warning=TRUE}
 # disconnect con varibale. returns nothing.
 con %>% dbDisconnect()
+
 # get warned since con is already disconnected
 con %>% dbDisconnect()
 ```

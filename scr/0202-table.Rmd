@@ -1,7 +1,8 @@
 ## Manipulating Tables
 
 ```{r ,include=FALSE}
-con <- refresh_con(con)
+con %>% dbDisconnect()
+con <- issue_con("demo")
 remove_all_table(con)
 ```
 

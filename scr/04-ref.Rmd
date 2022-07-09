@@ -1,14 +1,16 @@
 # References: dbplyr, DBI, RPostgres 参考資料 {#references}
+
 Overview
 
 - [巨大なデータがSQLサーバーにあるときに、Rでどう立ち向かうかマニュアル：dbplyrパッケージを中心として](https://yutatoyama.github.io/note/intro_R_for_SQL.html)
 - [Introduction to dbplyr](https://dbplyr.tidyverse.org/articles/dbplyr.html)
 - [R: Working with Databases](https://nuitrcs.github.io/databases_workshop/r/r_databases.html)
+- [Introduction to DBI](https://dbi.r-dbi.org/articles/dbi)
 
 DBI
 
-- [Introduction to DBI](https://dbi.r-dbi.org/articles/dbi)
 - [RSQLite & DBIの使い方](http://delta0726.web.fc2.com/packages/database/00_RSQLite.html)
+- [Code Examples for DBI and RPostgres](https://shena4746.github.io/code-examples-dbi-rpostgres/)
 - [DBI specification](https://dbi.r-dbi.org/articles/spec)
 - [DBI: R Database Interface .pdf](https://cran.r-project.org/web/packages/DBI/DBI.pdf)
 

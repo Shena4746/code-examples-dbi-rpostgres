@@ -9,7 +9,8 @@
 - `glue_sql()` in glue packages is also useful to deal with SQL escaping needs.
 
 ```{r sql-method-exampl1, collapse=TRUE}
-con <- refresh_con(con)
+con %>% dbDisconnect()
+con <- issue_con("demo")
 str <- c("SELECT", "WHERE")
 s <- SQL(str)
 s %>% class()
@@ -60,7 +61,7 @@ dbDataType(RPostgres::Postgres(), iris) %>% class()
 
 - Create a SQL statement from a query string with a greater flexibility than `dbExecute()` or `dbGetQuery()`.
 - Returns SQL of `SQL` class.
-- Accepts placeholders with one of two syntaxes. They are bounded by `.dots = list()`. 
+- Accepts placeholders with one of the following two syntaxes. They should be bounded by `.dots = list()`. 
 	- `?,...,?`: bounded by an unnamed list.
 	-  `?name1,...,?name2`: bounded by a named list.
 - All values in `.dots = list()` will be first escaped with `dbQuoteLiteral()` to protect against SQL injection.

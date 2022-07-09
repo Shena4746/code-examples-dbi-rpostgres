@@ -1,7 +1,8 @@
 ## Queries and Statements
 
 ```{r, include=FALSE}
-con <- refresh_con(con)
+con %>% dbDisconnect()
+con <- issue_con("demo")
 ```
 
 This section uses the following tables as an example.

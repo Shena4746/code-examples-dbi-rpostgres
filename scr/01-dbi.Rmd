@@ -1,9 +1,9 @@
 # Functions in DBI and RPostgres {#Functions-dbi}
 
-For convenience, we define a function that issues a connection variable.
+For convenience, we define a function that issues a connection variable. Here we use config package to avoid to write credentials in a code.
 
 ```{r issue-con}
-# depends on config package to handling credentials
+# depends on config package
 issue_con <- function(service_name) {
     dw <- config::get(service_name)
     DBI::dbConnect(
@@ -14,13 +14,6 @@ issue_con <- function(service_name) {
         user = dw$user,
         password = dw$password
     )
-}
-```
-
-```{r def-refresh-con, include=FALSE}
-refresh_con <- function(x) {
-    try(x %>% DBI::dbDisconnect())
-    issue_con("demo")
 }
 ```
 

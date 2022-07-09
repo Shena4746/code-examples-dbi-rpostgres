@@ -60,6 +60,16 @@
 			}
 		},
 		{
+			"label": "Render Book (stop)",
+			"type": "shell",
+			"command": "Rscript -e 'setwd(\"${workspaceFolder}/scr\")' -e \"bookdown::render_book('top.Rmd', 'bookdown::gitbook', output_dir = '${workspaceFolder}/docs')\"",
+			"presentation": {
+				"reveal": "silent",
+				"revealProblems": "onProblem",
+				//"close": true
+			}
+		},
+		{
 			"label": "Show Rendering Error",
 			"type": "shell",
 			"command": "Rscript -e 'setwd(\"${workspaceFolder}/scr\")' -e \"bookdown::render_book('top.Rmd', 'bookdown::gitbook', output_dir = '${workspaceFolder}/docs')\"",
