@@ -1,5 +1,5 @@
+whats-this
 about-dbi-and-rpostgres
-overview
 list-of-functions
 functions-in-dbi
 functions-in-rpostgres
@@ -42,3 +42,4 @@ dbdatatype
 dbquoteidentifier
 dbquoteliteral
 sqlinterpolate
+references
