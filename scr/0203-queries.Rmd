@@ -334,17 +334,40 @@ rs %>% dbFetch(n = 0)
 rs %>% dbClearResult()
 ```
 
-Information about result types
-
 ### `dbClearResult()`
 
 - Frees all resources (local and remote) associated with a result set.
 - Returns `TRUE` invisibly.
-- MUST follow `dbSendQuery()` and `dbSendStatement()`.
+- MUST be called `dbSendQuery()` and `dbSendStatement()`.
 
-```{r clear-result-example, collapse=TRUE}
+Rposgres automatically cleans up the existing result setes associated connnection when a new `dbSendQuery()` and `dbSendStatement()` is called. So, Rposgres user don't need to pay much attention to this method.
+
+```{r clear-result-example, collapse=TRUE, warning=TRUE}
 rs <- con %>% dbSendQuery("SELECT 3.14 AS pi")
 rs %>% dbFetch()
 rs %>% dbClearResult()
-rs %>% dbClearResult() # clearing a cleared result again raises warning
+rs %>% dbClearResult() # clearing a cleared result again causes warning
+```
+
+If you are using RPosgres, automatic clearing works.
+
+```{r clear-result-example2, collapse=TRUE, warning=TRUE}
+rs <- con %>% dbSendQuery("SELECT 3.14 AS pi")
+rs <- con %>% dbSendQuery("SELECT 2.71 AS napier") # this call induces auto-cleaning
+rs %>% dbFetch()
+rs %>% dbClearResult()
+```
+
+The automatic cleaning does not work if you are working on different connnection variables. Such situation should be avoided or be handled with care in general.
+
+```{r clear-result-example3, collapse=TRUE, warning=TRUE}
+con1 <- issue_con("demo") # new connection
+rs <- con %>% dbSendQuery("SELECT 3.14 AS pi")
+rs1 <- con1 %>% dbSendQuery("SELECT 2.71 AS napier") # query with the new connection
+rs %>% dbFetch() # no automatic cleaning
+rs1 %>% dbFetch()
+
+rs1 %>% dbClearResult()
+rs %>% dbClearResult()
+con1 %>% dbDisconnect()
 ```

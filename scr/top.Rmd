@@ -13,16 +13,36 @@ gc(reset = TRUE)
 knitr::opts_chunk$set(eval = TRUE, echo = TRUE, warning = FALSE)
 ```
 
+# What's this? 
+
+From [README.md in Github repository]():
+
+This repository is the R markdown source for the article [Code Examples for DBI and RPostgres](https://shena4746.github.io/code-examples-dbi-rpostgres/).
+Assuming you are using DBI with Postgres, it provides a brief overview of each DBI function and various code examples that illustrates how it is typically used and how it behaves.
+
+It is also intended to document minor tips that are not as well-documented as DBI official references. One important example is the actual behaviour of DBI functions.
+As implied in [DBI specification](https://dbi.r-dbi.org/articles/spec), the behaviour of DBI functions, which depends on the R/DBMS implementation, may sometimes be slightly different from what is expected from the DBI documentation.
+In such cases, the user is required to learn where the gaps exist and how they are different, typically through ad-hoc experimentation. This is exactly where this article grows out of. As a result, the content tends to focus on tricky aspects at times. If you would like a more balanced explanation, then the official DBI references should still be your first choice.
+
 # About DBI and RPostgres
 
-```{r libraries, message=FALSE, warning=FALSE}
+[DBI specification](https://dbi.r-dbi.org/articles/spec) has a rich explanation. Here is a brief summary of what DBI and RPostgres are and their relationship: 
+
+- DBI (shor fo the database inteface) defines virtual classes such as DBIDriver, DBIConnection, and DBIResult, which is intended to serve as an interface for communitacation between R and R/DBMS.
+- The connection to indivisual DBMS is provides by so-called DBI backend packages such as RSQLite, RPostgres, RMySQL, RSQLServe, etc. It also provides implementation for the DBI base classes mentioned above.
+
+What is sometimes confusing is the fact that the functionlaity of the base class might be extended or/and might not be fully supported by a particular backend. Also, the backed class is not so well documented as DBI. Unfortunately, these things also apply to RPostgres, which is one of the reason why some "experimentation" are needed as mentioned earlier.
+
+## List of Functions
+
+```{r libraries, message=FALSE, warning=FALSE, include=FALSE}
 library("RPostgres")
 library("DBI")
 library("dbplyr")
 library("dplyr")
 ```
 
-This document is based on the following conditions.
+The following contents rely on the following packages.
 ```{r versions-of-libraries, collapse=TRUE}
 R.version.string
 packageVersion("RPostgres")
@@ -31,10 +51,6 @@ packageVersion("dbplyr")
 packageVersion("dplyr")
 packageVersion("purrr")
 ```
-
-## Overview
-
-## List of Functions
 
 ### Functions in DBI 
 
@@ -56,16 +72,12 @@ rpos %>% print()
 
 ### Functions with duplicated names
 
-You might have noticed that there are quite a few functions with the same name in these packages. They provides the same functionlaity, possibly with the different implementation and efficiecy.
-
 ```{r DBI-RPostgres-common-functions, collapse=TRUE}
 # common functions in DBI and RPostgres
 common <- base::intersect(dbi, rpos)
 common %>% length() # how many ?
 common %>% print()
 ```
-
-We don't go into the (potentially deep) difference of these twin functions. This document prefers to using `DBI::` methods as introduced in [GitHub repository of RPostgres package](https://github.com/r-dbi/RPostgres), unless there is a significant difference between them. 
 
 ### Funcions only in DBI
 
@@ -126,6 +138,14 @@ con <- DBI::dbConnect(
     password = dw$password
 )
 ```
+
+```{r remove-all-tables, include=FALSE}
+con %>%
+    dbListTables() %>%
+    purrr::map_lgl(~ dbRemoveTable(con, .x)) %>%
+    all()
+```
+
 
 Let us observe the list of tables in the connected database.
 

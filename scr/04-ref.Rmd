@@ -1,4 +1,8 @@
-# References: dbplyr, DBI, RPostgres 参考資料 {#references}
+
+```{r clear-all-results-at-ref, ref.label='remove-all-tables', include=FALSE}
+```
+
+# References: dbplyr, DBI, RPostgres {#references}
 
 Overview
 
@@ -11,9 +15,9 @@ DBI
 
 - [RSQLite & DBIの使い方](http://delta0726.web.fc2.com/packages/database/00_RSQLite.html)
 - [Code Examples for DBI and RPostgres](https://shena4746.github.io/code-examples-dbi-rpostgres/)
+- [DBI Reference](https://dbi.r-dbi.org/reference/)
 - [DBI specification](https://dbi.r-dbi.org/articles/spec)
 - [DBI: R Database Interface .pdf](https://cran.r-project.org/web/packages/DBI/DBI.pdf)
-
 RPostgres
 
 - [RPostgres - Reference](https://rpostgres.r-dbi.org/reference/index.html)

@@ -159,7 +159,7 @@ con %>% dbListFields("mtcars")
 
 ### `dbExistsTable()`
 
-- Returns a logical scalar, `TRUE` if the table or view specified by the name argument exists, `FALSE` otherwise.
+- Returns a logical scalar, `TRUE` if the table or view specified by the name argument exists, `FALSE` if otherwise.
 - Works also for temprary tables created by `dplyr::copy_to()` in Postgres.
 
 ```{r exsits-table, collapse=TRUE}
@@ -169,7 +169,7 @@ con %>% dbExistsTable("absent_table")
 
 ### `dbListObjects()`
 
-- Returns a data frame with columns table and is_prefix in that order.
+- Returns a data frame with columns named table and is_prefix in this order.
 - Works also for temprary tables created by `dplyr::copy_to()` in Postgres.
 
 ```{r ListObj, collapse=TRUE}

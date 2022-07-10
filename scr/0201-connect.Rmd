@@ -68,7 +68,7 @@ But it is no longer printable.
 con %>% print()
 ```
 
-Disconnection has a local effect. That is, disconnecting one connection has no impact on other connections.
+Disconnection has a local effect. That is, disconnecting one connection has no impact on other connections. This means that you have to manually disconnect every connection variable you have issued.
 
 ```{r ,collapse=TRUE}
 con <- issue_con("demo")

@@ -1,5 +1,5 @@
 book_filename: index.Rmd
-delete_merged_file: false
+delete_merged_file: true
 rmd_files: 
   - top.Rmd # bind Rmd in this order.
   - 01-dbi.Rmd
