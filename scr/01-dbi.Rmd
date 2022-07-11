@@ -1,6 +1,6 @@
 # Functions in DBI and RPostgres {#Functions-dbi}
 
-For convenience, we define a function that issues a connection variable. Here we use config package to avoid to write credentials in a code.
+For convenience, we define a function that issues a connection variable. Here we use config package to avoid to write credentials directly in this article.
 
 ```{r issue-con}
 # depends on config package

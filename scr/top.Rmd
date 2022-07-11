@@ -28,10 +28,10 @@ In such cases, the user is required to learn where the gaps exist and how they a
 
 [DBI specification](https://dbi.r-dbi.org/articles/spec) has a rich explanation. Here is a brief summary of what DBI and RPostgres are and their relationship: 
 
-- DBI (shor fo the database inteface) defines virtual classes such as DBIDriver, DBIConnection, and DBIResult, which is intended to serve as an interface for communitacation between R and R/DBMS.
-- The connection to indivisual DBMS is provides by so-called DBI backend packages such as RSQLite, RPostgres, RMySQL, RSQLServe, etc. It also provides implementation for the DBI base classes mentioned above.
+- DBI (short for the database inteface) defines virtual classes such as DBIDriver, DBIConnection, and DBIResult, which are interfaces for communitacation between R and R/DBMS.
+- The connection to indivisual DBMS is provided by so-called DBI backend packages such as RSQLite, RPostgres, RMySQL, RSQLServe, etc. It also provides implementation for the DBI base classes mentioned above.
 
-What is sometimes confusing is the fact that the functionlaity of the base class might be extended or/and might not be fully supported by a particular backend. Also, the backed class is not so well documented as DBI. Unfortunately, these things also apply to RPostgres, which is one of the reason why some "experimentation" are needed as mentioned earlier.
+What is sometimes confusing is the fact that the functionlaity of the base class might be extended or/and might not be fully supported by a particular backend. Moreover, the backend class is not so well documented as DBI. Unfortunately, these things also apply to RPostgres, which is one of the reason why some "experimentation" is needed.
 
 ## List of Functions
 

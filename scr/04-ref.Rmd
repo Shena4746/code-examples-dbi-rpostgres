@@ -14,10 +14,11 @@ Overview
 DBI
 
 - [RSQLite & DBIの使い方](http://delta0726.web.fc2.com/packages/database/00_RSQLite.html)
-- [Code Examples for DBI and RPostgres](https://shena4746.github.io/code-examples-dbi-rpostgres/)
 - [DBI Reference](https://dbi.r-dbi.org/reference/)
 - [DBI specification](https://dbi.r-dbi.org/articles/spec)
+- [User-defined functions that DBI + RPostgres users should have](https://shena4746.github.io/r-functions-on-dbi/)
 - [DBI: R Database Interface .pdf](https://cran.r-project.org/web/packages/DBI/DBI.pdf)
+
 RPostgres
 
 - [RPostgres - Reference](https://rpostgres.r-dbi.org/reference/index.html)

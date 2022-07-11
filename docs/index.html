@@ -221,10 +221,10 @@ In such cases, the user is required to learn where the gaps exist and how they a
 <h1><span class="header-section-number">2</span> About DBI and RPostgres<a href="#about-dbi-and-rpostgres" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><a href="https://dbi.r-dbi.org/articles/spec">DBI specification</a> has a rich explanation. Here is a brief summary of what DBI and RPostgres are and their relationship:</p>
 <ul>
-<li>DBI (shor fo the database inteface) defines virtual classes such as DBIDriver, DBIConnection, and DBIResult, which is intended to serve as an interface for communitacation between R and R/DBMS.</li>
-<li>The connection to indivisual DBMS is provides by so-called DBI backend packages such as RSQLite, RPostgres, RMySQL, RSQLServe, etc. It also provides implementation for the DBI base classes mentioned above.</li>
+<li>DBI (short for the database inteface) defines virtual classes such as DBIDriver, DBIConnection, and DBIResult, which are interfaces for communitacation between R and R/DBMS.</li>
+<li>The connection to indivisual DBMS is provided by so-called DBI backend packages such as RSQLite, RPostgres, RMySQL, RSQLServe, etc. It also provides implementation for the DBI base classes mentioned above.</li>
 </ul>
-<p>What is sometimes confusing is the fact that the functionlaity of the base class might be extended or/and might not be fully supported by a particular backend. Also, the backed class is not so well documented as DBI. Unfortunately, these things also apply to RPostgres, which is one of the reason why some “experimentation” are needed as mentioned earlier.</p>
+<p>What is sometimes confusing is the fact that the functionlaity of the base class might be extended or/and might not be fully supported by a particular backend. Moreover, the backend class is not so well documented as DBI. Unfortunately, these things also apply to RPostgres, which is one of the reason why some “experimentation” is needed.</p>
 <div id="list-of-functions" class="section level2 hasAnchor">
 <h2><span class="header-section-number">2.1</span> List of Functions<a href="#list-of-functions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The following contents rely on the following packages.</p>
@@ -461,7 +461,7 @@ The following code is one of the most simplest, deleting all tables.</p>
 </div>
 <div id="Functions-dbi" class="section level1 hasAnchor">
 <h1><span class="header-section-number">3</span> Functions in DBI and RPostgres<a href="#Functions-dbi" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>For convenience, we define a function that issues a connection variable. Here we use config package to avoid to write credentials in a code.</p>
+<p>For convenience, we define a function that issues a connection variable. Here we use config package to avoid to write credentials directly in this article.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># depends on config package</span></a>
 <a class="sourceLine" id="cb24-2" title="2">issue_con &lt;-<span class="st"> </span><span class="cf">function</span>(service_name) {</a>
 <a class="sourceLine" id="cb24-3" title="3">    dw &lt;-<span class="st"> </span>config<span class="op">::</span><span class="kw">get</span>(service_name)</a>
@@ -585,7 +585,7 @@ The following code is one of the most simplest, deleting all tables.</p>
 <a class="sourceLine" id="cb32-27" title="27"><span class="co">## [1] 120011</span></a>
 <a class="sourceLine" id="cb32-28" title="28"><span class="co">## </span></a>
 <a class="sourceLine" id="cb32-29" title="29"><span class="co">## $pid</span></a>
-<a class="sourceLine" id="cb32-30" title="30"><span class="co">## [1] 18121</span></a></code></pre></div>
+<a class="sourceLine" id="cb32-30" title="30"><span class="co">## [1] 2793</span></a></code></pre></div>
 </div>
 <div id="dbisreadonly" class="section level3 hasAnchor">
 <h3><span class="header-section-number">3.1.5</span> <code>dbIsReadOnly()</code><a href="#dbisreadonly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1389,12 +1389,14 @@ One such example is the result of query with a unbounded placeholder.</p>
 <p>DBI</p>
 <ul>
 <li><a href="http://delta0726.web.fc2.com/packages/database/00_RSQLite.html">RSQLite &amp; DBIの使い方</a></li>
-<li><a href="https://shena4746.github.io/code-examples-dbi-rpostgres/">Code Examples for DBI and RPostgres</a></li>
 <li><a href="https://dbi.r-dbi.org/reference/">DBI Reference</a></li>
 <li><a href="https://dbi.r-dbi.org/articles/spec">DBI specification</a></li>
-<li><p><a href="https://cran.r-project.org/web/packages/DBI/DBI.pdf">DBI: R Database Interface .pdf</a>
-RPostgres</p></li>
-<li><p><a href="https://rpostgres.r-dbi.org/reference/index.html">RPostgres - Reference</a></p></li>
+<li><a href="https://shena4746.github.io/r-functions-on-dbi/">User-defined functions that DBI + RPostgres users should have</a></li>
+<li><a href="https://cran.r-project.org/web/packages/DBI/DBI.pdf">DBI: R Database Interface .pdf</a></li>
+</ul>
+<p>RPostgres</p>
+<ul>
+<li><a href="https://rpostgres.r-dbi.org/reference/index.html">RPostgres - Reference</a></li>
 </ul>
 
 </div>
